@@ -26,7 +26,7 @@ namespace Capstone.Web.Controllers
         public ActionResult SendEmailHome()
         {
             User s=new User();
-            string xx= s.sendEmail();
+            string xx= s.SendEmail();
             return View("AdminHome");
         }
 

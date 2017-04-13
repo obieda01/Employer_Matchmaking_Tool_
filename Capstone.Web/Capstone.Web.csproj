@@ -137,8 +137,8 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\GenerateMatchesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IUserDAL.cs" />
     <Compile Include="Controllers\MatchMakingController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -146,6 +146,7 @@
     <Compile Include="Crypto\HashProvider.cs" />
     <Compile Include="DAL\CreateEventDAL.cs" />
     <Compile Include="DAL\InterviewDAL.cs" />
+    <Compile Include="DAL\IUserDAL.cs" />
     <Compile Include="DAL\StudentChoiceDAL.cs" />
     <Compile Include="DAL\UserSqlDAL.cs" />
     <Compile Include="Global.asax.cs">
@@ -156,11 +157,12 @@
     <Compile Include="Models\EmployerTeam.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Interview.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentChoice.cs" />
     <Compile Include="Models\TimeSlot.cs" />
-    <Compile Include="Models\User\ChangePasswordViewModel.cs" />
-    <Compile Include="Models\User\LoginViewModel.cs" />
+    <Compile Include="Models\Users\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\Users\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +172,15 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\GenerateMatches\Index.cshtml" />
+    <Content Include="Views\Users\ChangePassword.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Admin\AdminHome.cshtml" />
+    <Content Include="Views\Shared\_ViewStart.cshtml" />
+    <Content Include="Views\Staff\StaffHome.cshtml" />
+    <Content Include="Views\Student\StudentHome.cshtml" />
+    <Content Include="Views\Users\LeavingSite.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -179,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\MatchMaking\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

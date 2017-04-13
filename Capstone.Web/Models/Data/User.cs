@@ -10,7 +10,7 @@ namespace Capstone.Web.Models.Data
         public string Username { get; set; }
         public string Password { get; set; }
         public int ProfileId { get; set; }
-        public string sendEmail()
+        public string SendEmail()
         {
             return "";
         }

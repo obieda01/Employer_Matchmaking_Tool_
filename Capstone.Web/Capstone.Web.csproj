@@ -136,14 +136,31 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IUserDAL.cs" />
+    <Compile Include="Controllers\MatchMakingController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Crypto\HashProvider.cs" />
+    <Compile Include="DAL\CreateEventDAL.cs" />
+    <Compile Include="DAL\InterviewDAL.cs" />
+    <Compile Include="DAL\StudentChoiceDAL.cs" />
+    <Compile Include="DAL\UserSqlDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Class1.cs" />
-    <Compile Include="Models\Class2.cs" />
-    <Compile Include="Models\Class3.cs" />
+    <Compile Include="Models\Data\User.cs" />
+    <Compile Include="Models\Employer.cs" />
+    <Compile Include="Models\EmployerTeam.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Interview.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentChoice.cs" />
+    <Compile Include="Models\TimeSlot.cs" />
+    <Compile Include="Models\User\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\User\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

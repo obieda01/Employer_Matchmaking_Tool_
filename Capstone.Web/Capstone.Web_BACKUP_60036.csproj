@@ -188,13 +188,10 @@
     <Content Include="Views\Users\LeavingSite.cshtml" />
     <Content Include="Views\Shared\_AuthenticationBar.cshtml" />
     <Content Include="Views\Student\StudentHome.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Admin\AddStaff.cshtml" />
-=======
     <Content Include="Views\Staff\ViewEmployerSchedule.cshtml" />
     <Content Include="Views\Staff\ViewMasterSchedule.cshtml" />
     <Content Include="Views\Student\ViewStudentSchedule.cshtml" />
->>>>>>> 5e741728954489e62925af2dddaf010d90d09799
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

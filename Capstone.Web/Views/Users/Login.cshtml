@@ -2,22 +2,24 @@
 @{
     ViewBag.Title = "Login";
 }
+
 <body id="viewport_01" style="">
     <link type="text/css" rel="stylesheet" href="~/Content/css/login.css" />
     <div class="wrapper">
         <div class="container">
-            <h1>Tech Elevator Event Planner <br />Welcome</h1>
             @using (Html.BeginForm("Login", "Users", FormMethod.Post))
             {
+                <h1>
+                    Tech Elevator Event Planner <br />Welcome
+                </h1>
                 @Html.TextBoxFor(m => m.Username, new { @placeholder = "User Name" })
                 @Html.ValidationMessageFor(m => m.Username)
-
                 @Html.TextBoxFor(m => m.Password, new { @placeholder = "Password" })
                 @Html.ValidationMessageFor(m => m.Password)
+                @Html.ValidationMessage("invalid-login")
                 <button type="submit" id="login-button">Login</button>
             }
         </div>
-
         <ul class="bg-bubbles">
             <li></li>
             <li></li>
@@ -31,5 +33,6 @@
             <li></li>
         </ul>
     </div>
-    <script type="text/javascript" src="~/Scripts/js/Login.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/js/Login.js"></script>*@
 </body>
+

@@ -41,7 +41,7 @@ namespace Capstone.Web.Crypto
             //Compare the hashed password values
             string newHashedPassword = Convert.ToBase64String(hash);
 
-            return (existingHashedPassword == newHashedPassword);
+            return (existingHashedPassword == plainTextPassword);
         }
 
     }

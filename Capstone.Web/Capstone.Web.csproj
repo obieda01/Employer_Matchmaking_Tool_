@@ -105,10 +105,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\asset\6317f272960cb35f1ed84dd56aba8ec1.jpg" />
+    <Content Include="Content\asset\old-1130743_1920.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\navbar.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -131,6 +135,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\Login.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +162,6 @@
     <Compile Include="Models\EmployerTeam.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Interview.cs" />
-    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentChoice.cs" />
     <Compile Include="Models\TimeSlot.cs" />
@@ -179,8 +183,9 @@
     <Content Include="Views\Admin\AdminHome.cshtml" />
     <Content Include="Views\Shared\_ViewStart.cshtml" />
     <Content Include="Views\Staff\StaffHome.cshtml" />
-    <Content Include="Views\Student\StudentHome.cshtml" />
     <Content Include="Views\Users\LeavingSite.cshtml" />
+    <Content Include="Views\Shared\_AuthenticationBar.cshtml" />
+    <Content Include="Views\Student\StudentHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

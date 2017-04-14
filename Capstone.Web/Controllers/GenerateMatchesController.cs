@@ -18,7 +18,7 @@ namespace Capstone.Web.Controllers
             //StudentChoiceDAL dal = new StudentChoiceDAL(connectionstring);
             //List<StudentChoice> StudentChoices = dal.GetEmployersByRank(1);
 
-            InterviewDAL dal = new InterviewDAL(connectionstring);
+            InterviewDAL dal = new InterviewDAL();
             List<Interview> masterSchedule = dal.GetMasterSchedule();
 
             return View(masterSchedule);

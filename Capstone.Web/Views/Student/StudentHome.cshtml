@@ -1,13 +1,38 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "StudentHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Student</h2>
-<div class="">
-    @*<a href='@Url.Action("SendEmailHome", "Admin", new { id = park.ParkCode })'>See detail</a>*@
-    
-    <a href='@Url.Action("SendEmailHome", "Admin")'>See detail</a>
-</div>
-<button type="submit" id="sendEmail-button">Send Email</button>
+
+
+<body id="viewport_01" style="">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/login.css" />
+    <div class="wrapper">
+        
+        <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    @*<script type="text/javascript" src="~/Scripts/js/Login.js"></script>*@
+    <section>
+        <nav>
+            <div></div>
+            <ul>
+                <li data-xcoord="0px" class="active">Home</li>
+                <li data-xcoord="160px">About</li>
+                <li data-xcoord="320px">Contact</li>
+                <li data-xcoord="480px">Store</li>
+            </ul>
+        </nav>
+    </section>
+</body>
 

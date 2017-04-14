@@ -59,8 +59,8 @@ Insert into Student_Choices (Student_Id, Employer_Id, Employer_Rank, Event_Date)
 Insert into Student_Choices (Student_Id, Employer_Id, Employer_Rank, Event_Date) VALUES (5,2,1,'4/15/2017');
 Insert into Student_Choices (Student_Id, Employer_Id, Employer_Rank, Event_Date) VALUES (5,3,2,'4/15/2017');
 
-Insert into Time_Slot_Rank (Event_Date, Start_Time, End_Time, Time_Slot_Rank) VALUES ('4/15/2017','2017-04-15 01:00:00','4/15/2017 1:45:00',5);
-Insert into Time_Slot_Rank (Event_Date, Start_Time, End_Time, Time_Slot_Rank) VALUES ('4/15/2017',' 4/15/2017 1:45:00 PM','4/15/2017 2:30:00 PM',3);
+Insert into Time_Slot_Rank (Event_Date, Start_Time, End_Time, Time_Slot_Rank) VALUES ('4/15/2017','4/15/2017 1:00:00 PM','4/15/2017 1:45:00 PM',5);
+Insert into Time_Slot_Rank (Event_Date, Start_Time, End_Time, Time_Slot_Rank) VALUES ('4/15/2017','4/15/2017 1:45:00 PM','4/15/2017 2:30:00 PM',3);
 Insert into Time_Slot_Rank (Event_Date, Start_Time, End_Time, Time_Slot_Rank) VALUES ('4/15/2017','4/15/2017 2:30:00 PM','4/15/2017 3:15:00 PM',1);
 Insert into Time_Slot_Rank (Event_Date, Start_Time, End_Time, Time_Slot_Rank) VALUES ('4/15/2017','4/15/2017 3:30:00 PM','4/15/2017 4:15:00 PM',2);
 Insert into Time_Slot_Rank (Event_Date, Start_Time, End_Time, Time_Slot_Rank) VALUES ('4/15/2017','4/15/2017 4:15:00 PM','4/15/2017 5:00:00 PM',4);

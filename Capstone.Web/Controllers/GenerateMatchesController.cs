@@ -11,16 +11,28 @@ namespace Capstone.Web.Controllers
 {
     public class GenerateMatchesController : Controller
     {
-        public string connectionstring = ConfigurationManager.ConnectionStrings["FinalCapstoneDatabase"].ConnectionString;
         // GET: GenerateMatches
-        public ActionResult Index()
+        public ActionResult MasterSchedule()
         {
-            //StudentChoiceDAL dal = new StudentChoiceDAL(connectionstring);
-            //List<StudentChoice> StudentChoices = dal.GetEmployersByRank(1);
+            StudentChoiceDAL scDAL = new StudentChoiceDAL();
+            InterviewDAL iDAL = new InterviewDAL();
+            string eventDate = "";
 
-            InterviewDAL dal = new InterviewDAL();
-            List<Interview> masterSchedule = dal.GetMasterSchedule();
+            for (int i = 1; i < 3; i++)
+            {
+                List<StudentChoice> StudentChoices = scDAL.GetEmployersByRank(i);
 
+                foreach (StudentChoice choice in StudentChoices)
+                {
+                    iDAL.GenerateMatchesByStudentRanking(choice);
+                    eventDate = choice.EventDate;
+                }
+            }
+
+            //randomly fill in the rest of the schedule
+            iDAL.RandomlyGenerateRemainingSchedule(eventDate);
+
+            List<Interview> masterSchedule = iDAL.GetMasterSchedule();
             return View(masterSchedule);
         }
     }

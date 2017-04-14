@@ -1,0 +1,29 @@
+﻿@using Capstone.Web.Models;
+
+@model List<Interview>
+
+@{
+    ViewBag.Title = "ViewStudentSchedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>View Student Schedule</h2>
+
+    <table>
+        <tr>
+            <th>Employer Name</th>
+            <th>Team Id</th>
+            <th>Event Date</th>
+            <th>Start Time</th>
+        </tr>
+        @foreach (Interview i in Model)
+        {
+            <tr>
+                <td> @i.EmployerName</td>
+                <td> @i.TeamId</td>
+                <td> @i.EventDate</td>
+                <td> @i.StartTime</td>
+            </tr>
+        }
+    </table>
+

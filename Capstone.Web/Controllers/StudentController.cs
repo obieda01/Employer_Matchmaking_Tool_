@@ -22,5 +22,22 @@ namespace Capstone.Web.Controllers.UsersProfiles
         {
             return View("StudentHome");
         }
+
+        public ActionResult RankEmployers()
+        {
+            return View();
+        }
+        public ActionResult ViewStudentSchedule()
+        {
+            //need to know how the student is getting transferred
+            int studentId = 1;
+
+            InterviewDAL dal = new InterviewDAL();
+
+            List<Interview> studentSchedule = dal.GetStudentSchedule(studentId);
+
+            return View(studentSchedule);
+        }
+
     }
 }

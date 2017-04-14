@@ -25,7 +25,10 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
         public ActionResult RankEmployers()
         {
-            return View();
+            EmployerDAL edal = new EmployerDAL();
+            List<Employer> results = new List<Employer>();
+            results = edal.GetAllEmployers();
+            return View(results);
         }
         public ActionResult ViewStudentSchedule()
         {

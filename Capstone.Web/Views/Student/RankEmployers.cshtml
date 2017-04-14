@@ -1,0 +1,25 @@
+﻿@using Capstone.Web.Models;
+@{
+    ViewBag.Title = "RankEmployers";
+}
+
+<h2>RankEmployers</h2>
+@model List<Employer>
+
+<table>
+    <tr>
+        <th>Employer Name</th>
+        <th>Summary</th>
+       
+    </tr>
+    @foreach (Employer e in Model)
+    {
+        <tr>
+            <td> @e.EmployerName</td>
+            <td> @e.Summary</td>
+        </tr>
+    }
+</table>
+
+
+

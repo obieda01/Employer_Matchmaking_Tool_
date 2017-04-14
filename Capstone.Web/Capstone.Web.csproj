@@ -150,6 +150,7 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Crypto\HashProvider.cs" />
     <Compile Include="DAL\CreateEventDAL.cs" />
+    <Compile Include="DAL\EmployerDAL.cs" />
     <Compile Include="DAL\InterviewDAL.cs" />
     <Compile Include="DAL\IUserDAL.cs" />
     <Compile Include="DAL\StudentChoiceDAL.cs" />
@@ -191,6 +192,7 @@
     <Content Include="Views\Staff\ViewEmployerSchedule.cshtml" />
     <Content Include="Views\Staff\ViewMasterSchedule.cshtml" />
     <Content Include="Views\Student\ViewStudentSchedule.cshtml" />
+    <Content Include="Views\Student\RankEmployers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

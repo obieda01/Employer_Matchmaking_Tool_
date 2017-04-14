@@ -12,6 +12,7 @@ namespace Capstone.Web.Models
         public int TeamId { get; set; }
         public int StudentId { get; set; }
         public string StudentName { get; set; }
+        public int Matchmaking_Id { get; set; }
         public string EventDate { get; set; }
         public string StartTime { get; set; }
         public int TimeSlotRank { get; set; }

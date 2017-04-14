@@ -16,7 +16,7 @@ namespace Capstone.Web.Controllers
         {
             StudentChoiceDAL scDAL = new StudentChoiceDAL();
             InterviewDAL iDAL = new InterviewDAL();
-            string eventDate = "";
+            int matchmakingId = 0;
 
             for (int i = 1; i < 3; i++)
             {
@@ -25,12 +25,12 @@ namespace Capstone.Web.Controllers
                 foreach (StudentChoice choice in StudentChoices)
                 {
                     iDAL.GenerateMatchesByStudentRanking(choice);
-                    eventDate = choice.EventDate;
+                    matchmakingId = choice.MatchmakingId;
                 }
             }
 
             //randomly fill in the rest of the schedule
-            iDAL.RandomlyGenerateRemainingSchedule(eventDate);
+            iDAL.RandomlyGenerateRemainingSchedule(matchmakingId);
 
             List<Interview> masterSchedule = iDAL.GetMasterSchedule();
             return View(masterSchedule);

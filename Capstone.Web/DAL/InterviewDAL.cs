@@ -13,15 +13,15 @@ namespace Capstone.Web.DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        private string SQL_GetMasterSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Event_Date, t.Start_Time, i.Employer_id, i.student_id 
+        private string SQL_GetMasterSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Matchmaking_Id, t.Start_Time, i.Employer_id, i.student_id 
                                                 from Interview_Schedule i join employer e on i.Employer_id = e.Employer_Id join student s on i.student_id = s.Student_Id  
                                                 join Time_Slot_Rank t on i.Time_Slot_Rank = t.Time_Slot_Rank order by i.Employer_Id, t.Start_Time";
 
-        private string SQL_GetStudentSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Event_Date, t.Start_Time, i.Employer_id, i.student_id 
+        private string SQL_GetStudentSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Matchmaking_Id, t.Start_Time, i.Employer_id, i.student_id 
                                                 from Interview_Schedule i join employer e on i.Employer_id = e.Employer_Id join student s on i.student_id = s.Student_Id  
                                                 join Time_Slot_Rank t on i.Time_Slot_Rank = t.Time_Slot_Rank where s.student_id = @studentId order by t.Start_Time";
 
-        private string SQL_GetEmployerSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Event_Date, t.Start_Time, i.Employer_id, i.student_id 
+        private string SQL_GetEmployerSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Matchmaking_Id, t.Start_Time, i.Employer_id, i.student_id 
                                                 from Interview_Schedule i join employer e on i.Employer_id = e.Employer_Id join student s on i.student_id = s.Student_Id  
                                                 join Time_Slot_Rank t on i.Time_Slot_Rank = t.Time_Slot_Rank where e.employer_id = @employerId order by t.Start_Time, i.Team_Id";
 
@@ -29,7 +29,7 @@ namespace Capstone.Web.DAL
 
         private string SQL_GetMaximumTimeSlotsAvailable = @"select max(Time_Slot_Rank) from Time_Slot_Rank";
 
-        private string SQL_UpdateInterviewSchedule = @"insert into Interview_Schedule (Student_Id, Employer_Id, Team_Id, Time_Slot_Rank, Event_Date) values (@studentId, @employerId, @teamId, @timeSlotRank, @eventDate)";
+        private string SQL_UpdateInterviewSchedule = @"insert into Interview_Schedule (Student_Id, Employer_Id, Team_Id, Time_Slot_Rank, Matchmaking_Id) values (@studentId, @employerId, @teamId, @timeSlotRank, @matchmaking_Id)";
 
         private string SQL_GetTotalEmployerInterview = @"select employer_id, count(*) as totalInterviews from Interview_Schedule  group by Employer_id";
 
@@ -140,7 +140,7 @@ namespace Capstone.Web.DAL
                         interviewToBeAdded.StudentId = choice.StudentId;
                         interviewToBeAdded.EmployerId = choice.EmployerId;
                         interviewToBeAdded.TimeSlotRank = nextAvailableTimeSlot;
-                        interviewToBeAdded.EventDate = choice.EventDate;
+                        interviewToBeAdded.Matchmaking_Id = choice.MatchmakingId;
                         //will need updated with team info when multiple teams - need to update TeamId accordingly
                         interviewToBeAdded.TeamId = 1;
 
@@ -155,7 +155,7 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public void RandomlyGenerateRemainingSchedule(string eventDate)
+        public void RandomlyGenerateRemainingSchedule(int matchmakingId)
         {
             int maxTimeSlotsAvailable = 0;
             Dictionary<int, int> totalInterviewsGroupedByEmployers = new Dictionary<int, int>();
@@ -196,7 +196,7 @@ namespace Capstone.Web.DAL
                             cmd.Parameters.AddWithValue("@timeSlotRank", interviewToBeInserted.TimeSlotRank);
 
                             interviewToBeInserted.StudentId = (int)cmd.ExecuteScalar();
-                            interviewToBeInserted.EventDate = eventDate;
+                            interviewToBeInserted.Matchmaking_Id = matchmakingId;
 
                             //will need updated with team info when multiple teams - need to update TeamId accordingly
                             interviewToBeInserted.TeamId = 1;
@@ -229,8 +229,9 @@ namespace Capstone.Web.DAL
                 i.TeamId = Convert.ToInt32(reader["Team_Id"]);
                 i.StudentId = Convert.ToInt32(reader["Student_Id"]);
                 i.StudentName = Convert.ToString(reader["Student_Name"]);
-                i.EventDate = Convert.ToDateTime(reader["Event_Date"]).ToShortDateString();
+                i.Matchmaking_Id = Convert.ToInt32(reader["Matchmaking_Id"]);
                 i.StartTime = Convert.ToDateTime(reader["Start_Time"]).ToShortTimeString();
+                i.EventDate = Convert.ToDateTime(reader["Start_Time"]).ToShortDateString();
 
                 results.Add(i);
             }
@@ -244,7 +245,7 @@ namespace Capstone.Web.DAL
             cmd.Parameters.AddWithValue("@studentId", interviewToBeAdded.StudentId);
             cmd.Parameters.AddWithValue("@employerId", interviewToBeAdded.EmployerId);
             cmd.Parameters.AddWithValue("@timeSlotRank", interviewToBeAdded.TimeSlotRank);
-            cmd.Parameters.AddWithValue("@eventDate", interviewToBeAdded.EventDate);
+            cmd.Parameters.AddWithValue("@matchmakingId", interviewToBeAdded.Matchmaking_Id);
             cmd.Parameters.AddWithValue("@teamId", interviewToBeAdded.TeamId);
 
             cmd.ExecuteNonQuery();

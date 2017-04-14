@@ -55,15 +55,15 @@ namespace Capstone.Web.Controllers.UsersProfiles
         public ActionResult UpdateStudentChoices()
         {
             StudentChoiceDAL scdal = new StudentChoiceDAL();
-            string eventDate = "4/15/2017";
+            int matchmakingId = 1;
             int studentId = 1;
-            scdal.DeletePreviousChoices(studentId,eventDate);
+            scdal.DeletePreviousChoices(studentId, matchmakingId);
             List<StudentChoice> studentChoices = new List<StudentChoice>();
             for (int i = 1; i<3; i++)
             {
                 StudentChoice s = new StudentChoice();
                 s.StudentId = studentId;
-                s.EventDate = eventDate;
+                s.MatchmakingId = matchmakingId;
                 s.EmployerId = int.Parse(Request["Choice"+i]);
                 s.EmployerRank = i;
                 studentChoices.Add(s);

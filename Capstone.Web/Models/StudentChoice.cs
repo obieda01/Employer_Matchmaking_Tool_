@@ -10,6 +10,6 @@ namespace Capstone.Web.Models
         public int StudentId { get; set; }
         public int EmployerId { get; set; }
         public int EmployerRank { get; set; }
-        public string EventDate { get; set; }
+        public int MatchmakingId { get; set; }
     }
 }

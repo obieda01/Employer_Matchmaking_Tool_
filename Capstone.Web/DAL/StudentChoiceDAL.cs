@@ -13,9 +13,9 @@ namespace Capstone.Web.DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        private string SQL_GetEmployersByRank = "Select * From Student_Choices where Employer_Rank = @EmployerRanking;";
-        private string SQL_UpdateStudentChoice = "Insert INTO Student_Choices (Student_Id, Employer_Id, Employer_Rank, Event_Date) VALUES (@studentId, @employerId, @employerRank, @eventDate);";
-        private string SQL_DeletePreviousChoices = "Delete From Student_Choices where Student_Id = @studentId AND Event_Date = @eventDate;";
+        private string SQL_GetEmployersByRank = "Select Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id From Student_Choices where Employer_Rank = @EmployerRanking;";
+        private string SQL_UpdateStudentChoice = "Insert INTO Student_Choices (Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id) VALUES (@studentId, @employerId, @employerRank, @matchmakingId);";
+        private string SQL_DeletePreviousChoices = "Delete From Student_Choices where Student_Id = @studentId AND Matchmaking_Id = @matchmakingId;";
         public List<StudentChoice> GetEmployersByRank(int ranking)
         {
             List<StudentChoice> results = new List<StudentChoice>();
@@ -36,7 +36,7 @@ namespace Capstone.Web.DAL
                         sc.StudentId = Convert.ToInt32(reader["Student_Id"]);
                         sc.EmployerId = Convert.ToInt32(reader["Employer_Id"]);
                         sc.EmployerRank = Convert.ToInt32(reader["Employer_Rank"]);
-                        sc.EventDate = Convert.ToDateTime(reader["Event_Date"]).ToShortDateString();
+                        sc.MatchmakingId = Convert.ToInt32(reader["Matchmaking_Id"]);
                         results.Add(sc);
                     }
                 }
@@ -65,7 +65,7 @@ namespace Capstone.Web.DAL
                         cmd.Parameters.AddWithValue("@employerRank", choice.EmployerRank);
                         cmd.Parameters.AddWithValue("@employerId", choice.EmployerId);
                         cmd.Parameters.AddWithValue("@studentId", choice.StudentId);
-                        cmd.Parameters.AddWithValue("@eventDate", choice.EventDate);
+                        cmd.Parameters.AddWithValue("@matchmakingId", choice.MatchmakingId);
                         rowsUpdated += cmd.ExecuteNonQuery();
                       
                     }
@@ -78,7 +78,7 @@ namespace Capstone.Web.DAL
                 throw new NotImplementedException();
             }
         }
-        public void DeletePreviousChoices(int studentId,string eventDate)
+        public void DeletePreviousChoices(int studentId,int matchmakingId)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Capstone.Web.DAL
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(SQL_DeletePreviousChoices, conn);
                     cmd.Parameters.AddWithValue("@studentId", studentId);
-                    cmd.Parameters.AddWithValue("@eventDate", eventDate);
+                    cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
                     cmd.ExecuteNonQuery();
                 }
             }

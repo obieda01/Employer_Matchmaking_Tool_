@@ -13,15 +13,15 @@ use [FinalCapstone];
 BEGIN TRANSACTION;
 
 CREATE TABLE [dbo].[Login](
-	[User_Name] varchar(32) NOT NULL, --
+	[User_Name] varchar(50) NOT NULL, --
 	[Password] varchar(32) NOT NULL, ---
-	[User_Role] [nchar](7) NOT NULL,
+	[User_Role] [varchar](7) NOT NULL,
 CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED ([User_Name] ASC));
 
 CREATE TABLE [dbo].[Internal_Staff](
 	[Staff_Id] [int] IDENTITY(1,1) NOT NULL,
-	[User_Name] [nchar](50) NOT NULL,
-	[Name] [nchar](50) NOT NULL,
+	[User_Name] varchar(50) NOT NULL,
+	[Name] varchar(50) NOT NULL,
 	[Admin_Flag] [char](1) NOT NULL,
  CONSTRAINT [PK_Internal_Staff] PRIMARY KEY CLUSTERED ([Staff_Id] ASC));
 
@@ -64,7 +64,7 @@ CREATE TABLE [dbo].[Wait_Listed](
 	[Student_Id] [int] NOT NULL,
 	[Employer_Id] [int] NOT NULL,
 	[Event_Date] [date] NOT NULL,
-	[Resolved] [nchar](1) NOT NULL,
+	[Resolved] [varchar](1) NOT NULL,
  CONSTRAINT [PK_Wait_Listed] PRIMARY KEY CLUSTERED 
 (
 	[Student_Id] ASC,
@@ -102,7 +102,7 @@ CREATE TABLE [dbo].[Student](
 	[Student_Id] [int] IDENTITY(1,1) NOT NULL,
 	[Student_Name] [nvarchar](50) NOT NULL,
 	[Language_Id] [int] NOT NULL,
-	[User_Name] [nchar](50) NOT NULL,
+	[User_Name] [varchar](50) NOT NULL,
  CONSTRAINT [PK_Student] PRIMARY KEY CLUSTERED 
 (
 	[Student_Id] ASC
@@ -111,7 +111,7 @@ CREATE TABLE [dbo].[Student](
 
 CREATE TABLE [dbo].[Language](
 	[Language_Id] [int] NOT NULL,
-	[Language] [nchar](10) NOT NULL,
+	[Language] [varchar](10) NOT NULL,
  CONSTRAINT [PK_Language] PRIMARY KEY CLUSTERED 
 (
 	[Language_Id] ASC

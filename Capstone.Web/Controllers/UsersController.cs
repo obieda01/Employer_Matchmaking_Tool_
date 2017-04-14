@@ -80,11 +80,11 @@ namespace Capstone.Web.Controllers
                 }
                 else
                 {
-                    if (user.ProfileId == 1)
+                    if (user.User_Role == "Admin")
                     {
                         return RedirectToAction("AdminHome", "Admin", new {username = base.CurrentUser});
                     }
-                    else if (user.ProfileId == 2)
+                    else if (user.User_Role == "2")
                     {
                         return RedirectToAction("StaffHome", "Staff", new { username = base.CurrentUser });
                     }

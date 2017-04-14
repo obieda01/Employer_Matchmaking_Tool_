@@ -20,7 +20,7 @@ namespace Capstone.Web.DAL
         {
             try
             {
-                string sql = $"UPDATE app_user SET password = '{newPassword}' WHERE user_name = '{username}'";
+                string sql = $"UPDATE Login SET password = '{newPassword}' WHERE User_Name = '{username}'";
 
                 using (SqlConnection conn = new SqlConnection(databaseConnectionString))
                 {
@@ -43,40 +43,40 @@ namespace Capstone.Web.DAL
         {
             return true;
 
-            //try
-            //{
-            //    string sql = $"INSERT INTO app_user VALUES (@username, @password, @avatar);";
+            try
+            {
+                string sql = $"INSERT INTO Login VALUES (@Username, @Password, @User_Role);";
 
-            //    using (SqlConnection conn = new SqlConnection(databaseConnectionString))
-            //    {
-            //        conn.Open();
-            //        SqlCommand cmd = new SqlCommand(sql, conn);
-            //        cmd.Parameters.AddWithValue("@username", newUser.Username);
-            //        cmd.Parameters.AddWithValue("@password", newUser.Password);
-            //        cmd.Parameters.AddWithValue("@avatar", newUser.ProfileId);
+                using (SqlConnection conn = new SqlConnection(databaseConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@Username", newUser.Username);
+                    cmd.Parameters.AddWithValue("@Password", newUser.Password);
+                    cmd.Parameters.AddWithValue("@User_Role", newUser.User_Role);
 
 
-            //        int result = cmd.ExecuteNonQuery();
+                    int result = cmd.ExecuteNonQuery();
 
-            //        return result > 0;
-            //    }
-            //}
-            //catch (SqlException ex)
-            //{
-            //    throw;
-            //}
+                    return result > 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
         }
 
         public List<string> GetUsernames(string startsWith)
         {
             List<string> usernames = new List<string>();
 
-            usernames.Add("Ahmad");
-            return usernames;
+            //usernames.Add("Ahmad");
+            //return usernames;
 
             try
             {
-                string sql = $"SELECT user_name FROM app_user WHERE user_name LIKE '{startsWith}%';";
+                string sql = $"SELECT User_Name FROM Login WHERE User_Name LIKE '{startsWith}%';";
 
                 using (SqlConnection conn = new SqlConnection(databaseConnectionString))
                 {
@@ -86,7 +86,7 @@ namespace Capstone.Web.DAL
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        usernames.Add(Convert.ToString(reader["user_name"]));
+                        usernames.Add(Convert.ToString(reader["Username"]));
                     }
                 }
             }
@@ -100,22 +100,19 @@ namespace Capstone.Web.DAL
 
         public User GetUser(string username)
         {
-            //   User user = null;
+             User user = null;
 
 
-            User user = new User
-            {
-                Username = "a",
-                Password = "a",
-                ProfileId = 3
+            //User user = new User
+            //{
+            //    Username = "a",
+            //    Password = "a",
+            //    User_Role = 3
 
-            };
-
-            return user;
-
+            //};
             try
             {
-                string sql = $"SELECT TOP 1 * FROM app_user WHERE user_name = '{username}'";
+                string sql = $"SELECT TOP 1 * FROM Login WHERE  User_Name= '{username}'";
 
                 using (SqlConnection conn = new SqlConnection(databaseConnectionString))
                 {
@@ -128,9 +125,9 @@ namespace Capstone.Web.DAL
                     {
                         user = new User
                         {
-                            Username = Convert.ToString(reader["user_name"]),
-                            Password = Convert.ToString(reader["password"]),
-                            ProfileId = Convert.ToInt32(reader["avatar_id"])
+                            Username = Convert.ToString(reader["User_Name"]),
+                            Password = Convert.ToString(reader["Password"]),
+                            User_Role = Convert.ToString(reader["User_Role"])
                         };
                     }
 
@@ -146,23 +143,23 @@ namespace Capstone.Web.DAL
 
         public User GetUser(string username, string password)
         {
-            // User user = null;
+            User user = null;
 
 
-            User user = new User
-            {
-                Username = "a",
-                Password = "a",
-                ProfileId = 1
+            //User user = new User
+            //{
+            //    Username = "a",
+            //    Password = "a",
+            //    User_Role = 1
 
-            };
+            //};
 
-            return user;
+            //return user;
 
 
             try
             {
-                string sql = $"SELECT TOP 1 * FROM app_user WHERE user_name = '{username}' AND password = '{password}'";
+                string sql = $"SELECT TOP 1 * FROM Login WHERE User_Name = '{username}' AND Password = '{password}'";
 
                 using (SqlConnection conn = new SqlConnection(databaseConnectionString))
                 {
@@ -175,15 +172,15 @@ namespace Capstone.Web.DAL
                     {
                         user = new User
                         {
-                            Username = Convert.ToString(reader["user_name"]),
-                            Password = Convert.ToString(reader["password"]),
-                            ProfileId = Convert.ToInt32(reader["avatar_id"])
+                            Username = Convert.ToString(reader["User_Name"]),
+                            Password = Convert.ToString(reader["Password"]),
+                            User_Role = Convert.ToString(reader["User_Role"])
                         };
                     }
 
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 throw;
             }

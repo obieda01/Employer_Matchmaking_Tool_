@@ -1,1 +1,109 @@
-﻿
+﻿@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: white;
+    font-weight: 300;
+}
+
+    body ::-webkit-input-placeholder {
+        /* WebKit browsers */
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        font-weight: 300;
+    }
+
+    body :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        opacity: 1;
+        font-weight: 300;
+    }
+
+    body ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        opacity: 1;
+        font-weight: 300;
+    }
+
+    body :-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        font-weight: 300;
+    }
+
+div#bg_01{
+    background: #50a3a2;
+    background: -webkit-linear-gradient(top left, #50a3a2 0%, #27ae60 100%);
+    background: linear-gradient(to bottom right, #50a3a2 0%, #27ae60 100%);
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    margin-top: -200px;
+    overflow: auto;
+}
+
+div#bg_02 {
+    background: #50a3a2;
+    background: -webkit-linear-gradient(top left, #50a3a2 0%, #27ae60 100%);
+    background: linear-gradient(to bottom right, #50a3a2 0%, #27ae60 100%);
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 200px;
+    height:100%;
+    margin-top: -200px;
+    overflow: auto;
+}
+
+
+
+
+
+.bg-bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+@-webkit-keyframes square {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        -webkit-transform: translateY(-700px) rotate(600deg);
+        transform: translateY(-700px) rotate(600deg);
+    }
+}
+
+@keyframes square {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        -webkit-transform: translateY(-700px) rotate(600deg);
+        transform: translateY(-700px) rotate(600deg);
+    }
+}
+
+

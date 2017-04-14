@@ -30,5 +30,11 @@ namespace Capstone.Web.Controllers
             return View("AdminHome");
         }
 
+        // GET: Admin
+        public ActionResult AddStaff()
+        {
+            return View("AddStaff");
+        }
+
     }
 }

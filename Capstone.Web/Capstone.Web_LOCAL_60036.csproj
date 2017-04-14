@@ -111,7 +111,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\crus.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\navbar.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -151,7 +150,6 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Crypto\HashProvider.cs" />
     <Compile Include="DAL\CreateEventDAL.cs" />
-    <Compile Include="DAL\EmployerDAL.cs" />
     <Compile Include="DAL\InterviewDAL.cs" />
     <Compile Include="DAL\IUserDAL.cs" />
     <Compile Include="DAL\StudentChoiceDAL.cs" />
@@ -190,11 +188,10 @@
     <Content Include="Views\Users\LeavingSite.cshtml" />
     <Content Include="Views\Shared\_AuthenticationBar.cshtml" />
     <Content Include="Views\Student\StudentHome.cshtml" />
+    <Content Include="Views\Admin\AddStaff.cshtml" />
     <Content Include="Views\Staff\ViewEmployerSchedule.cshtml" />
     <Content Include="Views\Staff\ViewMasterSchedule.cshtml" />
     <Content Include="Views\Student\ViewStudentSchedule.cshtml" />
-    <Content Include="Views\Student\RankEmployers.cshtml" />
-    <Content Include="Views\Student\UpdateStudentChoices.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

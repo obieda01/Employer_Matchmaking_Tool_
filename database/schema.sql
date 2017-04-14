@@ -37,7 +37,7 @@ CREATE TABLE [dbo].[Interview_Schedule](
 	[Employer_Id] [int] NOT NULL,
 	[Team_Id] [int] NOT NULL,
 	[Time_Slot_Rank] [int] NOT NULL,
-	[Event_Date] [date] NOT NULL,
+	[Matchmaking_Id] [int] NOT NULL,
 
  CONSTRAINT [PK_Interview_Schedule] PRIMARY KEY CLUSTERED 
  (
@@ -49,7 +49,7 @@ CREATE TABLE [dbo].[Interview_Schedule](
 CREATE TABLE [dbo].[Employer_Team](
 	[Employer_Id] [int] NOT NULL,
 	[Team_Id] [int] NOT NULL,
-	[Event_Date] [date] NOT NULL,
+	[Event_Id] [int] NOT NULL,
 	[Language_Id] [int] NOT NULL,
 	[Start_Time] [datetime] NOT NULL,
 	[End_Time] [datetime] NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE [dbo].[Employer_Team](
 CREATE TABLE [dbo].[Wait_Listed](
 	[Student_Id] [int] NOT NULL,
 	[Employer_Id] [int] NOT NULL,
-	[Event_Date] [date] NOT NULL,
+	[Matchmaking_Id] [int] NOT NULL,
 	[Resolved] [varchar](1) NOT NULL,
  CONSTRAINT [PK_Wait_Listed] PRIMARY KEY CLUSTERED 
 (
@@ -72,7 +72,8 @@ CREATE TABLE [dbo].[Wait_Listed](
 ));
 
 CREATE TABLE [dbo].[Event](
-	[Event_Date] [date] NOT NULL,
+	[Event_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Matchmaking_Id] [int] NOT NULL,
 	[Start_Time] [datetime] NOT NULL,
 	[End_Time] [datetime] NOT NULL,
 	[Lunch_Start] [datetime] NULL,
@@ -84,14 +85,14 @@ CREATE TABLE [dbo].[Event](
 	[Interview_Length] [int] NOT NULL,
  CONSTRAINT [PK_Event] PRIMARY KEY CLUSTERED 
 (
-	[Event_Date] ASC
+	[Event_Id] ASC
 ));
 
 CREATE TABLE [dbo].[Student_Choices](
 	[Student_Id] [int] NOT NULL,
 	[Employer_Id] [int] NOT NULL,
 	[Employer_Rank] [int] NULL,
-	[Event_Date] [date] NOT NULL,
+	[Matchmaking_Id] [int] NOT NULL,
  CONSTRAINT [PK_Student_Choices] PRIMARY KEY CLUSTERED 
 (
 	[Student_Id] ASC,
@@ -117,18 +118,26 @@ CREATE TABLE [dbo].[Language](
 	[Language_Id] ASC
 ));
 
-
 CREATE TABLE [dbo].[Time_Slot_Rank](
-	[Event_Date] [date] NOT NULL,
+	[Matchmaking_Id] [int] NOT NULL,
 	[Start_Time] [datetime] NOT NULL,
 	[End_Time] [datetime] NOT NULL,
 	[Time_Slot_Rank] [int] NULL,
  CONSTRAINT [PK_Time_Slot_Rank] PRIMARY KEY CLUSTERED 
 (
-	[Event_Date] ASC,
 	[Start_Time] ASC
 ));
 
+CREATE TABLE [dbo].[Matchmaking_Arrangement](
+	[Matchmaking_Id] [int] IDENTITY (1,1) NOT NULL,
+	[Location] [varchar](20) NOT NULL,
+	[Season] [varchar](10) NOT NULL,
+	[Cohort_Number] [int] NOT NULL,
+	[Number_Of_Student_Choices] [int] NULL,
+ CONSTRAINT [PK_Matchmaking_Id] PRIMARY KEY CLUSTERED 
+(
+	[Matchmaking_Id] ASC
+));
 
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Interview_Schedule_Employer]') AND parent_object_id = OBJECT_ID(N'[dbo].[Interview_Schedule]'))
 ALTER TABLE [dbo].[Interview_Schedule]  WITH CHECK ADD  CONSTRAINT [FK_Interview_Schedule_Employer] FOREIGN KEY([Employer_Id])
@@ -139,13 +148,13 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[Interview_Schedule] CHECK CONSTRAINT [FK_Interview_Schedule_Employer]
 GO
 
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Interview_Schedule_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Interview_Schedule]'))
-ALTER TABLE [dbo].[Interview_Schedule]  WITH CHECK ADD  CONSTRAINT [FK_Interview_Schedule_Event] FOREIGN KEY([Event_Date])
-REFERENCES [dbo].[Event] ([Event_Date])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Interview_Schedule_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Interview_Schedule]'))
+ALTER TABLE [dbo].[Interview_Schedule]  WITH CHECK ADD  CONSTRAINT [FK_Interview_Schedule_Matchmaking_Arrangement] FOREIGN KEY([Matchmaking_Id])
+REFERENCES [dbo].[Matchmaking_Arrangement] ([Matchmaking_Id])
 GO
 
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Interview_Schedule_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Interview_Schedule]'))
-ALTER TABLE [dbo].[Interview_Schedule] CHECK CONSTRAINT [FK_Interview_Schedule_Event]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Interview_Schedule_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Interview_Schedule]'))
+ALTER TABLE [dbo].[Interview_Schedule] CHECK CONSTRAINT [FK_Interview_Schedule_Matchmaking_Arrangement]
 GO
 
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Interview_Schedule_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[Interview_Schedule]'))
@@ -158,8 +167,8 @@ ALTER TABLE [dbo].[Interview_Schedule] CHECK CONSTRAINT [FK_Interview_Schedule_S
 GO
 
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Employer_Team_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Employer_Team]'))
-ALTER TABLE [dbo].[Employer_Team]  WITH CHECK ADD  CONSTRAINT [FK_Employer_Team_Event] FOREIGN KEY([Event_Date])
-REFERENCES [dbo].[Event] ([Event_Date])
+ALTER TABLE [dbo].[Employer_Team]  WITH CHECK ADD  CONSTRAINT [FK_Employer_Team_Event] FOREIGN KEY([Event_Id])
+REFERENCES [dbo].[Event] ([Event_Id])
 GO
 
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Employer_Team_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Employer_Team]'))
@@ -184,13 +193,13 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[Wait_Listed] CHECK CONSTRAINT [FK_Wait_Listed_Employer]
 GO
 
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Wait_Listed_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Wait_Listed]'))
-ALTER TABLE [dbo].[Wait_Listed]  WITH CHECK ADD  CONSTRAINT [FK_Wait_Listed_Event] FOREIGN KEY([Event_Date])
-REFERENCES [dbo].[Event] ([Event_Date])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Wait_Listed_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Wait_Listed]'))
+ALTER TABLE [dbo].[Wait_Listed]  WITH CHECK ADD  CONSTRAINT [FK_Wait_Listed_Matchmaking_Arrangement] FOREIGN KEY([Matchmaking_Id])
+REFERENCES [dbo].[Matchmaking_Arrangement] ([Matchmaking_Id])
 GO
 
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Wait_Listed_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Wait_Listed]'))
-ALTER TABLE [dbo].[Wait_Listed] CHECK CONSTRAINT [FK_Wait_Listed_Event]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Wait_Listed_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Wait_Listed]'))
+ALTER TABLE [dbo].[Wait_Listed] CHECK CONSTRAINT [FK_Wait_Listed_Matchmaking_Arrangement]
 GO
 
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Wait_Listed_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[Wait_Listed]'))
@@ -211,13 +220,13 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[Student_Choices] CHECK CONSTRAINT [FK_Student_Choices_Employer]
 GO
 
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Choices_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student_Choices]'))
-ALTER TABLE [dbo].[Student_Choices]  WITH CHECK ADD  CONSTRAINT [FK_Student_Choices_Event] FOREIGN KEY([Event_Date])
-REFERENCES [dbo].[Event] ([Event_Date])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Choices_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student_Choices]'))
+ALTER TABLE [dbo].[Student_Choices]  WITH CHECK ADD  CONSTRAINT [FK_Student_Choices_Matchmaking_Arrangement] FOREIGN KEY([Matchmaking_Id])
+REFERENCES [dbo].[Matchmaking_Arrangement] ([Matchmaking_Id])
 GO
 
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Choices_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student_Choices]'))
-ALTER TABLE [dbo].[Student_Choices] CHECK CONSTRAINT [FK_Student_Choices_Event]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Choices_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student_Choices]'))
+ALTER TABLE [dbo].[Student_Choices] CHECK CONSTRAINT [FK_Student_Choices_Matchmaking_Arrangement]
 GO
 
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Choices_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student_Choices]'))
@@ -238,6 +247,15 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Language]
 GO
 
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Time_Slot_Rank_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Time_Slot_Rank]'))
+ALTER TABLE [dbo].[Time_Slot_Rank]  WITH CHECK ADD  CONSTRAINT [FK_Time_Slot_Rank_Matchmaking_Arrangement] FOREIGN KEY([Matchmaking_Id])
+REFERENCES [dbo].[Matchmaking_Arrangement] ([Matchmaking_Id])
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Time_Slot_Rank_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Time_Slot_Rank]'))
+ALTER TABLE [dbo].[Time_Slot_Rank] CHECK CONSTRAINT [FK_Time_Slot_Rank_Matchmaking_Arrangement]
+GO
+/*
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Time_Slot_Rank_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Time_Slot_Rank]'))
 ALTER TABLE [dbo].[Time_Slot_Rank]  WITH CHECK ADD  CONSTRAINT [FK_Time_Slot_Rank_Event] FOREIGN KEY([Event_Date])
 REFERENCES [dbo].[Event] ([Event_Date])
@@ -246,16 +264,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Time_Slot_Rank_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Time_Slot_Rank]'))
 ALTER TABLE [dbo].[Time_Slot_Rank] CHECK CONSTRAINT [FK_Time_Slot_Rank_Event]
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Time_Slot_Rank_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Time_Slot_Rank]'))
-ALTER TABLE [dbo].[Time_Slot_Rank]  WITH CHECK ADD  CONSTRAINT [FK_Time_Slot_Rank_Event] FOREIGN KEY([Event_Date])
-REFERENCES [dbo].[Event] ([Event_Date])
-GO
-
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Time_Slot_Rank_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Time_Slot_Rank]'))
-ALTER TABLE [dbo].[Time_Slot_Rank] CHECK CONSTRAINT [FK_Time_Slot_Rank_Event]
-GO
-
+*/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Internal_Staff_Login]') AND parent_object_id = OBJECT_ID(N'[dbo].[Internal_Staff]'))
 ALTER TABLE [dbo].[Internal_Staff]  WITH CHECK ADD CONSTRAINT [FK_Internal_Staff_Login] FOREIGN KEY([User_Name])
 REFERENCES [dbo].[Login] ([User_Name])
@@ -290,4 +299,11 @@ IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[d
 ALTER TABLE [dbo].[Login] CHECK CONSTRAINT [Role_is_Appropriate]
 GO
 
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Event_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Event]'))
+ALTER TABLE [dbo].[Event]  WITH CHECK ADD  CONSTRAINT [FK_Event_Matchmaking_Arrangement] FOREIGN KEY([Matchmaking_Id])
+REFERENCES [dbo].[Matchmaking_Arrangement] ([Matchmaking_Id])
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Event_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Event]'))
+ALTER TABLE [dbo].[Event] CHECK CONSTRAINT [FK_Event_Matchmaking_Arrangement]
 Commit;

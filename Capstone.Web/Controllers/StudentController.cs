@@ -26,9 +26,19 @@ namespace Capstone.Web.Controllers.UsersProfiles
         public ActionResult RankEmployers()
         {
             EmployerDAL edal = new EmployerDAL();
-            List<Employer> results = new List<Employer>();
-            results = edal.GetAllEmployers();
-            return View(results);
+            List<Employer> employers = new List<Employer>();
+            employers = edal.GetAllEmployers();
+
+            List<SelectListItem> employerNames = new List<SelectListItem>();
+            foreach (Employer e in employers)
+            {
+                employerNames.Add(new SelectListItem { Text = e.EmployerName, Value = e.EmployerId.ToString() });
+            }
+
+            ViewBag.EmployerNames = employerNames;
+
+                 
+            return View(employers);
         }
         public ActionResult ViewStudentSchedule()
         {
@@ -42,5 +52,34 @@ namespace Capstone.Web.Controllers.UsersProfiles
             return View(studentSchedule);
         }
 
+        public ActionResult UpdateStudentChoices()
+        {
+            StudentChoiceDAL scdal = new StudentChoiceDAL();
+            string eventDate = "4/15/2017";
+            int studentId = 1;
+            scdal.DeletePreviousChoices(studentId,eventDate);
+            List<StudentChoice> studentChoices = new List<StudentChoice>();
+            for (int i = 1; i<3; i++)
+            {
+                StudentChoice s = new StudentChoice();
+                s.StudentId = studentId;
+                s.EventDate = eventDate;
+                s.EmployerId = int.Parse(Request["Choice"+i]);
+                s.EmployerRank = i;
+                studentChoices.Add(s);
+            }
+          
+            
+            bool isSuccessful = scdal.UpdateStudentChoice(studentChoices);
+            if (isSuccessful)
+            {
+                ViewBag.Message = "Your choices were submitted.";
+            }
+            else
+            {
+                ViewBag.Message = "Your choices were not submitted. Please try again.";
+            }
+            return View();
+        }
     }
 }

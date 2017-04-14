@@ -1,17 +1,41 @@
 ﻿@using Capstone.Web.Models;
+@model List<Employer>
+
 @{
     ViewBag.Title = "RankEmployers";
 }
 
-<h2>RankEmployers</h2>
-@model List<Employer>
+<h2>Rank Employers</h2>
+
+@using (Html.BeginForm("UpdateStudentChoices", "Student"))
+{
+<table>
+    <tr>
+
+        <td>@Html.Label("Please Rank your #1 Employer")</td>
+        <td>@Html.DropDownList("Choice1", (List<SelectListItem>)ViewBag.EmployerNames)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Please Rank your #2 Employer")</td>
+        <td>@Html.DropDownList("Choice2", (List<SelectListItem>)ViewBag.EmployerNames)</td>
+
+       </tr> 
+</table>
+<input value="Submit" type="submit" id="inputButton"/>
+<p>@Html.ActionLink("Go Back", "StudentHome", "Student")</p>
+<br />
+<br />
+<br />
+}
 
 <table>
+    
     <tr>
         <th>Employer Name</th>
         <th>Summary</th>
-       
+
     </tr>
+
     @foreach (Employer e in Model)
     {
         <tr>

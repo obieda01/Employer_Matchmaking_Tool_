@@ -193,6 +193,7 @@
     <Content Include="Views\Staff\ViewMasterSchedule.cshtml" />
     <Content Include="Views\Student\ViewStudentSchedule.cshtml" />
     <Content Include="Views\Student\RankEmployers.cshtml" />
+    <Content Include="Views\Student\UpdateStudentChoices.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

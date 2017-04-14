@@ -32,23 +32,7 @@ namespace Capstone.Web.Controllers
             StudentChoiceDAL scDAL = new StudentChoiceDAL();
             InterviewDAL iDAL = new InterviewDAL();
 
-            List<Interview> masterSchedule = new List<Interview>();
-
-            for (int i = 1; i < 3; i++)
-            {
-                List<StudentChoice> StudentChoices = scDAL.GetEmployersByRank(i);
-
-                foreach (StudentChoice choice in StudentChoices)
-                {
-                    iDAL.UpdateEmployerScheduleWithStudent(choice);
-                }
-
-                //randomly fill in the rest of the schedule
-                iDAL.RandomlyFillInRemainingEmployerSchedules();
-
-                masterSchedule = iDAL.GetMasterSchedule();
-            }
-
+            List<Interview> masterSchedule = iDAL.GetMasterSchedule();
             return View(masterSchedule);
         }
 

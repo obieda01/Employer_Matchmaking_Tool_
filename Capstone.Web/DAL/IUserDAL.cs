@@ -10,7 +10,6 @@ namespace Capstone.Web.DAL
         User GetUser(string username, string password);
         User GetUser(string username);
         List<string> GetUsernames(string startsWith);
-
         bool CreateUser(User newUser);
         bool ChangePassword(string username, string newPassword);
     }

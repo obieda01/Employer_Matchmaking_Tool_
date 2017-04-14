@@ -11,7 +11,7 @@ namespace Capstone.Web.DAL
 
     public class StudentChoiceDAL
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstoneDatabase"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
         private string SQL_GetEmployersByRank = "Select * From Student_Choices where Employer_Rank = @EmployerRanking;";
 
@@ -31,13 +31,11 @@ namespace Capstone.Web.DAL
 
                     while (reader.Read())
                     {
-                        StudentChoice sc = new StudentChoice()
-                        {
-                            StudentId = Convert.ToInt32(reader["Student_Id"]),
-                            EmployerId = Convert.ToInt32(reader["Employer_Id"]),
-                            EmployerRank = Convert.ToInt32(reader["Employer_Rank"]),
-                            EventDate = Convert.ToDateTime(reader["Event_Date"])
-                        };
+                        StudentChoice sc = new StudentChoice();
+                        sc.StudentId = Convert.ToInt32(reader["Student_Id"]);
+                        sc.EmployerId = Convert.ToInt32(reader["Employer_Id"]);
+                        sc.EmployerRank = Convert.ToInt32(reader["Employer_Rank"]);
+                        sc.EventDate = Convert.ToDateTime(reader["Event_Date"]).ToShortDateString();
                         results.Add(sc);
                     }
                 }

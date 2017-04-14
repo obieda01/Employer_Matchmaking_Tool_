@@ -14,5 +14,6 @@ namespace Capstone.Web.Models
         public string StudentName { get; set; }
         public string EventDate { get; set; }
         public string StartTime { get; set; }
+        public int TimeSlotRank { get; set; }
     }
 }

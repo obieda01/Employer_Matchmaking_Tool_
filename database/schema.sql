@@ -13,21 +13,21 @@ use [FinalCapstone];
 BEGIN TRANSACTION;
 
 CREATE TABLE [dbo].[Login](
-	[User_Name] varchar(32) NOT NULL, --
-	[Password] varchar(32) NOT NULL, ---
-	[User_Role] [nchar](7) NOT NULL,
+	[User_Name] [varchar] (50) NOT NULL, --
+	[Password] [varchar] (32) NOT NULL, ---
+	[User_Role] [varchar](7) NOT NULL,
 CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED ([User_Name] ASC));
 
 CREATE TABLE [dbo].[Internal_Staff](
 	[Staff_Id] [int] IDENTITY(1,1) NOT NULL,
-	[User_Name] [nchar](50) NOT NULL,
-	[Name] [nchar](50) NOT NULL,
+	[User_Name] [varchar] (50) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
 	[Admin_Flag] [char](1) NOT NULL,
  CONSTRAINT [PK_Internal_Staff] PRIMARY KEY CLUSTERED ([Staff_Id] ASC));
 
 CREATE TABLE [dbo].[Employer](
 	[Employer_Id] [int] IDENTITY(1,1) NOT NULL,
-	[Employer_Name] [nvarchar](50) NOT NULL,
+	[Employer_Name] [varchar](50) NOT NULL,
 	[Number_Of_Teams] [int] NOT NULL,
 	[Summary] [text] NULL,
  CONSTRAINT [PK_Employer] PRIMARY KEY CLUSTERED ([Employer_Id] ASC));
@@ -51,9 +51,9 @@ CREATE TABLE [dbo].[Employer_Team](
 	[Team_Id] [int] NOT NULL,
 	[Event_Date] [date] NOT NULL,
 	[Language_Id] [int] NOT NULL,
-	[Start_Time] [time](7) NOT NULL,
-	[End_Time] [time](7) NOT NULL,
-	[Assigned_Room] [nvarchar](50) NULL,
+	[Start_Time] [datetime] NOT NULL,
+	[End_Time] [datetime] NOT NULL,
+	[Assigned_Room] [varchar](50) NULL,
  CONSTRAINT [PK_Employer_Team] PRIMARY KEY CLUSTERED 
 (
 	[Team_Id] ASC,
@@ -64,7 +64,7 @@ CREATE TABLE [dbo].[Wait_Listed](
 	[Student_Id] [int] NOT NULL,
 	[Employer_Id] [int] NOT NULL,
 	[Event_Date] [date] NOT NULL,
-	[Resolved] [nchar](1) NOT NULL,
+	[Resolved] [varchar](1) NOT NULL,
  CONSTRAINT [PK_Wait_Listed] PRIMARY KEY CLUSTERED 
 (
 	[Student_Id] ASC,
@@ -73,14 +73,14 @@ CREATE TABLE [dbo].[Wait_Listed](
 
 CREATE TABLE [dbo].[Event](
 	[Event_Date] [date] NOT NULL,
-	[Start_Time] [time](7) NOT NULL,
-	[End_Time] [time](7) NOT NULL,
-	[Lunch_Start] [time](7) NULL,
-	[Lunch_End] [time](7) NULL,
-	[First_Break_Start] [time](7) NULL,
-	[First_Break_End] [time](7) NULL,
-	[Second_Break_Start] [time](7) NULL,
-	[Second_Break_End] [time](7) NULL,
+	[Start_Time] [datetime] NOT NULL,
+	[End_Time] [datetime] NOT NULL,
+	[Lunch_Start] [datetime] NULL,
+	[Lunch_End] [datetime] NULL,
+	[First_Break_Start] [datetime] NULL,
+	[First_Break_End] [datetime] NULL,
+	[Second_Break_Start] [datetime] NULL,
+	[Second_Break_End] [datetime] NULL,
 	[Interview_Length] [int] NOT NULL,
  CONSTRAINT [PK_Event] PRIMARY KEY CLUSTERED 
 (
@@ -100,9 +100,9 @@ CREATE TABLE [dbo].[Student_Choices](
 
 CREATE TABLE [dbo].[Student](
 	[Student_Id] [int] IDENTITY(1,1) NOT NULL,
-	[Student_Name] [nvarchar](50) NOT NULL,
+	[Student_Name] [varchar](50) NOT NULL,
 	[Language_Id] [int] NOT NULL,
-	[User_Name] [nchar](50) NOT NULL,
+	[User_Name] [varchar](50) NOT NULL,
  CONSTRAINT [PK_Student] PRIMARY KEY CLUSTERED 
 (
 	[Student_Id] ASC
@@ -111,7 +111,7 @@ CREATE TABLE [dbo].[Student](
 
 CREATE TABLE [dbo].[Language](
 	[Language_Id] [int] NOT NULL,
-	[Language] [nchar](10) NOT NULL,
+	[Language] [varchar](10) NOT NULL,
  CONSTRAINT [PK_Language] PRIMARY KEY CLUSTERED 
 (
 	[Language_Id] ASC
@@ -120,8 +120,8 @@ CREATE TABLE [dbo].[Language](
 
 CREATE TABLE [dbo].[Time_Slot_Rank](
 	[Event_Date] [date] NOT NULL,
-	[Start_Time] [time](7) NOT NULL,
-	[End_Time] [time](7) NOT NULL,
+	[Start_Time] [datetime] NOT NULL,
+	[End_Time] [datetime] NOT NULL,
 	[Time_Slot_Rank] [int] NULL,
  CONSTRAINT [PK_Time_Slot_Rank] PRIMARY KEY CLUSTERED 
 (

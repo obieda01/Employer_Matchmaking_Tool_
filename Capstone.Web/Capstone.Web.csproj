@@ -188,7 +188,9 @@
     <Content Include="Views\Users\LeavingSite.cshtml" />
     <Content Include="Views\Shared\_AuthenticationBar.cshtml" />
     <Content Include="Views\Student\StudentHome.cshtml" />
-    <Content Include="Views\Admin\AddStaff.cshtml" />
+    <Content Include="Views\Staff\ViewEmployerSchedule.cshtml" />
+    <Content Include="Views\Staff\ViewMasterSchedule.cshtml" />
+    <Content Include="Views\Student\ViewStudentSchedule.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

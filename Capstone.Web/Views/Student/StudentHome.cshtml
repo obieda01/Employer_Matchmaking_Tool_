@@ -1,38 +1,51 @@
-﻿@{
+﻿@using Critter.Web.Extensions;
+
+@{
     ViewBag.Title = "StudentHome";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
+<link type="text/css" rel="stylesheet" href="~/Content/css/login.css" />
 
 <body id="viewport_01" style="">
-    <link type="text/css" rel="stylesheet" href="~/Content/css/login.css" />
-    <div class="wrapper">
-        
-        <ul class="bg-bubbles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
-    @*<script type="text/javascript" src="~/Scripts/js/Login.js"></script>*@
-    <section>
-        <nav>
-            <div></div>
-            <ul>
-                <li data-xcoord="0px" class="active">Home</li>
-                <li data-xcoord="160px">About</li>
-                <li data-xcoord="320px">Contact</li>
-                <li data-xcoord="480px">Store</li>
-            </ul>
-        </nav>
-    </section>
+
 </body>
+
+<div class="wrapper">
+
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+@*<script type="text/javascript" src="~/Scripts/js/Login.js"></script>*@
+<section>
+    <nav>
+        <ul>
+            <li data-xcoord="0px" class="active">Home</li>
+            <li data-xcoord="160px">About</li>
+            <li data-xcoord="320px">Contact</li>
+            <li data-xcoord="480px">Store</li>
+        </ul>
+        @*<ul class="nav navbar-nav">
+            <li class="@Html.IsSelected("Home", "Index", "active")">@Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="@Html.IsSelected("Messages", "Dashboard", "active")">@Html.ActionLink("Private Messages", "Dashboard", "Messages", new { username = Model.Username }, null)</li>
+            <li class="@Html.IsSelected("Messages", "NewMessage", "active")">@Html.ActionLink("New Message", "NewMessage", "Messages", new { username = Model.Username }, null)</li>
+            <li class="@Html.IsSelected("Messages", "SentMessages", "active")">@Html.ActionLink("Sent Messages", "SentMessages", "Messages", new { username = Model.Username }, null)</li>
+            <li class="@Html.IsSelected("Messages", "ChangePassword", "active")">@Html.ActionLink("Change Password", "ChangePassword", "Users", new { username = Model.Username }, null)</li>
+        </ul>*@
+
+
+    </nav>
+
+</section>
 

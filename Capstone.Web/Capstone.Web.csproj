@@ -154,6 +154,8 @@
     <Compile Include="DAL\IUserDAL.cs" />
     <Compile Include="DAL\StudentChoiceDAL.cs" />
     <Compile Include="DAL\UserSqlDAL.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

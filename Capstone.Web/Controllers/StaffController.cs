@@ -41,6 +41,39 @@ namespace Capstone.Web.Controllers
             //return View(employerSchedule);
 
         }
+        public ActionResult AssignRoom()
+        {
+            EmployerDAL iDAL = new EmployerDAL();
+            List<EmployerTeam> employerList = iDAL.GetAllEmployersAndTeams();
+            
+            
+            return View(employerList);
+        }
+        public ActionResult UpdateRoom()
+        {
+            EmployerDAL eDAL = new EmployerDAL();
+            List<EmployerTeam> employerList = eDAL.GetAllEmployersAndTeams();
+            foreach (EmployerTeam e in employerList)
+            {
+                if (!String.IsNullOrEmpty(Request.Params[e.EmployerName + e.TeamId + "assignedRoom"]))
+                {
+                    e.AssignedRoom = Request.Params[e.EmployerName + e.TeamId + "assignedRoom"];
+                }
+            }
+                bool isSuccessful = eDAL.UpdateAssignedRoom(employerList);
+
+                if (isSuccessful)
+                {
+                    ViewBag.Message = "The employer was successfully added.";
+                }
+                else
+                {
+                    ViewBag.Message = "The employer was not successfully added. Please try again.";
+                }
+
+                return View("UpdateStatus");
+            }
+
 
         public ActionResult ViewMasterSchedule()
         {
@@ -49,6 +82,7 @@ namespace Capstone.Web.Controllers
             return View(masterSchedule);
         }
 
+    
         public ActionResult ViewAStudentsSchedule()
         {
             StudentDAL sdal = new StudentDAL();

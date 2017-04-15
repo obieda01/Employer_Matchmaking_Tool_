@@ -199,6 +199,7 @@
     <Content Include="Views\Staff\UpdateStatus.cshtml" />
     <Content Include="Views\Student\UpdateStudentChoices.cshtml" />
     <Content Include="Views\Staff\AddEmployer.cshtml" />
+    <Content Include="Views\Staff\AssignRoom.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

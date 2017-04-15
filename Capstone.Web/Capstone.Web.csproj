@@ -105,12 +105,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Capstone.Web_BACKUP_60036.csproj" />
+    <Content Include="Capstone.Web_BASE_60036.csproj" />
+    <Content Include="Capstone.Web_LOCAL_60036.csproj" />
+    <Content Include="Capstone.Web_REMOTE_60036.csproj" />
     <Content Include="Content\asset\6317f272960cb35f1ed84dd56aba8ec1.jpg" />
     <Content Include="Content\asset\old-1130743_1920.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\crus.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\navbar.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -192,6 +197,12 @@
     <Content Include="Views\Staff\ViewEmployerSchedule.cshtml" />
     <Content Include="Views\Staff\ViewMasterSchedule.cshtml" />
     <Content Include="Views\Student\ViewStudentSchedule.cshtml" />
+    <Content Include="Views\Student\RankEmployers.cshtml" />
+    <Content Include="Views\Student\UpdateStudentChoices.cshtml" />
+    <Content Include="Views\Student\ViewMySchedule.cshtml" />
+    <Content Include="Views\Staff\CreateAStudentLogin.cshtml" />
+    <Content Include="Views\Staff\ViewAStudentsSchedule.cshtml" />
+    <Content Include="Views\Admin\AddStaff.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

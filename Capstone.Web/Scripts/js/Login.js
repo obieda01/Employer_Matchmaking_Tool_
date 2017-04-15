@@ -1,4 +1,5 @@
 ﻿
+
     /*!
  * jQuery twitter bootstrap wizard plugin
  * Examples and documentation at: http://github.com/VinceG/twitter-bootstrap-wizard
@@ -334,6 +335,10 @@
     transparent = true;
 
     $(document).ready(function () {
+
+       
+   
+
 
         $.material.init();
 

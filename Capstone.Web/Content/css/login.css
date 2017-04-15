@@ -1,4 +1,6 @@
-﻿@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+﻿
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 
 * {
     box-sizing: border-box;
@@ -12,41 +14,21 @@ body {
     color: white;
     font-weight: 300;
 }
+body {
+    background: #50a3a2;
+    background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+    background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+    min-height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+}
 
-    body ::-webkit-input-placeholder {
-        /* WebKit browsers */
-        font-family: 'Source Sans Pro', sans-serif;
-        color: white;
-        font-weight: 300;
-    }
-
-    body :-moz-placeholder {
-        /* Mozilla Firefox 4 to 18 */
-        font-family: 'Source Sans Pro', sans-serif;
-        color: white;
-        opacity: 1;
-        font-weight: 300;
-    }
-
-    body ::-moz-placeholder {
-        /* Mozilla Firefox 19+ */
-        font-family: 'Source Sans Pro', sans-serif;
-        color: white;
-        opacity: 1;
-        font-weight: 300;
-    }
-
-    body :-ms-input-placeholder {
-        /* Internet Explorer 10+ */
-        font-family: 'Source Sans Pro', sans-serif;
-        color: white;
-        font-weight: 300;
-    }
 
 .wrapper {
     background: #50a3a2;
-    background: -webkit-linear-gradient(top left, #50a3a2 0%, #27ae60 100%);
-    background: linear-gradient(to bottom right, #50a3a2 0%, #27ae60 100%);
+    background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+    background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
     position: absolute;
     top: 20%;
     left: 0;
@@ -54,6 +36,7 @@ body {
     height: 100%;
     margin-top: -200px;
     overflow: auto;
+    overflow: hidden;
 }
 
     .wrapper.form-success .container h1 {
@@ -62,9 +45,9 @@ body {
     }
 
 .container {
-    max-width: 100%;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 200px 0;
+    padding: 80px 0;
     height: 400px;
     text-align: center;
 }
@@ -260,4 +243,3 @@ form {
         transform: translateY(-700px) rotate(600deg);
     }
 }
-

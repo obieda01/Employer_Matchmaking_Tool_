@@ -1,10 +1,13 @@
 ﻿@model Capstone.Web.Models.Users.LoginViewModel
 @{
-    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+ 
 
 <body id="viewport_01" style="">
     <link type="text/css" rel="stylesheet" href="~/Content/css/login.css" />
+
     <div class="wrapper">
         <div class="container">
             @using (Html.BeginForm("Login", "Users", FormMethod.Post))
@@ -17,21 +20,25 @@
                 @Html.TextBoxFor(m => m.Password, new { @placeholder = "Password" })
                 @Html.ValidationMessageFor(m => m.Password)
                 @Html.ValidationMessage("invalid-login")
+
+
+                
                 <button type="submit" id="login-button">Login</button>
             }
+            <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </div>
-        <ul class="bg-bubbles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+       
     </div>
 </body>
 

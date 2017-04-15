@@ -18,8 +18,9 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
 
         // GET: Student
-        public ActionResult StudentHome()
+        public ActionResult StudentHome(string username)
         {
+            ViewBag.userName = username;
             return View("StudentHome");
         }
 

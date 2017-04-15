@@ -3,32 +3,32 @@
 @model List<Interview>
 
 @{
-    ViewBag.Title = "ViewEmployerSchedule";
+    ViewBag.Title = "ViewStudentSchedule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-
-<h2>AHMAD -
+<h2>
+    AHMAD -
     IF POSSIBLE I WOULD LIKE THIS PAGE TO DYNAMICALLY CHANGE USING JAVASCRIPT.
     WHEN A STAFF COMES TO THIS PAGE INITIALLY IT SHOULD ONLY HAVE THE DROPDOWN LIST OF EMPLOYERS.
     THEN WHEN THEY CLICK ON A PARTICULAR EMPLOYER THAT EMPLOYERS SCHEDULE SHOULD APPEAR.
     I DON'T KNOW HOW TO DO THIS WITH JAVASCRIPT, JSON OR AJAX.  SO IF YOU KNOW HOW TO DO THIS
-    IT WOULD BE SO <STRONG>FANTASTIC</STRONG>.  OTHERWISE I WILL JUST CREATE TWO PAGES AND HAVE IT 
+    IT WOULD BE SO <STRONG>FANTASTIC</STRONG>.  OTHERWISE I WILL JUST CREATE TWO PAGES AND HAVE IT
     HIT THE CONTROLLER AND THEN DISPLAY THE RESULTS AFTERWARDS.  THANK YOU! KENDALLENE
-    </h2>
+</h2>
 
 
-<h2>View Employer Schedule</h2>
+<h2>View Student Schedule</h2>
 
-<td>@Html.Label("Which employer's schedule do you want to see:")</td>
-<td>@Html.DropDownList("employer", (List<SelectListItem>)ViewBag.EmployerNames)</td>
+<td>@Html.Label("Which student's schedule do you want to see:")</td>
+<td>@Html.DropDownList("student", (List<SelectListItem>)ViewBag.StudentNames)</td>
 
-<table id="employerTable">
+
+<table>
     <tr>
         <th>Employer Name</th>
         <th>Team Id</th>
-        <th>Student Name</th>
         <th>Event Date</th>
         <th>Start Time</th>
     </tr>
@@ -37,7 +37,6 @@
         <tr>
             <td> @i.EmployerName</td>
             <td> @i.TeamId</td>
-            <td> @i.StudentName</td>
             <td> @i.EventDate</td>
             <td> @i.StartTime</td>
         </tr>

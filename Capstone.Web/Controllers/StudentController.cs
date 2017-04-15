@@ -40,7 +40,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
                  
             return View(employers);
         }
-        public ActionResult ViewStudentSchedule()
+        public ActionResult ViewMySchedule()
         {
             //need to know how the student is getting transferred
             int studentId = 1;

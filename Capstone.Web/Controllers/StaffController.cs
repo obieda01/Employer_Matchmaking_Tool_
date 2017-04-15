@@ -41,6 +41,7 @@ namespace Capstone.Web.Controllers
             //return View(employerSchedule);
 
         }
+
         public ActionResult AssignRoom()
         {
             EmployerDAL iDAL = new EmployerDAL();
@@ -49,6 +50,7 @@ namespace Capstone.Web.Controllers
             
             return View(employerList);
         }
+
         public ActionResult UpdateRoom()
         {
             EmployerDAL eDAL = new EmployerDAL();
@@ -74,7 +76,6 @@ namespace Capstone.Web.Controllers
                 return View("UpdateStatus");
             }
 
-
         public ActionResult ViewMasterSchedule()
         {
             InterviewDAL iDAL = new InterviewDAL();
@@ -82,7 +83,6 @@ namespace Capstone.Web.Controllers
             return View(masterSchedule);
         }
 
-    
         public ActionResult ViewAStudentsSchedule()
         {
             StudentDAL sdal = new StudentDAL();
@@ -112,6 +112,11 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UpdateStatus()
         {
+            return View();
+        }
+
+        public ActionResult UpdateStudentLogin()
+        {
             //need to add capability to email the student the username and password
 
             Student s = new Student();
@@ -138,7 +143,7 @@ namespace Capstone.Web.Controllers
                 ViewBag.Message = "The student was not successfully added. Please try again.";
             }
 
-            return View();
+            return View("UpdateStatus");
 
         }
 

@@ -17,7 +17,7 @@ namespace Capstone.Web.DAL
 
         private string SQL_AddNewEmployer = "Insert into employer (Employer_Name, Summary, Number_Of_Teams) VALUES (@employerName, @summary, @numberOfTeams);";
         private string SQL_GetAllEmployersAndTeams = "Select e.Employer_Id,e.Employer_Name,t.Assigned_Room,t.Team_Id,l.Language,t.Start_Time,t.End_Time from Employer_Team t join Employer e ON e.Employer_Id = t.Employer_Id join Language l ON t.Language_Id = l.Language_Id;";
-
+        private string SQL_UpdateRoom = "";
         public List<Employer> GetAllEmployers()
         {
             List<Employer> results = new List<Employer>();
@@ -125,10 +125,10 @@ namespace Capstone.Web.DAL
                     conn.Open();
                     foreach (EmployerTeam e in team)
                     {
+                        //update assigned room
                         SqlCommand cmd = new SqlCommand(SQL_UpdateRoom, conn);
-                        cmd.Parameters.AddWithValue("@employerName", employer.EmployerName);
-                        cmd.Parameters.AddWithValue("@summary", employer.Summary);
-                        cmd.Parameters.AddWithValue("@numberOfTeams", employer.NumberOfTeams);
+                        cmd.Parameters.AddWithValue("@employerName", e.EmployerName);
+
 
                         rowsUpdated += cmd.ExecuteNonQuery();
                     }

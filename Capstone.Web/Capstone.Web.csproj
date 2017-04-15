@@ -111,7 +111,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\crus.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\navbar.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -192,11 +191,7 @@
     <Content Include="Views\Student\StudentHome.cshtml" />
     <Content Include="Views\Staff\ViewEmployerSchedule.cshtml" />
     <Content Include="Views\Staff\ViewMasterSchedule.cshtml" />
-    <Content Include="Views\Student\ViewMySchedule.cshtml" />
-    <Content Include="Views\Student\RankEmployers.cshtml" />
-    <Content Include="Views\Student\UpdateStudentChoices.cshtml" />
-    <Content Include="Views\Staff\CreateAStudentLogin.cshtml" />
-    <Content Include="Views\Staff\ViewAStudentsSchedule.cshtml" />
+    <Content Include="Views\Student\ViewStudentSchedule.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -16,6 +16,7 @@ namespace Capstone.Web.DAL
         private string SQL_GetEmployersByRank = "Select Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id From Student_Choices where Employer_Rank = @EmployerRanking;";
         private string SQL_UpdateStudentChoice = "Insert INTO Student_Choices (Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id) VALUES (@studentId, @employerId, @employerRank, @matchmakingId);";
         private string SQL_DeletePreviousChoices = "Delete From Student_Choices where Student_Id = @studentId AND Matchmaking_Id = @matchmakingId;";
+
         public List<StudentChoice> GetEmployersByRank(int ranking)
         {
             List<StudentChoice> results = new List<StudentChoice>();
@@ -78,6 +79,7 @@ namespace Capstone.Web.DAL
                 throw new NotImplementedException();
             }
         }
+
         public void DeletePreviousChoices(int studentId,int matchmakingId)
         {
             try

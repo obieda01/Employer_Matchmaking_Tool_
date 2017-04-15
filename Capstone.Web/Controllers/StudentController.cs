@@ -25,11 +25,14 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
         public ActionResult RankEmployers()
         {
+            //need to update with the real matchmaking id
+            int matchmakingId = 1;
             EmployerDAL edal = new EmployerDAL();
-            List<Employer> employers = new List<Employer>();
-            employers = edal.GetAllEmployers();
+
+            List<Employer> employers = edal.GetAllEmployers();
 
             List<SelectListItem> employerNames = new List<SelectListItem>();
+
             foreach (Employer e in employers)
             {
                 employerNames.Add(new SelectListItem { Text = e.EmployerName, Value = e.EmployerId.ToString() });
@@ -37,9 +40,12 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
             ViewBag.EmployerNames = employerNames;
 
+            EventDAL eventDAL = new EventDAL();
+            ViewBag.NumberOfStudentChoices = eventDAL.GetNumberOfStudentChoices(matchmakingId);
                  
             return View(employers);
         }
+
         public ActionResult ViewMySchedule()
         {
             //need to know how the student is getting transferred
@@ -54,12 +60,19 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
         public ActionResult UpdateStudentChoices()
         {
-            StudentChoiceDAL scdal = new StudentChoiceDAL();
-            int matchmakingId = 1;
+            //need to update with the real student id and matchmaking id
             int studentId = 1;
+            int matchmakingId = 1;
+
+            StudentChoiceDAL scdal = new StudentChoiceDAL();
+            EventDAL eventDAL = new EventDAL();
+            int numberOfStudentChoices = eventDAL.GetNumberOfStudentChoices(matchmakingId);
+
+
             scdal.DeletePreviousChoices(studentId, matchmakingId);
             List<StudentChoice> studentChoices = new List<StudentChoice>();
-            for (int i = 1; i<3; i++)
+
+            for (int i = 1; i<= numberOfStudentChoices; i++)
             {
                 StudentChoice s = new StudentChoice();
                 s.StudentId = studentId;

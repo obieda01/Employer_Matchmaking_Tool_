@@ -16,10 +16,11 @@ namespace Capstone.Web.Controllers
         public ActionResult ViewEmployerSchedule()
         {
             EmployerDAL edal = new EmployerDAL();
-            List<Employer> employers = new List<Employer>();
-            employers = edal.GetAllEmployers();
+
+            List<Employer> employers = edal.GetAllEmployers();
 
             List<SelectListItem> employerNames = new List<SelectListItem>();
+
             foreach (Employer e in employers)
             {
                 employerNames.Add(new SelectListItem { Text = e.EmployerName, Value = e.EmployerId.ToString() });
@@ -27,9 +28,10 @@ namespace Capstone.Web.Controllers
 
             ViewBag.EmployerNames = employerNames;
 
-
             InterviewDAL iDAL = new InterviewDAL();
+
             List<Interview> masterSchedule = iDAL.GetMasterSchedule();
+
             return View(masterSchedule);
 
             //Note from KH: If we have to build two pages then - we will use this in the results view 
@@ -49,26 +51,99 @@ namespace Capstone.Web.Controllers
 
         public ActionResult ViewAStudentsSchedule()
         {
-            //need to know how the student is getting transferred
-            int studentId = 1;
+            StudentDAL sdal = new StudentDAL();
 
-            InterviewDAL dal = new InterviewDAL();
+            List<Student> students = sdal.GetAllStudents();
 
-            List<Interview> studentSchedule = dal.GetStudentSchedule(studentId);
+            List<SelectListItem> studentNames = new List<SelectListItem>();
 
-            return View(studentSchedule);
+            foreach (Student s in students)
+            {
+                studentNames.Add(new SelectListItem { Text = s.StudentName, Value = s.StudentId.ToString() });
+            }
+
+            ViewBag.StudentNames = studentNames;
+
+            InterviewDAL idal = new InterviewDAL();
+
+            List<Interview> studentSchedules = idal.GetAllStudentsSchedules();
+
+            return View(studentSchedules);
+        }
+        
+        public ActionResult AddAStudentLogin()
+        {
+            return View();
         }
 
-
-        public ActionResult CreateAStudentLogin()
+        public ActionResult UpdateStatus()
         {
+            //need to add capability to email the student the username and password
+
+            Student s = new Student();
+
+            if ((!String.IsNullOrEmpty(Request.Params["studentName"])) && (!String.IsNullOrEmpty(Request.Params["userName"]))
+                    && (!String.IsNullOrEmpty(Request.Params["languageId"])))
+            {
+
+                s.StudentName = Request.Params["studentName"];
+                s.UserName = Request.Params["userName"];
+                s.LanguageId = int.Parse(Request.Params["languageId"]);
+            }
+
+            StudentDAL sdal = new StudentDAL();
+
+            bool isSuccessful = sdal.AddNewStudent(s);
+
+            if (isSuccessful)
+            {
+                ViewBag.Message = "The student was successfully added.";
+            }
+            else
+            {
+                ViewBag.Message = "The student was not successfully added. Please try again.";
+            }
 
             return View();
+
+        }
+
+        public ActionResult AddEmployer()
+        {
+            return View();
+        }
+
+        public ActionResult UpdateEmployer()
+        {
+            Employer e = new Employer();
+
+            if ((!String.IsNullOrEmpty(Request.Params["employerName"])) && (!String.IsNullOrEmpty(Request.Params["employerSummary"])))
+            {
+
+                e.EmployerName = Request.Params["employerName"];
+                e.Summary = Request.Params["employerSummary"];
+                e.NumberOfTeams = 1; //initially set this value to 1. Staff have the option to update it when they create an event
+            }
+
+            EmployerDAL edal = new EmployerDAL();
+            
+            bool isSuccessful = edal.AddNewEmployer(e);
+
+            if (isSuccessful)
+            {
+                ViewBag.Message = "The employer was successfully added.";
+            }
+            else
+            {
+                ViewBag.Message = "The employer was not successfully added. Please try again.";
+            }
+
+            return View("UpdateStatus");
         }
 
         public ActionResult CreateEvent()
         {
-            return null;
+            return View();
         }
     }
 }

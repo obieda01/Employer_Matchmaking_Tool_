@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "AddAStudentLogin";
+}
+
+<h2>Create A Student Login</h2>
+
+@using (Html.BeginForm("UpdateStudentLogin", "Staff"))
+{
+    <table>
+        <tr>
+
+            <td>@Html.Label("Student Name: ")</td>
+            <td>@Html.TextBox("studentName")</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Student's User Name: ")</td>
+            <td>@Html.TextBox("userName")</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Student's email address: ")</td>
+            <td>@Html.TextBox("emailAddress")</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Confirm student's email address: ")</td>
+            <td>@Html.TextBox("emailAddress2")</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Student's Programming Language: ")</td>
+            <td>@Html.DropDownList("languageId", new SelectList(new List<Object>{new { value = 1 , text = "Java" },
+                    new { value = 2 , text = ".Net"}}, "value", "text", 2))</td>
+        </tr>
+            <tr>
+                <td>Initial Passwords are set to "Password"</td>
+            </tr>
+    </table>
+
+    <input value="Submit" type="submit" id="inputButton" />
+}
+
+

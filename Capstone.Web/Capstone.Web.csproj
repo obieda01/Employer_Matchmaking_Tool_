@@ -149,10 +149,11 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Crypto\HashProvider.cs" />
-    <Compile Include="DAL\CreateEventDAL.cs" />
+    <Compile Include="DAL\EventDAL.cs" />
     <Compile Include="DAL\EmployerDAL.cs" />
     <Compile Include="DAL\InterviewDAL.cs" />
     <Compile Include="DAL\IUserDAL.cs" />
+    <Compile Include="DAL\StudentDAL.cs" />
     <Compile Include="DAL\StudentChoiceDAL.cs" />
     <Compile Include="DAL\UserSqlDAL.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
@@ -191,7 +192,13 @@
     <Content Include="Views\Student\StudentHome.cshtml" />
     <Content Include="Views\Staff\ViewEmployerSchedule.cshtml" />
     <Content Include="Views\Staff\ViewMasterSchedule.cshtml" />
-    <Content Include="Views\Student\ViewStudentSchedule.cshtml" />
+    <Content Include="Views\Staff\ViewAStudentsSchedule.cshtml" />
+    <Content Include="Views\Staff\AddAStudentLogin.cshtml" />
+    <Content Include="Views\Student\RankEmployers.cshtml" />
+    <Content Include="Views\Student\ViewMySchedule.cshtml" />
+    <Content Include="Views\Staff\UpdateStatus.cshtml" />
+    <Content Include="Views\Student\UpdateStudentChoices.cshtml" />
+    <Content Include="Views\Staff\AddEmployer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

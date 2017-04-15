@@ -13,17 +13,9 @@ namespace Capstone.Web.DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        private string SQL_GetMasterSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Matchmaking_Id, t.Start_Time, i.Employer_id, i.student_id 
+        private string SQL_GetSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Matchmaking_Id, t.Start_Time, i.Employer_id, i.student_id 
                                                 from Interview_Schedule i join employer e on i.Employer_id = e.Employer_Id join student s on i.student_id = s.Student_Id  
-                                                join Time_Slot_Rank t on i.Time_Slot_Rank = t.Time_Slot_Rank order by i.Employer_Id, t.Start_Time";
-
-        private string SQL_GetStudentSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Matchmaking_Id, t.Start_Time, i.Employer_id, i.student_id 
-                                                from Interview_Schedule i join employer e on i.Employer_id = e.Employer_Id join student s on i.student_id = s.Student_Id  
-                                                join Time_Slot_Rank t on i.Time_Slot_Rank = t.Time_Slot_Rank where s.student_id = @studentId order by t.Start_Time";
-
-        private string SQL_GetEmployerSchedule = @"select e.Employer_Name, i.Team_Id, s.Student_Name, i.Matchmaking_Id, t.Start_Time, i.Employer_id, i.student_id 
-                                                from Interview_Schedule i join employer e on i.Employer_id = e.Employer_Id join student s on i.student_id = s.Student_Id  
-                                                join Time_Slot_Rank t on i.Time_Slot_Rank = t.Time_Slot_Rank where e.employer_id = @employerId order by t.Start_Time, i.Team_Id";
+                                                join Time_Slot_Rank t on i.Time_Slot_Rank = t.Time_Slot_Rank ";
 
         private string SQL_GetNextAvailableTimeSlot = @"select max(Time_Slot_Rank) as maximum from Interview_Schedule where Employer_Id = @employerId";
 
@@ -41,6 +33,8 @@ namespace Capstone.Web.DAL
         public List<Interview> GetMasterSchedule()
         {
             List<Interview> results = new List<Interview>();
+
+            string SQL_GetMasterSchedule = SQL_GetSchedule + "order by i.Employer_Id, t.Start_Time;";
 
             try
             {
@@ -66,6 +60,7 @@ namespace Capstone.Web.DAL
         {
             List<Interview> results = new List<Interview>();
 
+            string SQL_GetStudentSchedule = SQL_GetSchedule + "where s.student_id = @studentId order by t.Start_Time;";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -90,6 +85,7 @@ namespace Capstone.Web.DAL
 
         public List<Interview> GetEmployerSchedule(int employerId)
         {
+            string SQL_GetEmployerSchedule = SQL_GetSchedule + "where e.employer_id = @employerId order by t.Start_Time, i.Team_Id";
             List<Interview> results = new List<Interview>();
 
             try
@@ -101,6 +97,30 @@ namespace Capstone.Web.DAL
                     SqlCommand cmd = new SqlCommand(SQL_GetEmployerSchedule, conn);
                     cmd.Parameters.AddWithValue("@employerId", employerId);
 
+                    results = populateSchedule(cmd);
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                //Log and throw the exception
+                throw new NotImplementedException();
+            }
+
+            return results;
+        }
+
+        public List<Interview> GetAllStudentsSchedules()
+        {
+            List<Interview> results = new List<Interview>();
+
+            string SQL_GetAllStudentSchedules = SQL_GetSchedule + "order by s.Student_Name, t.Start_Time;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(SQL_GetAllStudentSchedules, conn);
                     results = populateSchedule(cmd);
 
                 }

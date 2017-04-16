@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "AddEmployer";
+}
+
+<h2>Add Employer</h2>
+
+@using (Html.BeginForm("UpdateEmployer", "Staff"))
+{
+    <table>
+        <tr>
+
+            <td>@Html.Label("Employer Name: ")</td>
+            <td>@Html.TextBox("employerName")</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Employer Summary: ")</td>
+            <td>@Html.TextArea("employerSummary")</td>
+        </tr>
+</table>
+
+    <input value="Update" type="submit" id="inputButton" />
+}

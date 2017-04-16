@@ -1,9 +1,15 @@
 ﻿@model Capstone.Web.Models.Users.LoginViewModel
+
+
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
- 
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
 
 <body id="viewport_01" style="">
     <link type="text/css" rel="stylesheet" href="~/Content/css/login.css" />
@@ -15,15 +21,15 @@
                 <h1>
                     Tech Elevator Event Planner <br />Welcome
                 </h1>
-                @Html.TextBoxFor(m => m.Username, new { @placeholder = "User Name" })
-                @Html.ValidationMessageFor(m => m.Username)
-                @Html.TextBoxFor(m => m.Password, new { @placeholder = "Password" })
-                @Html.ValidationMessageFor(m => m.Password)
-                @Html.ValidationMessage("invalid-login")
+                    @Html.TextBoxFor(m => m.Username, new { @placeholder = "User Name" })
+                    @Html.ValidationMessageFor(m => m.Username)
+                    @Html.TextBoxFor(m => m.Password, new { @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                    @Html.ValidationMessage("invalid-login")
 
 
-                
-                <button type="submit" id="login-button">Login</button>
+
+                    <button type="submit" id="login-button">Login</button>
             }
             <ul class="bg-bubbles">
                 <li></li>
@@ -38,7 +44,9 @@
                 <li></li>
             </ul>
         </div>
-       
+
     </div>
 </body>
+</html>
+
 

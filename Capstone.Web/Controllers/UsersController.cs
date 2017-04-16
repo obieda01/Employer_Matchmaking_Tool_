@@ -29,6 +29,7 @@ namespace Capstone.Web.Controllers
         {
             if (base.IsAuthenticated)
             {
+
                 return RedirectToAction("AdminHome", "Admin", new { username = base.CurrentUser });
             }
 
@@ -80,17 +81,25 @@ namespace Capstone.Web.Controllers
                 }
                 else
                 {
-                    if (user.User_Role == "Admin")
+                    return RedirectToAction("StaffHome", "Staff", new { username = base.CurrentUser });        //HERE
+
+
+                    if (user.User_Role == "admin")
                     {
                         return RedirectToAction("AdminHome", "Admin", new {username = base.CurrentUser});
                     }
-                    else if (user.User_Role == "2")
+                    else if (user.User_Role == "staff")
                     {
                         return RedirectToAction("StaffHome", "Staff", new { username = base.CurrentUser });
                     }
-                    else
+                    else if(user.User_Role=="student")
                     {
                         return RedirectToAction("StudentHome", "Student", new { username = base.CurrentUser });
+                    }
+                    else
+                    {
+                        return View("Login", model);
+
                     }
 
                 }

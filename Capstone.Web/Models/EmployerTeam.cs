@@ -9,11 +9,12 @@ namespace Capstone.Web.Models
     {
         public int EmployerId { get; set; }
         public int TeamId { get; set; }
-        public DateTime EventDate { get; set; }
+        public string EventDate { get; set; }
         public string Language { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string AssignedRoom { get; set; }
+        public string EmployerName { get; set; }
         public List<Interview> EmployerTeamSchedule { get; set; }
     }
 }

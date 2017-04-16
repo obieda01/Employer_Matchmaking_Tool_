@@ -47,6 +47,7 @@ CREATE TABLE [dbo].[Interview_Schedule](
 ));
 
 CREATE TABLE [dbo].[Employer_Team](
+	[Matchmaking_Id] [int] NOT NULL,
 	[Employer_Id] [int] NOT NULL,
 	[Team_Id] [int] NOT NULL,
 	[Event_Id] [int] NOT NULL,
@@ -56,6 +57,7 @@ CREATE TABLE [dbo].[Employer_Team](
 	[Assigned_Room] [varchar](50) NULL,
  CONSTRAINT [PK_Employer_Team] PRIMARY KEY CLUSTERED 
 (
+	[Matchmaking_Id] ASC,
 	[Team_Id] ASC,
 	[Employer_Id] ASC
 ));
@@ -255,16 +257,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Time_Slot_Rank_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Time_Slot_Rank]'))
 ALTER TABLE [dbo].[Time_Slot_Rank] CHECK CONSTRAINT [FK_Time_Slot_Rank_Matchmaking_Arrangement]
 GO
-/*
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Time_Slot_Rank_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Time_Slot_Rank]'))
-ALTER TABLE [dbo].[Time_Slot_Rank]  WITH CHECK ADD  CONSTRAINT [FK_Time_Slot_Rank_Event] FOREIGN KEY([Event_Date])
-REFERENCES [dbo].[Event] ([Event_Date])
-GO
 
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Time_Slot_Rank_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Time_Slot_Rank]'))
-ALTER TABLE [dbo].[Time_Slot_Rank] CHECK CONSTRAINT [FK_Time_Slot_Rank_Event]
-GO
-*/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Internal_Staff_Login]') AND parent_object_id = OBJECT_ID(N'[dbo].[Internal_Staff]'))
 ALTER TABLE [dbo].[Internal_Staff]  WITH CHECK ADD CONSTRAINT [FK_Internal_Staff_Login] FOREIGN KEY([User_Name])
 REFERENCES [dbo].[Login] ([User_Name])
@@ -306,4 +299,15 @@ GO
 
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Event_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Event]'))
 ALTER TABLE [dbo].[Event] CHECK CONSTRAINT [FK_Event_Matchmaking_Arrangement]
+go
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Employer_Team_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Employer_Team]'))
+ALTER TABLE [dbo].[Employer_Team]  WITH CHECK ADD  CONSTRAINT [FK_Employer_Team_Matchmaking_Arrangement] FOREIGN KEY([Matchmaking_Id])
+REFERENCES [dbo].[Matchmaking_Arrangement] ([Matchmaking_Id])
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Employer_Team_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Employer_Team]'))
+ALTER TABLE [dbo].[Employer_Team] CHECK CONSTRAINT [FK_Employer_Team_Matchmaking_Arrangement]
+go
+
 Commit;

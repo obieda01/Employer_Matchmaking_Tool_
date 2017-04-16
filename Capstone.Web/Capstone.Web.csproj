@@ -105,17 +105,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Capstone.Web_BACKUP_60036.csproj" />
-    <Content Include="Capstone.Web_BASE_60036.csproj" />
-    <Content Include="Capstone.Web_LOCAL_60036.csproj" />
-    <Content Include="Capstone.Web_REMOTE_60036.csproj" />
     <Content Include="Content\asset\6317f272960cb35f1ed84dd56aba8ec1.jpg" />
     <Content Include="Content\asset\old-1130743_1920.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\crus.css" />
+    <Content Include="Content\css\fresh-bootstrap-table.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\navbar.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -131,6 +129,7 @@
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.11.2.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -140,6 +139,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\bootstrap-table.js" />
     <Content Include="Scripts\js\Login.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -154,10 +154,11 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Crypto\HashProvider.cs" />
-    <Compile Include="DAL\CreateEventDAL.cs" />
+    <Compile Include="DAL\EventDAL.cs" />
     <Compile Include="DAL\EmployerDAL.cs" />
     <Compile Include="DAL\InterviewDAL.cs" />
     <Compile Include="DAL\IUserDAL.cs" />
+    <Compile Include="DAL\StudentDAL.cs" />
     <Compile Include="DAL\StudentChoiceDAL.cs" />
     <Compile Include="DAL\UserSqlDAL.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
@@ -196,13 +197,14 @@
     <Content Include="Views\Student\StudentHome.cshtml" />
     <Content Include="Views\Staff\ViewEmployerSchedule.cshtml" />
     <Content Include="Views\Staff\ViewMasterSchedule.cshtml" />
-    <Content Include="Views\Student\ViewStudentSchedule.cshtml" />
-    <Content Include="Views\Student\RankEmployers.cshtml" />
-    <Content Include="Views\Student\UpdateStudentChoices.cshtml" />
-    <Content Include="Views\Student\ViewMySchedule.cshtml" />
-    <Content Include="Views\Staff\CreateAStudentLogin.cshtml" />
     <Content Include="Views\Staff\ViewAStudentsSchedule.cshtml" />
-    <Content Include="Views\Admin\AddStaff.cshtml" />
+    <Content Include="Views\Staff\AddAStudentLogin.cshtml" />
+    <Content Include="Views\Student\RankEmployers.cshtml" />
+    <Content Include="Views\Student\ViewMySchedule.cshtml" />
+    <Content Include="Views\Staff\UpdateStatus.cshtml" />
+    <Content Include="Views\Student\UpdateStudentChoices.cshtml" />
+    <Content Include="Views\Staff\AddEmployer.cshtml" />
+    <Content Include="Views\Staff\AssignRoom.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

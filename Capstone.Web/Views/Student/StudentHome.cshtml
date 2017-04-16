@@ -4,12 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
 <script type="text/javascript" src="~/Scripts/js/Login.js"></script>
-
+<link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
 
 <div class="image-container set-full-height">
     <!--   Creative Tim Branding   -->
+    <link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
+
     <a href="http://creative-tim.com" target="_blank">
         <div class="logo-container">
             <div class="logo">
@@ -41,8 +42,8 @@
 
     <!--   Big container   -->
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+        <div class="row" style="width: 1200px">
+            <div class="col-sm-12">
                 <!-- Wizard container -->
                 <div class="wizard-container">
                     <div class="card wizard-card" data-color="green" id="wizard">
@@ -55,12 +56,11 @@
                                 </h3>
                                 <h5>This information will let us know more about you.</h5>
                             </div>
-                            <div class="wizard-navigation">
+                            <div class="wizard-navigation" >
                                 <ul>
                                     <li><a href="#details" data-toggle="tab">View My Schedule</a></li>
-                                    <li><a href="#details" data-toggle="tab">View My Schedule</a></li>
-                                    <li><a href="#captain" data-toggle="tab">Room Type</a></li>
-                                    <li><a href="#description" data-toggle="tab">Extra Details</a></li>
+                                    <li><a href="#captain" data-toggle="tab">Rank Employers</a></li>
+                                    <li><a href="#description" data-toggle="tab">Update My Choices</a></li>
                                 </ul>
                             </div>
 
@@ -70,91 +70,10 @@
                                         <div class="col-sm-12">
                                             <h4 class="info-text"> Let's start with the basic details.</h4>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">email</i>
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Your Email</label>
-                                                    <input name="name" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">email</i>
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Your Email</label>
-                                                    <input name="name" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">lock_outline</i>
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Your Password</label>
-                                                    <input name="name2" type="password" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">email</i>
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Your Email</label>
-                                                    <input name="name" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">email</i>
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Your Email</label>
-                                                    <input name="name" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">lock_outline</i>
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Your Password</label>
-                                                    <input name="name2" type="password" class="form-control">
-                                                </div>
-                                            </div>
 
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">email</i>
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Your Email</label>
-                                                    <input name="name" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">email</i>
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Your Email</label>
-                                                    <input name="name" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">lock_outline</i>
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Your Password</label>
-                                                    <input name="name2" type="password" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
+                                            @Html.Action("ViewMySchedule", "Student")
+
+                                        @*<div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Country</label>
                                                 <select class="form-control">
@@ -180,45 +99,55 @@
                                                     <option value="American Samoa"> $999+ </option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div>*@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="captain">
                                     <h4 class="info-text">What type of room would you want? </h4>
-                                    <div class="row">
-                                        <div class="col-sm-10 col-sm-offset-1">
-                                            <div class="col-sm-4">
-                                                <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="This is good if you travel alone.">
-                                                    <input type="radio" name="job" value="Design">
-                                                    <div class="icon">
-                                                        <i class="material-icons">weekend</i>
-                                                    </div>
-                                                    <h6>Single</h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Select this room if you're traveling with your family.">
-                                                    <input type="radio" name="job" value="Code">
-                                                    <div class="icon">
-                                                        <i class="material-icons">home</i>
-                                                    </div>
-                                                    <h6>Family</h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Select this option if you are coming with your team.">
-                                                    <input type="radio" name="job" value="Code">
-                                                    <div class="icon">
-                                                        <i class="material-icons">business</i>
-                                                    </div>
-                                                    <h6>Business</h6>
-                                                </div>
-                                            </div>
+                                    <div class="row" style="width: 1200px">
+                                        <div class="col-sm-12 ">
+                                            @Html.Action("RankEmployers", "Student")
+
+
+                                            @*<div class="col-sm-12">
+
+
+                    <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="This is good if you travel alone.">
+                        <input type="radio" name="job" value="Design">
+                        <div class="icon">
+                            <i class="material-icons">weekend</i>
+                        </div>
+                        <h6>Single</h6>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Select this room if you're traveling with your family.">
+                        <input type="radio" name="job" value="Code">
+                        <div class="icon">
+                            <i class="material-icons">home</i>
+                        </div>
+                        <h6>Family</h6>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Select this option if you are coming with your team.">
+                        <input type="radio" name="job" value="Code">
+                        <div class="icon">
+                            <i class="material-icons">business</i>
+                        </div>
+                        <h6>Business</h6>
+                    </div>
+                </div>*@
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="description">
                                     <div class="row">
+                                        @Html.Action("UpdateStudentChoices", "Student")
+
+
+
+
                                         <h4 class="info-text"> Drop us a small description.</h4>
                                         <div class="col-sm-6 col-sm-offset-1">
                                             <div class="form-group">

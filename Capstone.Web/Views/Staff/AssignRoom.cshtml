@@ -1,0 +1,34 @@
+﻿@using Capstone.Web.Models;
+
+@model List<EmployerTeam>
+
+@{
+    ViewBag.Title = "AssignRoom";
+}
+
+<h2>UpdateRooms</h2>
+
+
+@using (Html.BeginForm("UpdateRoom", "Staff"))
+{
+
+    <table>
+        <tr>
+            <td>@Html.Label("Employer Name")</td>
+            <td>@Html.Label("Team Number")</td>
+            <td>@Html.Label("Assign Room")</td>
+        </tr>
+        @foreach (EmployerTeam e in Model)
+        {
+            <tr>
+                <td>@Html.Label(e.EmployerName)</td>
+                <td>@Html.Label(e.TeamId.ToString())</td>
+                <td>@Html.TextArea(e.EmployerName+e.TeamId+"assignedRoom",new { @Value = e.AssignedRoom })</td>
+            </tr>
+        }
+      
+    </table>
+
+    <input value="Update" type="submit" id="inputButton" />
+}
+

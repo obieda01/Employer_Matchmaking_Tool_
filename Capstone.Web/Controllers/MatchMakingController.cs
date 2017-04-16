@@ -68,15 +68,16 @@ namespace Capstone.Web.Controllers
         [ChildActionOnly]
         public ActionResult GetAuthenticatedUser()
         {
-            User model = null;
+            //User model = null;
 
-            if (IsAuthenticated)
-            {
-                model = userDal.GetUser(CurrentUser);
-            }
+            //if (IsAuthenticated)
+            //{
+            //    model = userDal.GetUser(CurrentUser);
+            //}
 
-            return PartialView("_AuthenticationBar", model);
+            return PartialView("ViewMySchedule");
         }
+
 
     }
 }

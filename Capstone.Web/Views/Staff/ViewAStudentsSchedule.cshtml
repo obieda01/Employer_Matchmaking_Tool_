@@ -11,8 +11,8 @@
 <h2>
     AHMAD -
     IF POSSIBLE I WOULD LIKE THIS PAGE TO DYNAMICALLY CHANGE USING JAVASCRIPT.
-    WHEN A STAFF COMES TO THIS PAGE INITIALLY IT SHOULD ONLY HAVE THE DROPDOWN LIST OF EMPLOYERS.
-    THEN WHEN THEY CLICK ON A PARTICULAR EMPLOYER THAT EMPLOYERS SCHEDULE SHOULD APPEAR.
+    WHEN A STAFF COMES TO THIS PAGE INITIALLY IT SHOULD ONLY HAVE THE DROPDOWN LIST OF STUDENTS.
+    THEN WHEN THEY CLICK ON A PARTICULAR STUDENT THAT STUDENTS SCHEDULE SHOULD APPEAR.
     I DON'T KNOW HOW TO DO THIS WITH JAVASCRIPT, JSON OR AJAX.  SO IF YOU KNOW HOW TO DO THIS
     IT WOULD BE SO <STRONG>FANTASTIC</STRONG>.  OTHERWISE I WILL JUST CREATE TWO PAGES AND HAVE IT
     HIT THE CONTROLLER AND THEN DISPLAY THE RESULTS AFTERWARDS.  THANK YOU! KENDALLENE
@@ -24,9 +24,9 @@
 <td>@Html.Label("Which student's schedule do you want to see:")</td>
 <td>@Html.DropDownList("student", (List<SelectListItem>)ViewBag.StudentNames)</td>
 
-
 <table>
     <tr>
+        <th>Student Name</th>
         <th>Employer Name</th>
         <th>Team Id</th>
         <th>Event Date</th>
@@ -35,6 +35,7 @@
     @foreach (Interview i in Model)
     {
         <tr>
+            <td>@i.StudentName</td>
             <td> @i.EmployerName</td>
             <td> @i.TeamId</td>
             <td> @i.EventDate</td>

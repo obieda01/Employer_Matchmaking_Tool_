@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = "MasterSchedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>
     Add this to the cards list - It would be nice to view the master schedule by having the employers going down and time going across. 
@@ -17,6 +18,7 @@
         <th>Student Name</th>
         <th>Event Date</th>
         <th>Start Time</th>
+        <th>Assigned Room</th>
     </tr>
     @foreach (Interview i in Model)
     {
@@ -26,6 +28,7 @@
             <td> @i.StudentName</td>
             <td> @i.EventDate</td>
             <td> @i.StartTime</td>
+            <td> @i.AssignedRoom</td>
         </tr>
     }
 </table>

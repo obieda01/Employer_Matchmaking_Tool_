@@ -31,6 +31,7 @@
         <th>Team Id</th>
         <th>Event Date</th>
         <th>Start Time</th>
+        <th>Assigned Room</th>
     </tr>
     @foreach (Interview i in Model)
     {
@@ -40,6 +41,7 @@
             <td> @i.TeamId</td>
             <td> @i.EventDate</td>
             <td> @i.StartTime</td>
+            <td> @i.AssignedRoom</td>
         </tr>
     }
 </table>

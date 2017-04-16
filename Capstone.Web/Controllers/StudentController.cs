@@ -29,7 +29,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
             int matchmakingId = 1;
             EmployerDAL edal = new EmployerDAL();
 
-            List<Employer> employers = edal.GetAllEmployers();
+            List<Employer> employers = edal.GetAllEmployers(matchmakingId);
 
             List<SelectListItem> employerNames = new List<SelectListItem>();
 
@@ -50,10 +50,12 @@ namespace Capstone.Web.Controllers.UsersProfiles
         {
             //need to know how the student is getting transferred
             int studentId = 1;
+            //need to remove hardcoding
+            int matchmakingId = 1;
 
             InterviewDAL dal = new InterviewDAL();
 
-            List<Interview> studentSchedule = dal.GetStudentSchedule(studentId);
+            List<Interview> studentSchedule = dal.GetStudentSchedule(studentId, matchmakingId);
 
             return View(studentSchedule);
         }
@@ -92,7 +94,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
             {
                 ViewBag.Message = "Your choices were not submitted. Please try again.";
             }
-            return View();
+            return View("StudentHome");
         }
     }
 }

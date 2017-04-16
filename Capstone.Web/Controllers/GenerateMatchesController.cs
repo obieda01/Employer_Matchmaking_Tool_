@@ -16,23 +16,24 @@ namespace Capstone.Web.Controllers
         {
             StudentChoiceDAL scDAL = new StudentChoiceDAL();
             InterviewDAL iDAL = new InterviewDAL();
-            int matchmakingId = 0;
+
+            //need to remove hardcoding
+            int matchmakingId = 1;
 
             for (int i = 1; i < 3; i++)
             {
-                List<StudentChoice> StudentChoices = scDAL.GetEmployersByRank(i);
+                List<StudentChoice> StudentChoices = scDAL.GetEmployersByRank(i, matchmakingId);
 
                 foreach (StudentChoice choice in StudentChoices)
                 {
                     iDAL.GenerateMatchesByStudentRanking(choice);
-                    matchmakingId = choice.MatchmakingId;
                 }
             }
 
             //randomly fill in the rest of the schedule
             iDAL.RandomlyGenerateRemainingSchedule(matchmakingId);
 
-            List<Interview> masterSchedule = iDAL.GetMasterSchedule();
+            List<Interview> masterSchedule = iDAL.GetMasterSchedule(matchmakingId);
             return View(masterSchedule);
         }
     }

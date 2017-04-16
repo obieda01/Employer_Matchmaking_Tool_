@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = "AssignRoom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>UpdateRooms</h2>
@@ -23,7 +24,7 @@
             <tr>
                 <td>@Html.Label(e.EmployerName)</td>
                 <td>@Html.Label(e.TeamId.ToString())</td>
-                <td>@Html.TextArea(e.EmployerName+e.TeamId+"assignedRoom",new { @Value = e.AssignedRoom })</td>
+                <td>@Html.TextBox(e.EmployerName+e.TeamId+"assignedRoom", e.AssignedRoom)</td>
             </tr>
         }
       

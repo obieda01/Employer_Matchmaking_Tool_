@@ -16,7 +16,7 @@ namespace Capstone.Web.DAL
 
         private string SQL_InsertStudentIntoLogin = "Insert into Login(User_Name, Password, User_Role) VALUES(@userName,'Password','student');";
 
-        private string SQL_InsertStudentIntoStudent = "Insert into student(Student_Name, Language_Id, User_Name) values(@studentName, @languageId, @username);";
+        private string SQL_InsertStudentIntoStudent = "Insert into student(Student_Name, Language_Id, User_Name, Matchmaking_Id) values(@studentName, @languageId, @username, @matchmakingId);";
 
 
         public List<Student> GetAllStudents()
@@ -72,6 +72,7 @@ namespace Capstone.Web.DAL
                     cmd2.Parameters.AddWithValue("@userName", student.UserName);
                     cmd2.Parameters.AddWithValue("@studentName", student.StudentName);
                     cmd2.Parameters.AddWithValue("@languageId", student.LanguageId);
+                    cmd2.Parameters.AddWithValue("@matchmakingId", student.MatchmakingId);
                     rowsUpdated += cmd2.ExecuteNonQuery();
                 }
 

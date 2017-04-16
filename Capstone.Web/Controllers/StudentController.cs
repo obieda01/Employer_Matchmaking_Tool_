@@ -62,6 +62,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
         public ActionResult UpdateStudentChoices()
         {
+            //need to remove hard coding
             //need to update with the real student id and matchmaking id
             int studentId = 1;
             int matchmakingId = 1;

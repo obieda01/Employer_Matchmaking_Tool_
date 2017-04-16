@@ -14,13 +14,17 @@ namespace Capstone.Web.Controllers
         // GET: GenerateMatches
         public ActionResult MasterSchedule()
         {
-            StudentChoiceDAL scDAL = new StudentChoiceDAL();
-            InterviewDAL iDAL = new InterviewDAL();
-
             //need to remove hardcoding
             int matchmakingId = 1;
 
-            for (int i = 1; i < 3; i++)
+            StudentChoiceDAL scDAL = new StudentChoiceDAL();
+            InterviewDAL iDAL = new InterviewDAL();
+            EventDAL eDAL = new EventDAL();
+            int numberOfStudentChoices = eDAL.GetNumberOfStudentChoices(matchmakingId);
+
+
+
+            for (int i = 1; i < numberOfStudentChoices; i++)
             {
                 List<StudentChoice> StudentChoices = scDAL.GetEmployersByRank(i, matchmakingId);
 

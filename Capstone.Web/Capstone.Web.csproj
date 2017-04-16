@@ -166,6 +166,7 @@
     <Compile Include="Models\EmployerTeam.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Interview.cs" />
+    <Compile Include="Models\MatchmakingArrangement.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentChoice.cs" />
     <Compile Include="Models\TimeSlot.cs" />

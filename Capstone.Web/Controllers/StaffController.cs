@@ -122,6 +122,20 @@ namespace Capstone.Web.Controllers
 
         public ActionResult AddAStudentLogin()
         {
+            EventDAL edal = new EventDAL();
+
+            List<MatchmakingArrangement> allArrangements = edal.GetAllArrangements();
+
+            List<SelectListItem> arrangements = new List<SelectListItem>();
+
+            foreach (MatchmakingArrangement a in allArrangements)
+            {
+                string displayText = a.Location + " Cohort " + a.CohortNumber + " " + a.Season;
+                arrangements.Add(new SelectListItem { Text = displayText, Value = a.MatchmakingId.ToString() });
+            }
+
+            ViewBag.Cohorts = arrangements;
+
             return View();
         }
 
@@ -132,11 +146,12 @@ namespace Capstone.Web.Controllers
             Student s = new Student();
 
             if ((!String.IsNullOrEmpty(Request.Params["studentName"])) && (!String.IsNullOrEmpty(Request.Params["userName"]))
-                    && (!String.IsNullOrEmpty(Request.Params["languageId"])))
+                    && (!String.IsNullOrEmpty(Request.Params["languageId"])) && (!String.IsNullOrEmpty(Request.Params["matchmakingId"])))
             {
                 s.StudentName = Request.Params["studentName"];
                 s.UserName = Request.Params["userName"];
                 s.LanguageId = int.Parse(Request.Params["languageId"]);
+                s.MatchmakingId = int.Parse(Request.Params["matchmakingId"]);
             }
 
             StudentDAL sdal = new StudentDAL();
@@ -191,7 +206,39 @@ namespace Capstone.Web.Controllers
 
         public ActionResult CreateANewArrangement()
         {
-            return View();
+            MatchmakingArrangement arrangement = new MatchmakingArrangement();
+            return View(arrangement);
+        }
+
+        public ActionResult UpdateArrangement()
+        {
+
+            MatchmakingArrangement arrangement = new MatchmakingArrangement();
+
+            if ((!String.IsNullOrEmpty(Request.Params["season"])) && (!String.IsNullOrEmpty(Request.Params["location"]))
+                    && (!String.IsNullOrEmpty(Request.Params["numberOfStudentChoices"])) && (!String.IsNullOrEmpty(Request.Params["cohortNumber"])))
+            {
+                arrangement.Location = Request.Params["location"];
+                arrangement.Season = Request.Params["season"];
+                arrangement.CohortNumber = int.Parse(Request.Params["cohortNumber"]);
+                arrangement.NumberOfStudentChoices = int.Parse(Request.Params["numberOfStudentChoices"]);
+            }
+
+            EventDAL edal = new EventDAL();
+
+            bool isSuccessful = edal.AddNewArrangement(arrangement);
+
+            if (isSuccessful)
+            {
+                ViewBag.Message = "The arrangement was successfully added.";
+            }
+            else
+            {
+                ViewBag.Message = "The arrangement was not successfully added. Please try again.";
+            }
+
+            return View("StaffHome");
+
         }
     }
 }

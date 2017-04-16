@@ -19,7 +19,7 @@ Delete from Language;
 Delete from Matchmaking_Arrangement;
 
 SET IDENTITY_INSERT dbo.Matchmaking_Arrangement ON;
-Insert into Matchmaking_Arrangement (Matchmaking_Id, Location, Season, Cohort_Number, Number_Of_Student_Choices) VALUES (1,'Columbus','Winter', 1,2);
+Insert into Matchmaking_Arrangement (Matchmaking_Id, Location, Season, Cohort_Number, Number_Of_Student_Choices, Schedule_Is_Generated) VALUES (1,'Columbus','Winter', 1,2,'Y');
 SET IDENTITY_INSERT dbo.Matchmaking_Arrangement OFF;
 
 Insert into Login (User_Name, Password, User_Role) VALUES ('Jacob','GWtlZ2gG14GC6DiY937w1L9RZCM=','staff');

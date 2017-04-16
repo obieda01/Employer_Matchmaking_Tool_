@@ -138,6 +138,7 @@ CREATE TABLE [dbo].[Matchmaking_Arrangement](
 	[Season] [varchar](10) NOT NULL,
 	[Cohort_Number] [int] NOT NULL,
 	[Number_Of_Student_Choices] [int] NULL,
+	[Schedule_Is_Generated] [varchar] (1) NOT NULL,
  CONSTRAINT [PK_Matchmaking_Id] PRIMARY KEY CLUSTERED 
 (
 	[Matchmaking_Id] ASC
@@ -321,4 +322,11 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Matchmaking_Arrangement]
 GO
 
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[Schedule_Is_Generated_Yes_or_No]') AND parent_object_id = OBJECT_ID(N'[dbo].[Schedule_Is_Generated]'))
+ALTER TABLE [dbo].[Matchmaking_Arrangement]  WITH CHECK ADD  CONSTRAINT [Schedule_Is_Generated_Yes_or_No] CHECK  (([Schedule_Is_Generated]='Y' OR [Schedule_Is_Generated]='N'))
+GO
+
+IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[Schedule_Is_Generated_Yes_or_No]') AND parent_object_id = OBJECT_ID(N'[dbo].[Schedule_Is_Generated]'))
+ALTER TABLE [dbo].[Matchmaking_Arrangement] CHECK CONSTRAINT [Schedule_Is_Generated_Yes_or_No]
+GO
 Commit;

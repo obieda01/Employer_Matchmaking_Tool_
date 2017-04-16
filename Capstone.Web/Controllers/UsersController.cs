@@ -81,16 +81,12 @@ namespace Capstone.Web.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("StaffHome", "Staff", new { username = base.CurrentUser });        //HERE
+                   // return RedirectToAction("StaffHome", "Staff", new { username = base.CurrentUser });        //HERE
 
 
-                    if (user.User_Role == "admin")
+                    if (user.User_Role == "admin"|| (user.User_Role == "staff"))
                     {
-                        return RedirectToAction("AdminHome", "Admin", new {username = base.CurrentUser});
-                    }
-                    else if (user.User_Role == "staff")
-                    {
-                        return RedirectToAction("StaffHome", "Staff", new { username = base.CurrentUser });
+                        return RedirectToAction("StaffHome", "Staff", new {username = base.CurrentUser});
                     }
                     else if(user.User_Role=="student")
                     {

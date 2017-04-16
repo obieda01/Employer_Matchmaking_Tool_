@@ -12,7 +12,7 @@ namespace Capstone.Web.DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        private string SQL_GetAllStudents = "Select Student_Id, Student_Name, l.Language, User_Name from Student join Language l on l.Language_Id = student.Language_Id;";
+        private string SQL_GetStudents = "Select Matchmaking_Id, Student_Id, Student_Name, l.Language_Id, l.Language, User_Name from Student join Language l on l.Language_Id = student.Language_Id ";
 
         private string SQL_InsertStudentIntoLogin = "Insert into Login(User_Name, Password, User_Role) VALUES(@userName,'Password','student');";
 
@@ -29,16 +29,18 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(SQL_GetAllStudents, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_GetStudents, conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
                         Student s = new Student();
+                        s.MatchmakingId = Convert.ToInt32(reader["Matchmaking_Id"]);
                         s.StudentId = Convert.ToInt32(reader["Student_Id"]);
                         s.StudentName = Convert.ToString(reader["Student_Name"]);
                         s.Language = Convert.ToString(reader["Language"]);
+                        s.LanguageId = Convert.ToInt32(reader["Language_Id"]);
                         s.UserName = Convert.ToString(reader["User_Name"]);
 
                         //Note from KH: Need to consider whether it is necessary to populate the Student Schedule or EmployerRanking
@@ -83,6 +85,46 @@ namespace Capstone.Web.DAL
                 //Log and throw the exception
                 throw new NotImplementedException();
             }
+        }
+
+        public Student GetStudent(string userName)
+        {
+            Student result = new Student();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string SQL_GetAStudent = SQL_GetStudents + " where User_Name = @userName";
+
+                    SqlCommand cmd = new SqlCommand(SQL_GetAStudent, conn);
+                    cmd.Parameters.AddWithValue("@userName", userName);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        result.MatchmakingId = Convert.ToInt32(reader["Matchmaking_Id"]);
+                        result.StudentId = Convert.ToInt32(reader["Student_Id"]);
+                        result.StudentName = Convert.ToString(reader["Student_Name"]);
+                        result.Language = Convert.ToString(reader["Language"]);
+                        result.LanguageId = Convert.ToInt32(reader["Language_Id"]);
+                        result.UserName = Convert.ToString(reader["User_Name"]);
+
+                        //Note from KH: Need to consider whether it is necessary to populate the Student Schedule or EmployerRanking
+
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                //Log and throw the exception
+                throw new NotImplementedException();
+            }
+
+            return result;
         }
     }
 }

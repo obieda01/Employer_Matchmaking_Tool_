@@ -5,17 +5,14 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Net.Mail;
 using Capstone.Web.Models.Data;
+using System.Configuration;
 
 namespace Capstone.Web.DAL
 {
     public class UserSqlDal : IUserDal
     {
-        private readonly string databaseConnectionString;
+        private readonly string databaseConnectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        public UserSqlDal(string connectionString)
-        {
-            databaseConnectionString = connectionString;
-        }
         public bool ChangePassword(string username, string newPassword)
         {
             try
@@ -100,19 +97,13 @@ namespace Capstone.Web.DAL
 
         public User GetUser(string username)
         {
-             User user = null;
+             User u = null;
 
-
-            //User user = new User
-            //{
-            //    Username = "a",
-            //    Password = "a",
-            //    User_Role = 3
-
-            //};
             try
             {
                 string sql = $"SELECT TOP 1 * FROM Login WHERE  User_Name= '{username}'";
+                string sql2 = $" if (((SELECT User_Role FROM Login WHERE User_Name =  '{username}') = 'staff') Or ((SELECT User_Role FROM Login WHERE User_Name =  '{username}') = 'admin'))" +
+                             $" select staff_id from Internal_Staff WHERE User_Name =  '{username}' else select student_id from student WHERE User_Name =  '{username}';";
 
                 using (SqlConnection conn = new SqlConnection(databaseConnectionString))
                 {
@@ -120,16 +111,19 @@ namespace Capstone.Web.DAL
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     SqlDataReader reader = cmd.ExecuteReader();
+                    u = new User();
 
                     while (reader.Read())
                     {
-                        user = new User
-                        {
-                            Username = Convert.ToString(reader["User_Name"]),
-                            Password = Convert.ToString(reader["Password"]),
-                            User_Role = Convert.ToString(reader["User_Role"])
-                        };
+                        u.Username = Convert.ToString(reader["User_Name"]);
+                        u.Password = Convert.ToString(reader["Password"]);
+                        u.User_Role = Convert.ToString(reader["User_Role"]);
+                       
                     }
+                    reader.Close();
+
+                    cmd = new SqlCommand(sql2, conn);
+                    u.UserId = (int) cmd.ExecuteScalar();
 
                 }
             }
@@ -138,7 +132,7 @@ namespace Capstone.Web.DAL
                 throw;
             }
 
-            return user;
+            return u;
         }
 
         public User GetUser(string username, string password)

@@ -10,9 +10,11 @@ namespace Capstone.Web.Models.Data
         public string Username { get; set; }
         public string Password { get; set; }
         public string User_Role { get; set; }
+        public int UserId { get; set; }
         public string SendEmail()
         {
             return "";
         }
+        
     }
 }

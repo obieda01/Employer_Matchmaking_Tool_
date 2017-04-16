@@ -22,13 +22,13 @@ SET IDENTITY_INSERT dbo.Matchmaking_Arrangement ON;
 Insert into Matchmaking_Arrangement (Matchmaking_Id, Location, Season, Cohort_Number, Number_Of_Student_Choices) VALUES (1,'Columbus','Winter', 1,2);
 SET IDENTITY_INSERT dbo.Matchmaking_Arrangement OFF;
 
-Insert into Login (User_Name, Password, User_Role) VALUES ('Jacob','Password','staff');
-Insert into Login (User_Name, Password, User_Role) VALUES ('Ahmad','Password','admin');
-Insert into Login (User_Name, Password, User_Role) VALUES ('Letha','Password','student');
-Insert into Login (User_Name, Password, User_Role) VALUES ('Jean','Password','student');
-Insert into Login (User_Name, Password, User_Role) VALUES ('Mark','Password','student');
-Insert into Login (User_Name, Password, User_Role) VALUES ('Ashley','Password','student');
-Insert into Login (User_Name, Password, User_Role) VALUES ('Rob','Password','student');
+Insert into Login (User_Name, Password, User_Role) VALUES ('Jacob','GWtlZ2gG14GC6DiY937w1L9RZCM=','staff');
+Insert into Login (User_Name, Password, User_Role) VALUES ('Ahmad','wyG8WVYjxcSVHmQKpxaQSK4x+lU=','admin');
+Insert into Login (User_Name, Password, User_Role) VALUES ('Letha','GWtlZ2gG14GC6DiY937w1L9RZCM=','student');
+Insert into Login (User_Name, Password, User_Role) VALUES ('Jean','GWtlZ2gG14GC6DiY937w1L9RZCM=','student');
+Insert into Login (User_Name, Password, User_Role) VALUES ('Mark','GWtlZ2gG14GC6DiY937w1L9RZCM=','student');
+Insert into Login (User_Name, Password, User_Role) VALUES ('Ashley','GWtlZ2gG14GC6DiY937w1L9RZCM=','student');
+Insert into Login (User_Name, Password, User_Role) VALUES ('Rob','GWtlZ2gG14GC6DiY937w1L9RZCM=','student');
 
 SET IDENTITY_INSERT dbo.Employer ON;
 Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (1,'Chase', 1,'Test Summary');

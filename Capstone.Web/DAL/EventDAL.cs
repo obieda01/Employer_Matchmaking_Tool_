@@ -19,6 +19,7 @@ namespace Capstone.Web.DAL
         private string SQL_GetAllArrangements = "select Matchmaking_Id, Location, Season, Cohort_Number, Number_Of_Student_Choices from matchmaking_arrangement";
 
         private string SQL_AddNewArrangement = "insert into matchmaking_arrangement (Location, Season, Cohort_Number, Number_Of_Student_Choices) values (@location, @season, @cohortNumber, @numberOfStudentChoices)";
+
         public int GetNumberOfStudentChoices(int matchmakingId)
         {
             try

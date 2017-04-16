@@ -5,32 +5,37 @@ using System.Web;
 using System.Web.Mvc;
 using Capstone.Web.DAL;
 using Capstone.Web.Models;
+using Capstone.Web.Models.Data;
 
 namespace Capstone.Web.Controllers.UsersProfiles
 {
     public class StudentController : MatchMakingController
     {
+        public Student loggedInStudent = new Student() {
+            StudentId=1,
+            MatchmakingId=1
+        };
+
         public StudentController(IUserDal userDal) :
             base(userDal)
         {
-            //this.messageDal = messageDal;
+           
         }
 
-
         // GET: Student
-        public ActionResult StudentHome(string username)
+        public ActionResult StudentHome(string userName)
         {
-            ViewBag.userName = username;
-            return View("StudentHome");
+            StudentDAL sdal = new StudentDAL();
+            loggedInStudent = sdal.GetStudent(userName);
+            ViewBag.userName = userName;
+            return View("StudentHome",loggedInStudent);
         }
 
         public ActionResult RankEmployers()
         {
-            //need to update with the real matchmaking id
-            int matchmakingId = 1;
             EmployerDAL edal = new EmployerDAL();
 
-            List<Employer> employers = edal.GetAllEmployers(matchmakingId);
+            List<Employer> employers = edal.GetAllEmployers(loggedInStudent.MatchmakingId);
 
             List<SelectListItem> employerNames = new List<SelectListItem>();
 
@@ -42,48 +47,38 @@ namespace Capstone.Web.Controllers.UsersProfiles
             ViewBag.EmployerNames = employerNames;
 
             EventDAL eventDAL = new EventDAL();
-            ViewBag.NumberOfStudentChoices = eventDAL.GetNumberOfStudentChoices(matchmakingId);
+            ViewBag.NumberOfStudentChoices = eventDAL.GetNumberOfStudentChoices(loggedInStudent.MatchmakingId);
                  
             return View(employers);
         }
 
         public ActionResult ViewMySchedule()
         {
-            //need to know how the student is getting transferred
-            int studentId = 1;
-            //need to remove hardcoding
-            int matchmakingId = 1;
-
             InterviewDAL dal = new InterviewDAL();
 
-            List<Interview> studentSchedule = dal.GetStudentSchedule(studentId, matchmakingId);
+            List<Interview> studentSchedule = dal.GetStudentSchedule(loggedInStudent.StudentId, loggedInStudent.MatchmakingId);
 
             return View(studentSchedule);
         }
 
         public ActionResult UpdateStudentChoices()
         {
-            //need to remove hard coding
-            //need to update with the real student id and matchmaking id
-            int studentId = 1;
-            int matchmakingId = 1;
-
             StudentChoiceDAL scdal = new StudentChoiceDAL();
             EventDAL eventDAL = new EventDAL();
-            int numberOfStudentChoices = eventDAL.GetNumberOfStudentChoices(matchmakingId);
+            int numberOfStudentChoices = eventDAL.GetNumberOfStudentChoices(loggedInStudent.MatchmakingId);
 
 
-            scdal.DeletePreviousChoices(studentId, matchmakingId);
+            scdal.DeletePreviousChoices(loggedInStudent.StudentId, loggedInStudent.MatchmakingId);
             List<StudentChoice> studentChoices = new List<StudentChoice>();
 
             for (int i = 1; i<= numberOfStudentChoices; i++)
             {
-                //StudentChoice s = new StudentChoice();
-                //s.StudentId = studentId;
-                //s.MatchmakingId = matchmakingId;
-                //s.EmployerId = int.Parse(Request["Choice"+i]);
-                //s.EmployerRank = i;
-                //studentChoices.Add(s);
+                StudentChoice s = new StudentChoice();
+                s.StudentId = loggedInStudent.StudentId;
+                s.MatchmakingId = loggedInStudent.StudentId;
+                s.EmployerId = int.Parse(Request["Choice" + i]);
+                s.EmployerRank = i;
+                studentChoices.Add(s);
             }
           
             
@@ -99,8 +94,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
             return View("StudentHome");
         }
 
-
-        [ChildActionOnly]
+                [ChildActionOnly]
         public ActionResult GetAuthenticatedUser()
         {
             //User model = null;

@@ -1,4 +1,5 @@
-﻿@model Capstone.Web.Models.Users.LoginViewModel
+﻿@using Capstone.Web.Models;
+@model Student
 
 ﻿@{
 }
@@ -16,7 +17,7 @@
                 <img src="http://demos.creative-tim.com/material-bootstrap-wizard/assets/img/new_logo.png">
             </div>
             <div class="brand">
-                @ViewBag.userName
+               @Model.StudentName
             </div>
         </div>
     </a>
@@ -74,7 +75,7 @@
 
                                         <h2>@ViewBag.Message</h2>
 
-                                        @Html.Action("ViewMySchedule", "Student")
+                                        @Html.Action("ViewMySchedule", "Student",new {student = base.Model })
 
                                         @*<div class="col-sm-6">
                                                 <div class="form-group label-floating">
@@ -109,7 +110,7 @@
                                     <h4 class="info-text">What type of room would you want? </h4>
                                     <div class="row" style="width: 1200px">
                                         <div class="col-sm-12 ">
-                                            @Html.Action("RankEmployers", "Student")
+                                            @Html.Action("RankEmployers", "Student", new { student = base.Model })
 
 
                                             @*<div class="col-sm-12">
@@ -146,8 +147,9 @@
                                 </div>
                                 <div class="tab-pane" id="description">
                                     <div class="row">
-                                        @Html.Action("UpdateStudentChoices", "Student")
+                                   @*     @Html.Action("UpdateStudentChoices", "Student",new { })*@
 
+                                        return RedirectToAction("StudentHome", "Student", new { username = base.CurrentUser });
 
 
 

@@ -14,7 +14,7 @@ BEGIN TRANSACTION;
 
 CREATE TABLE [dbo].[Login](
 	[User_Name] [varchar] (50) NOT NULL, --
-	[Password] [varchar] (32) NOT NULL, ---
+	[Password] [varchar] (50) NOT NULL, ---
 	[User_Role] [varchar](7) NOT NULL,
 CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED ([User_Name] ASC));
 

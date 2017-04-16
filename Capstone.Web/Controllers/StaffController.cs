@@ -6,14 +6,18 @@ using System.Web.Mvc;
 using Capstone.Web.DAL;
 using Capstone.Web.Models;
 using System.Configuration;
+using Capstone.Web.Models.Data;
 
 namespace Capstone.Web.Controllers
 {
     public class StaffController : HomeController
     {
+        private User loggedInUser = new User();
 
-        public ActionResult StaffHome()
+        public ActionResult StaffHome(string userName)
         {
+            IUserDal idal = new UserSqlDal();
+            loggedInUser = idal.GetUser(userName);
             return View();
         }
 

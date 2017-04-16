@@ -10,22 +10,46 @@
 </h2>
 <h1>Tech Elevator Matchmaking Master Schedule</h1>
 
-<table>
-    <tr>
-        <th>Employer Name</th>
-        <th>Team Id</th>
-        <th>Student Name</th>
-        <th>Event Date</th>
-        <th>Start Time</th>
-    </tr>
-    @foreach (Interview i in Model)
-    {
-        <tr>
-            <td> @i.EmployerName</td>
-            <td> @i.TeamId</td>
-            <td> @i.StudentName</td>
-            <td> @i.EventDate</td>
-            <td> @i.StartTime</td>
-        </tr>
-    }
-</table>
+<div>
+
+
+    <div class="fresh-table toolbar-color-green">
+        <!--    Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
+                Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+        -->
+
+
+
+        <h2>View My Schedule</h2>
+
+
+        <table id="fresh-table" class="table">
+            <thead>
+            <th data-field="city" data-sortable="true">Employer Name</th>
+            <th data-field="salary" data-sortable="true">Team Id</th>
+            <th data-field="name" data-sortable="true">Student Name</th>
+            <th data-field="Start_Time" data-sortable="true">Event Date</th>
+            <th data-field="Start_Time" data-sortable="true">Start Time</th>
+
+            <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+            </thead>
+
+
+
+            <tbody>
+                @foreach (Interview i in Model)
+                {
+                    <tr>
+                        <td> @i.EmployerName</td>
+                        <td> @i.TeamId</td>
+                        <td> @i.StudentName</td>
+                        <td> @i.EventDate</td>
+                        <td> @i.StartTime</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+   
+</div>

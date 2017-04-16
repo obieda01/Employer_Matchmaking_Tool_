@@ -2,8 +2,10 @@
 @model Capstone.Web.Models.Users.LoginViewModel
 
 @{
+
     ViewBag.Title = "StaffHome";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <script type="text/javascript" src="~/Scripts/js/Login.js"></script>
@@ -11,7 +13,6 @@
 
 <div class="image-container set-full-height">
     <!--   Creative Tim Branding   -->
-    <link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
 
     <a href="http://creative-tim.com" target="_blank">
         <div class="logo-container">
@@ -54,11 +55,11 @@
 
                             <div class="wizard-header">
                                 <h3 class="wizard-title">
-                                   Staff Home
+                                    Staff Home
                                 </h3>
                                 <h5>This information will let us know more about you.</h5>
                             </div>
-                            <div class="wizard-navigation">
+                            <div class="wizard-navigation" style="width: 1400px">
                                 <ul>
                                     <li><a href="#details" data-toggle="tab">Add Student Login</a></li>
                                     <li><a href="#captain" data-toggle="tab">Add Employer</a></li>
@@ -72,6 +73,7 @@
 
 
                                 </ul>
+                                <div class="moving-tab" style="transition:0.5s cubic-bezier(0.29, 1.42, 0.79, 1); width: 200px; transform: translate3d(62.2727px, 0px, 0px);">Add Employer</div>
                             </div>
 
                             <div class="tab-content">
@@ -196,19 +198,7 @@
                                 <div class="tab-pane" id="description_02">
                                     <div class="row">
                                         @Html.Action("ViewAStudentsSchedule", "Staff")
-                                        <h4 class="info-text"> Drop us a small description.</h4>
-                                        <div class="col-sm-6 col-sm-offset-1">
-                                            <div class="form-group">
-                                                <label>Room description</label>
-                                                <textarea class="form-control" placeholder="" rows="6"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label class="control-label">Example</label>
-                                                <p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
 
@@ -236,7 +226,7 @@
                                     <div class="row">
                                         @Html.Action("ViewMasterSchedule", "Staff")
                                         <h4 class="info-text"> Drop us a small description.</h4>
-                                        
+
                                     </div>
                                 </div>
 
@@ -275,7 +265,9 @@
     <div class="footer">
 
     </div>
-
+ 
 
 </div>
+
+
 

@@ -13,12 +13,15 @@ namespace Capstone.Web.DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        private string SQL_GetAllEmployers = "Select Employer_Id, Employer_Name, Number_Of_Teams, Summary From Employer;";
+        private string SQL_GetAllEmployers = "Select e.Employer_Id, e.Employer_Name, e.Number_Of_Teams, e.Summary From Employer e join Employer_Team et on et.Employer_Id = e.Employer_Id  where et.Matchmaking_Id = @matchmakingId;";
 
         private string SQL_AddNewEmployer = "Insert into employer (Employer_Name, Summary, Number_Of_Teams) VALUES (@employerName, @summary, @numberOfTeams);";
-        private string SQL_GetAllEmployersAndTeams = "Select e.Employer_Id,e.Employer_Name,t.Assigned_Room,t.Team_Id,l.Language,t.Start_Time,t.End_Time from Employer_Team t join Employer e ON e.Employer_Id = t.Employer_Id join Language l ON t.Language_Id = l.Language_Id;";
-        private string SQL_UpdateRoom = "";
-        public List<Employer> GetAllEmployers()
+
+        private string SQL_GetAllEmployersAndTeams = "Select t.Matchmaking_Id, e.Employer_Id, e.Employer_Name, t.Assigned_Room, t.Team_Id, l.Language, t.Start_Time, t.End_Time from Employer_Team t join Employer e ON e.Employer_Id = t.Employer_Id join Language l ON t.Language_Id = l.Language_Id where t.Matchmaking_Id = @matchmakingId;";
+
+        private string SQL_UpdateRoom = "Update Employer_Team SET assigned_room = @assignedRoom where matchmaking_id = @matchmakingId and employer_id = @employerId and team_id = @teamId";
+
+        public List<Employer> GetAllEmployers(int matchmakingId)
         {
             List<Employer> results = new List<Employer>();
 
@@ -29,6 +32,7 @@ namespace Capstone.Web.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(SQL_GetAllEmployers, conn);
+                    cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -52,7 +56,7 @@ namespace Capstone.Web.DAL
             return results;
         }
 
-        public List<EmployerTeam> GetAllEmployersAndTeams()
+        public List<EmployerTeam> GetAllEmployersAndTeams(int matchmakingId)
         {
             List<EmployerTeam> results = new List<EmployerTeam>();
 
@@ -63,12 +67,14 @@ namespace Capstone.Web.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(SQL_GetAllEmployersAndTeams, conn);
+                    cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
                         EmployerTeam e = new EmployerTeam();
+                        e.MatchmakingId = Convert.ToInt32(reader["Matchmaking_Id"]);
                         e.EmployerId = Convert.ToInt32(reader["Employer_Id"]);
                         e.EmployerName = Convert.ToString(reader["Employer_Name"]);
                         e.TeamId = Convert.ToInt32(reader["Team_Id"]);
@@ -115,6 +121,7 @@ namespace Capstone.Web.DAL
                 throw new NotImplementedException();
             }
         }
+
         public bool UpdateAssignedRoom(List<EmployerTeam> team)
         {
             try
@@ -127,8 +134,10 @@ namespace Capstone.Web.DAL
                     {
                         //update assigned room
                         SqlCommand cmd = new SqlCommand(SQL_UpdateRoom, conn);
-                        cmd.Parameters.AddWithValue("@employerName", e.EmployerName);
-
+                        cmd.Parameters.AddWithValue("@employerId", e.EmployerId);
+                        cmd.Parameters.AddWithValue("@teamId", e.TeamId);
+                        cmd.Parameters.AddWithValue("@matchmakingId", e.MatchmakingId);
+                        cmd.Parameters.AddWithValue("@assignedRoom", e.AssignedRoom);
 
                         rowsUpdated += cmd.ExecuteNonQuery();
                     }

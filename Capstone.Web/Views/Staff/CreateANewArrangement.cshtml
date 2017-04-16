@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "CreateANewArrangement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create A New Arrangement</h2>
+
+
+
+@using (Html.BeginForm("UpdateArrangement", "Staff"))
+{
+    <table>
+        <tr>
+            <td>@Html.Label("Which Location are you scheduling for? ")</td>
+            <td>@Html.DropDownList("location", new SelectList(new List<Object>{new { value = "Columbus" , text = "Columbus" },
+                    new { value = "Cleveland" , text = "Cleveland"}}, "value", "text", 2))
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.Label("What is the Cohort Number: ")</td>
+            <td>@Html.TextBox("cohortNumber")</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Which season are you scheduling for? ")</td>
+            <td>
+                @Html.DropDownList("season", new SelectList(new List<Object>{new { value = "Fall" , text = "Fall" }, new { value = "Winter" , text = "Winter" },
+                    new { value = "Spring" , text = "Spring"}, new { value = "Summer" , text = "Summer" },}, "value", "text", 2))
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.Label("How many employer choices will the students get : ")</td>
+            <td>@Html.TextBox("numberOfStudentChoices")</td>
+        </tr>
+
+    </table>
+
+    <input value="Update" type="submit" id="inputButton" />
+}

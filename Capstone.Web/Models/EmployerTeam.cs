@@ -7,6 +7,7 @@ namespace Capstone.Web.Models
 {
     public class EmployerTeam
     {
+        public int MatchmakingId { get; set; }
         public int EmployerId { get; set; }
         public int TeamId { get; set; }
         public string EventDate { get; set; }

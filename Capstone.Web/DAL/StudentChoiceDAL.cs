@@ -13,11 +13,11 @@ namespace Capstone.Web.DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        private string SQL_GetEmployersByRank = "Select Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id From Student_Choices where Employer_Rank = @EmployerRanking;";
+        private string SQL_GetEmployersByRank = "Select Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id From Student_Choices where Employer_Rank = @EmployerRanking and Matchmaking_Id = @matchmakingId;";
         private string SQL_UpdateStudentChoice = "Insert INTO Student_Choices (Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id) VALUES (@studentId, @employerId, @employerRank, @matchmakingId);";
         private string SQL_DeletePreviousChoices = "Delete From Student_Choices where Student_Id = @studentId AND Matchmaking_Id = @matchmakingId;";
 
-        public List<StudentChoice> GetEmployersByRank(int ranking)
+        public List<StudentChoice> GetEmployersByRank(int ranking, int matchmakingId)
         {
             List<StudentChoice> results = new List<StudentChoice>();
 
@@ -29,6 +29,7 @@ namespace Capstone.Web.DAL
 
                     SqlCommand cmd = new SqlCommand(SQL_GetEmployersByRank, conn);
                     cmd.Parameters.AddWithValue("@EmployerRanking", ranking);
+                    cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())

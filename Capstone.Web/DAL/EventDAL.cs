@@ -14,12 +14,13 @@ namespace Capstone.Web.DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        private string SQL_GetNumberOfStudentChoices = "select Number_Of_Student_Choices from Matchmaking_Arrangement;";
+        private string SQL_GetNumberOfStudentChoices = "select Number_Of_Student_Choices from Matchmaking_Arrangement where Matchmaking_Id = @matchmakingId;";
 
-        public int GetNumberOfStudentChoices(int MatchmakingId)
+        private string SQL_GetAllArrangements = "select Matchmaking_Id, Location, Season, Cohort_Number, Number_Of_Student_Choices from matchmaking_arrangement";
+
+        private string SQL_AddNewArrangement = "insert into matchmaking_arrangement (Location, Season, Cohort_Number, Number_Of_Student_Choices) values (@location, @season, @cohortNumber, @numberOfStudentChoices)";
+        public int GetNumberOfStudentChoices(int matchmakingId)
         {
-            List<StudentChoice> results = new List<StudentChoice>();
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -27,6 +28,7 @@ namespace Capstone.Web.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(SQL_GetNumberOfStudentChoices, conn);
+                    cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
 
                     return (int)cmd.ExecuteScalar();
                 }
@@ -38,6 +40,69 @@ namespace Capstone.Web.DAL
             }
         }
 
+        public List<MatchmakingArrangement> GetAllArrangements()
+        {
+            List<MatchmakingArrangement> results = new List<MatchmakingArrangement>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(SQL_GetAllArrangements, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        MatchmakingArrangement arrangement = new MatchmakingArrangement();
+                        arrangement.MatchmakingId = Convert.ToInt32(reader["Matchmaking_Id"]);
+                        arrangement.Location = Convert.ToString(reader["Location"]);
+                        arrangement.Season = Convert.ToString(reader["Season"]);
+                        arrangement.CohortNumber = Convert.ToInt32(reader["Cohort_Number"]);
+                        arrangement.NumberOfStudentChoices = Convert.ToInt32(reader["Number_Of_Student_Choices"]);
+
+                        results.Add(arrangement);
+                    }
+
+
+                }
+
+                return results;
+            }
+            catch (SqlException ex)
+            {
+                //Log and throw the exception
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool AddNewArrangement(MatchmakingArrangement arrangement)
+        {
+            try
+            {
+                int rowsUpdated = 0;
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(SQL_AddNewArrangement, conn);
+                    cmd.Parameters.AddWithValue("@location",arrangement.Location);
+                    cmd.Parameters.AddWithValue("@season", arrangement.Season);
+                    cmd.Parameters.AddWithValue("@cohortNumber", arrangement.CohortNumber);
+                    cmd.Parameters.AddWithValue("@numberOfStudentChoices", arrangement.NumberOfStudentChoices);
+
+                    rowsUpdated += cmd.ExecuteNonQuery();
+                }
+
+                return (rowsUpdated == 1);
+            }
+            catch (SqlException ex)
+            {
+                //Log and throw the exception
+                throw new NotImplementedException();
+            }
+        }
 
     }
 

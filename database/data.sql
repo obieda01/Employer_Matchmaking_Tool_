@@ -45,16 +45,16 @@ Insert into Language (Language_Id, Language) VALUES (1,'Java');
 Insert into Language (Language_Id, Language) VALUES (2,'.Net');
 
 SET IDENTITY_INSERT dbo.Student ON;
-Insert into Student (Student_Id,Student_Name, Language_Id, User_Name) VALUES (1,'Letha Lerman',2,'Letha');
-Insert into Student (Student_Id,Student_Name, Language_Id, User_Name) VALUES (2,'Jean Justus',1,'Jean');
-Insert into Student (Student_Id,Student_Name, Language_Id, User_Name) VALUES (3,'Mark Moore',2,'Mark');
-Insert into Student (Student_Id,Student_Name, Language_Id, User_Name) VALUES (4,'Ashley Anderson',1,'Ashley');
-Insert into Student (Student_Id,Student_Name, Language_Id, User_Name) VALUES (5,'Rob Redmond',1,'Rob');
+Insert into Student (Student_Id,Student_Name, Language_Id, User_Name, Matchmaking_Id) VALUES (1,'Letha Lerman',2,'Letha', 1);
+Insert into Student (Student_Id,Student_Name, Language_Id, User_Name, Matchmaking_Id) VALUES (2,'Jean Justus',1,'Jean', 1);
+Insert into Student (Student_Id,Student_Name, Language_Id, User_Name, Matchmaking_Id) VALUES (3,'Mark Moore',2,'Mark', 1);
+Insert into Student (Student_Id,Student_Name, Language_Id, User_Name, Matchmaking_Id) VALUES (4,'Ashley Anderson',1,'Ashley', 1);
+Insert into Student (Student_Id,Student_Name, Language_Id, User_Name, Matchmaking_Id) VALUES (5,'Rob Redmond',1,'Rob', 1);
 SET IDENTITY_INSERT dbo.Student OFF;
 
-Insert into Employer_Team (Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,1, 1, 0,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room A');
-Insert into Employer_Team (Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (2,1, 1, 1,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room B');
-Insert into Employer_Team (Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (3,1, 1, 2,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room C');
+Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,1,1, 1, 0,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room A');
+Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,2,1, 1, 1,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room B');
+Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,3,1, 1, 2,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room C');
 
 Insert into Student_Choices (Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id) VALUES (1,2,1, 1);
 Insert into Student_Choices (Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id) VALUES (1,3,2, 1);

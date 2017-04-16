@@ -16,5 +16,6 @@ namespace Capstone.Web.Models
         public string EventDate { get; set; }
         public string StartTime { get; set; }
         public int TimeSlotRank { get; set; }
+        public string AssignedRoom { get; set; }
     }
 }

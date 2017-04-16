@@ -8,6 +8,7 @@ namespace Capstone.Web.Models
 {
     public class Student
     {
+        public int MatchmakingId { get; set; }
         public int StudentId { get; set; }
         public string StudentName { get; set; }
         public string Language { get; set; }

@@ -171,6 +171,7 @@
     <Compile Include="Models\EmployerTeam.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Interview.cs" />
+    <Compile Include="Models\MatchmakingArrangement.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentChoice.cs" />
     <Compile Include="Models\TimeSlot.cs" />
@@ -201,10 +202,9 @@
     <Content Include="Views\Staff\AddAStudentLogin.cshtml" />
     <Content Include="Views\Student\RankEmployers.cshtml" />
     <Content Include="Views\Student\ViewMySchedule.cshtml" />
-    <Content Include="Views\Staff\UpdateStatus.cshtml" />
-    <Content Include="Views\Student\UpdateStudentChoices.cshtml" />
     <Content Include="Views\Staff\AddEmployer.cshtml" />
     <Content Include="Views\Staff\AssignRoom.cshtml" />
+    <Content Include="Views\Staff\CreateANewArrangement.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

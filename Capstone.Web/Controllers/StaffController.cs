@@ -20,9 +20,11 @@ namespace Capstone.Web.Controllers
         // GET: Staff
         public ActionResult ViewEmployerSchedule()
         {
+            //need to remove hard coding
+            int matchmakingId = 1;
             EmployerDAL edal = new EmployerDAL();
 
-            List<Employer> employers = edal.GetAllEmployers();
+            List<Employer> employers = edal.GetAllEmployers(matchmakingId);
 
             List<SelectListItem> employerNames = new List<SelectListItem>();
 
@@ -35,7 +37,7 @@ namespace Capstone.Web.Controllers
 
             InterviewDAL iDAL = new InterviewDAL();
 
-            List<Interview> masterSchedule = iDAL.GetMasterSchedule();
+            List<Interview> masterSchedule = iDAL.GetMasterSchedule(matchmakingId);
 
             return View(masterSchedule);
 
@@ -49,47 +51,60 @@ namespace Capstone.Web.Controllers
 
         public ActionResult AssignRoom()
         {
-            EmployerDAL iDAL = new EmployerDAL();
-            List<EmployerTeam> employerList = iDAL.GetAllEmployersAndTeams();
-            
-            
+            //remove hardcoding
+            int matchmakingId = 1;
+            EmployerDAL eDAL = new EmployerDAL();
+            List<EmployerTeam> employerList = eDAL.GetAllEmployersAndTeams(matchmakingId);
+
+
             return View(employerList);
         }
 
         public ActionResult UpdateRoom()
         {
+            //remove hardcoding
+            int matchmakingId = 1;
             EmployerDAL eDAL = new EmployerDAL();
-            List<EmployerTeam> employerList = eDAL.GetAllEmployersAndTeams();
+            List<EmployerTeam> employerList = eDAL.GetAllEmployersAndTeams(matchmakingId);
             foreach (EmployerTeam e in employerList)
             {
                 if (!String.IsNullOrEmpty(Request.Params[e.EmployerName + e.TeamId + "assignedRoom"]))
                 {
                     e.AssignedRoom = Request.Params[e.EmployerName + e.TeamId + "assignedRoom"];
                 }
-            }
-                bool isSuccessful = eDAL.UpdateAssignedRoom(employerList);
-
-                if (isSuccessful)
-                {
-                    ViewBag.Message = "The employer was successfully added.";
-                }
                 else
                 {
-                    ViewBag.Message = "The employer was not successfully added. Please try again.";
+                    e.AssignedRoom = "";
                 }
-
-                return View("UpdateStatus");
             }
+
+            bool isSuccessful = eDAL.UpdateAssignedRoom(employerList);
+
+            if (isSuccessful)
+            {
+                ViewBag.Message = "The rooms were successfully updated.";
+            }
+            else
+            {
+                ViewBag.Message = "The room were not successfully updated. Please try again.";
+            }
+
+            return View("StaffHome");
+        }
 
         public ActionResult ViewMasterSchedule()
         {
+            //need to remove hardcoding
+            int matchmakingId = 1;
             InterviewDAL iDAL = new InterviewDAL();
-            List<Interview> masterSchedule = iDAL.GetMasterSchedule();
+            List<Interview> masterSchedule = iDAL.GetMasterSchedule(matchmakingId);
             return View(masterSchedule);
         }
 
         public ActionResult ViewAStudentsSchedule()
         {
+            //need to remove hardcoding
+            int matchmaking = 1;
             StudentDAL sdal = new StudentDAL();
 
             List<Student> students = sdal.GetAllStudents();
@@ -105,18 +120,27 @@ namespace Capstone.Web.Controllers
 
             InterviewDAL idal = new InterviewDAL();
 
-            List<Interview> studentSchedules = idal.GetAllStudentsSchedules();
+            List<Interview> studentSchedules = idal.GetAllStudentsSchedules(matchmaking);
 
             return View(studentSchedules);
         }
-        
+
         public ActionResult AddAStudentLogin()
         {
-            return View();
-        }
+            EventDAL edal = new EventDAL();
 
-        public ActionResult UpdateStatus()
-        {
+            List<MatchmakingArrangement> allArrangements = edal.GetAllArrangements();
+
+            List<SelectListItem> arrangements = new List<SelectListItem>();
+
+            foreach (MatchmakingArrangement a in allArrangements)
+            {
+                string displayText = a.Location + " Cohort " + a.CohortNumber + " " + a.Season;
+                arrangements.Add(new SelectListItem { Text = displayText, Value = a.MatchmakingId.ToString() });
+            }
+
+            ViewBag.Cohorts = arrangements;
+
             return View();
         }
 
@@ -127,12 +151,12 @@ namespace Capstone.Web.Controllers
             Student s = new Student();
 
             if ((!String.IsNullOrEmpty(Request.Params["studentName"])) && (!String.IsNullOrEmpty(Request.Params["userName"]))
-                    && (!String.IsNullOrEmpty(Request.Params["languageId"])))
+                    && (!String.IsNullOrEmpty(Request.Params["languageId"])) && (!String.IsNullOrEmpty(Request.Params["matchmakingId"])))
             {
-
                 s.StudentName = Request.Params["studentName"];
                 s.UserName = Request.Params["userName"];
                 s.LanguageId = int.Parse(Request.Params["languageId"]);
+                s.MatchmakingId = int.Parse(Request.Params["matchmakingId"]);
             }
 
             StudentDAL sdal = new StudentDAL();
@@ -172,7 +196,7 @@ namespace Capstone.Web.Controllers
             }
 
             EmployerDAL edal = new EmployerDAL();
-            
+
             bool isSuccessful = edal.AddNewEmployer(e);
 
             if (isSuccessful)
@@ -184,12 +208,44 @@ namespace Capstone.Web.Controllers
                 ViewBag.Message = "The employer was not successfully added. Please try again.";
             }
 
-            return View("UpdateStatus");
+            return View("StaffHome");
         }
 
-        public ActionResult CreateEvent()
+        public ActionResult CreateANewArrangement()
         {
-            return View();
+            MatchmakingArrangement arrangement = new MatchmakingArrangement();
+            return View(arrangement);
+        }
+
+        public ActionResult UpdateArrangement()
+        {
+
+            MatchmakingArrangement arrangement = new MatchmakingArrangement();
+
+            if ((!String.IsNullOrEmpty(Request.Params["season"])) && (!String.IsNullOrEmpty(Request.Params["location"]))
+                    && (!String.IsNullOrEmpty(Request.Params["numberOfStudentChoices"])) && (!String.IsNullOrEmpty(Request.Params["cohortNumber"])))
+            {
+                arrangement.Location = Request.Params["location"];
+                arrangement.Season = Request.Params["season"];
+                arrangement.CohortNumber = int.Parse(Request.Params["cohortNumber"]);
+                arrangement.NumberOfStudentChoices = int.Parse(Request.Params["numberOfStudentChoices"]);
+            }
+
+            EventDAL edal = new EventDAL();
+
+            bool isSuccessful = edal.AddNewArrangement(arrangement);
+
+            if (isSuccessful)
+            {
+                ViewBag.Message = "The arrangement was successfully added.";
+            }
+            else
+            {
+                ViewBag.Message = "The arrangement was not successfully added. Please try again.";
+            }
+
+            return View("StaffHome");
+
         }
     }
 }

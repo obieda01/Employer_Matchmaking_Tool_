@@ -7,9 +7,11 @@ namespace Capstone.Web.Models
 {
     public class TimeSlot
     {
-        public DateTime EventDate { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public int MatchmakingId { get; set; }
+        public int EventId { get; set; }
+        public string EventDate { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public int TimeSlotRank { get; set; }
     }
 }

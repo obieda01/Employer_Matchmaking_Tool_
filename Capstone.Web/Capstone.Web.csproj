@@ -105,8 +105,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\asset\6317f272960cb35f1ed84dd56aba8ec1.jpg" />
-    <Content Include="Content\asset\old-1130743_1920.jpg" />
+    <Content Include="Content\asset\About\Ahmad.jpg" />
+    <Content Include="Content\asset\About\Cessar.jpg" />
+    <Content Include="Content\asset\About\Jake.jpg" />
+    <Content Include="Content\asset\About\Khill.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -116,6 +118,7 @@
     <Content Include="Content\css\fresh-bootstrap-table.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\navbar.css" />
+    <Content Include="Content\css\About.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -141,11 +144,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\bootstrap-table.js" />
     <Content Include="Scripts\js\Login.js" />
+    <Content Include="tee.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GenerateMatchesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -206,6 +211,9 @@
     <Content Include="Views\Staff\AssignRoom.cshtml" />
     <Content Include="Views\Staff\CreateANewArrangement.cshtml" />
     <Content Include="Views\Staff\AddNewEvent.cshtml" />
+
+    <Content Include="Views\About\About.cshtml" />
+
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

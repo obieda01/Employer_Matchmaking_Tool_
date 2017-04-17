@@ -11,8 +11,6 @@ namespace Capstone.Web.Controllers.UsersProfiles
 {
     public class StudentController : MatchMakingController
     {
-        public Student loggedInStudent;
-
         public StudentController(IUserDal userDal) :
             base(userDal)
         {
@@ -23,21 +21,16 @@ namespace Capstone.Web.Controllers.UsersProfiles
         // GET: Student
         public ActionResult StudentHome(string userName)
         {
-            StudentDAL sdal = new StudentDAL();
-            loggedInStudent = sdal.GetStudent(userName);
+            Student loggedInStudent = GetLoggedInStudent(userName);
 
-            ViewBag.userName = userName;
             return View("StudentHome",loggedInStudent);
         }
 
         public ActionResult RankEmployers(string userName)
         {
-            EmployerDAL edal = new EmployerDAL();
-            StudentDAL sdal = new StudentDAL();
-            loggedInStudent = new Student();
-            loggedInStudent = sdal.GetStudent(userName);
-            ViewBag.userName = userName;
+            Student loggedInStudent = GetLoggedInStudent(userName);
 
+            EmployerDAL edal = new EmployerDAL();
 
             List<Employer> employers = edal.GetAllEmployers(loggedInStudent.MatchmakingId);
 
@@ -59,31 +52,27 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
         public ActionResult ViewMySchedule(string userName)
         {
-            InterviewDAL dal = new InterviewDAL();
-            StudentDAL sdal = new StudentDAL();
-            loggedInStudent = new Student();
-            loggedInStudent = sdal.GetStudent(userName);
-            ViewBag.userName = userName;
+            InterviewDAL idal = new InterviewDAL();
 
+            Student loggedInStudent = GetLoggedInStudent(userName);
 
-            List<Interview> studentSchedule = dal.GetStudentSchedule(loggedInStudent.StudentId, loggedInStudent.MatchmakingId);
+            List<Interview> studentSchedule = idal.GetStudentSchedule(loggedInStudent.StudentId, loggedInStudent.MatchmakingId);
 
             return View(studentSchedule);
         }
 
         public ActionResult UpdateStudentChoices(string userName)
         {
+            Student loggedInStudent = GetLoggedInStudent(userName);
+
             StudentChoiceDAL scdal = new StudentChoiceDAL();
-            StudentDAL sdal = new StudentDAL();
-            loggedInStudent = new Student();
-            loggedInStudent = sdal.GetStudent(userName);
-            ViewBag.userName = userName;
 
             EventDAL eventDAL = new EventDAL();
+
             int numberOfStudentChoices = eventDAL.GetNumberOfStudentChoices(loggedInStudent.MatchmakingId);
-
-
+            
             scdal.DeletePreviousChoices(loggedInStudent.StudentId, loggedInStudent.MatchmakingId);
+
             List<StudentChoice> studentChoices = new List<StudentChoice>();
 
             for (int i = 1; i<= numberOfStudentChoices; i++)
@@ -96,8 +85,8 @@ namespace Capstone.Web.Controllers.UsersProfiles
                 studentChoices.Add(s);
             }
           
-            
             bool isSuccessful = scdal.UpdateStudentChoice(studentChoices);
+
             if (isSuccessful)
             {
                 ViewBag.Message = "Your choices were submitted.";
@@ -106,10 +95,20 @@ namespace Capstone.Web.Controllers.UsersProfiles
             {
                 ViewBag.Message = "Your choices were not submitted. Please try again.";
             }
+
             return View("StudentHome");
         }
 
-                [ChildActionOnly]
+        private Student GetLoggedInStudent(string userName)
+        {
+            ViewBag.userName = userName;
+
+            StudentDAL sdal = new StudentDAL();
+
+            return (sdal.GetStudent(userName));
+        }
+
+        [ChildActionOnly]
         public ActionResult GetAuthenticatedUser()
         {
             //User model = null;

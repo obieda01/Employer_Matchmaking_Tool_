@@ -37,7 +37,7 @@
 
 
 
-        <h2>View My Schedule</h2>
+        <h2>View Employer Schedule</h2>
 
 
         <table id="fresh-table" class="table">
@@ -49,6 +49,7 @@
 
             <th data-field="Start_Time" data-sortable="true">Event Date</th>
             <th data-field="Start_Time" data-sortable="true">Start Time</th>
+            <th data-field="Assigned_Room" data-sortable="true">Assigned Room</th>
 
             <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
             </thead>
@@ -64,6 +65,7 @@
                         <td> @i.StudentName</td>
                         <td> @i.EventDate</td>
                         <td> @i.StartTime</td>
+                        <td> @i.AssignedRoom </td>
                     </tr>
                 }
 

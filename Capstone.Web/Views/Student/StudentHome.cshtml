@@ -2,26 +2,18 @@
 @model Student
 
 ﻿@{
+    Layout = null;
+
 }
 
 <script type="text/javascript" src="~/Scripts/js/Login.js"></script>
 <link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
 
 <div class="image-container set-full-height">
+
+
     <!--   Creative Tim Branding   -->
     <link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
-
-    <a href="http://creative-tim.com" target="_blank">
-        <div class="logo-container">
-            <div class="logo">
-                <img src="http://demos.creative-tim.com/material-bootstrap-wizard/assets/img/new_logo.png">
-            </div>
-            <div class="brand">
-               @Model.StudentName
-            </div>
-        </div>
-    </a>
-
     <a href="http://creative-tim.com" style="" target="_blank">
         <div class="logo-container_01">
             <div class="logo">
@@ -29,6 +21,15 @@
             </div>
             <div class="brand">
                 @ViewBag.userName
+            </div>
+        </div>
+    </a>
+
+    <a href="http://creative-tim.com" style="" target="_blank">
+        <div class="logo-container_02">
+
+            <div class="brand">
+              Log out
             </div>
         </div>
     </a>
@@ -75,7 +76,7 @@
 
                                         <h2>@ViewBag.Message</h2>
 
-                                        @Html.Action("ViewMySchedule", "Student",new {username = Model.UserName })
+                                        @Html.Action("ViewMySchedule", "Student", new { username = Model.UserName })
 
                                         @*<div class="col-sm-6">
                                                 <div class="form-group label-floating">
@@ -147,7 +148,7 @@
                                 </div>
                                 <div class="tab-pane" id="description">
                                     <div class="row">
-                                   @*     @Html.Action("UpdateStudentChoices", "Student",new { })*@
+                                        @*     @Html.Action("UpdateStudentChoices", "Student",new { })*@
 
                                         return RedirectToAction("StudentHome", "Student", new { username = base.CurrentUser });
 
@@ -200,7 +201,5 @@
     <div class="footer">
 
     </div>
-    
+
 </div>
-
-

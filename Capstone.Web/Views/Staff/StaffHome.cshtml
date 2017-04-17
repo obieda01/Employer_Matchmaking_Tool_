@@ -1,10 +1,7 @@
-﻿
-@model Capstone.Web.Models.Users.LoginViewModel
-
+﻿@model Capstone.Web.Models.Users.LoginViewModel
 @{
-
     ViewBag.Title = "StaffHome";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 
 }
 
@@ -13,17 +10,9 @@
 
 <div class="image-container set-full-height">
     <!--   Creative Tim Branding   -->
+    <link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
 
-    <a href="http://creative-tim.com" target="_blank">
-        <div class="logo-container">
-            <div class="logo">
-                <img src="http://demos.creative-tim.com/material-bootstrap-wizard/assets/img/new_logo.png">
-            </div>
-            <div class="brand">
-                @ViewBag.userName
-            </div>
-        </div>
-    </a>
+
 
     <a href="http://creative-tim.com" style="" target="_blank">
         <div class="logo-container_01">
@@ -35,7 +24,14 @@
             </div>
         </div>
     </a>
+    <a href="http://creative-tim.com" style="" target="_blank">
+        <div class="logo-container_02">
 
+            <div class="brand">
+                Log out
+            </div>
+        </div>
+    </a>
 
     <!--  Made With Material Kit  -->
     <a href="http://demos.creative-tim.com/material-kit/index.html?ref=material-bootstrap-wizard" class="made-with-mk" target="_blank">
@@ -271,4 +267,3 @@
 
 
 
-<h2>@ViewBag.Message</h2>

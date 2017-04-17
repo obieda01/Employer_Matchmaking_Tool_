@@ -162,7 +162,7 @@ namespace Capstone.Web.Controllers
 
             // HERE Email Send
 
-            return View(""StaffHome"");
+            return View("StaffHome");
 
         }
 
@@ -188,7 +188,7 @@ namespace Capstone.Web.Controllers
 
             // HERE Email Send
 
-            return View(""StaffHome"");
+            return View("StaffHome");
 
         }
 

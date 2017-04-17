@@ -48,12 +48,6 @@ namespace Capstone.Web.Controllers
 
             return View(masterSchedule);
 
-            //Note from KH: If we have to build two pages then - we will use this in the results view 
-            //int employerId = 1;
-            //InterviewDAL dal = new InterviewDAL();
-            //List<Interview> employerSchedule = dal.GetEmployerSchedule(employerId);
-            //return View(employerSchedule);
-
         }
 
         public ActionResult AssignRoom()
@@ -150,6 +144,11 @@ namespace Capstone.Web.Controllers
             return View();
         }
 
+        public ActionResult AddStaffLogin()
+        {
+            return View();
+        }
+
         public ActionResult UpdateStudentLogin()
         {
             //need to add capability to email the student the username and password
@@ -176,6 +175,40 @@ namespace Capstone.Web.Controllers
             else
             {
                 ViewBag.Message = "The student was not successfully added. Please try again.";  
+            }
+
+            // HERE Email Send
+
+            return View("UpdateStatus");
+
+        }
+
+        public ActionResult UpdateStaffLogin()
+        {
+            //need to add capability to email the student the username and password
+
+            Student s = new Student();
+
+            if ((!String.IsNullOrEmpty(Request.Params["staffName"])) && (!String.IsNullOrEmpty(Request.Params["userName"]))
+                    && (!String.IsNullOrEmpty(Request.Params["isAdmin"])) && (!String.IsNullOrEmpty(Request.Params["matchmakingId"])))
+            {
+                s.StudentName = Request.Params["studentName"];
+                s.UserName = Request.Params["userName"];
+                s.LanguageId = int.Parse(Request.Params["languageId"]);
+                s.MatchmakingId = int.Parse(Request.Params["matchmakingId"]);
+            }
+
+            StudentDAL sdal = new StudentDAL();
+
+            bool isSuccessful = sdal.AddNewStudent(s);
+
+            if (isSuccessful)
+            {
+                ViewBag.Message = "The student was successfully added.";
+            }
+            else
+            {
+                ViewBag.Message = "The student was not successfully added. Please try again.";
             }
 
             // HERE Email Send
@@ -264,6 +297,68 @@ namespace Capstone.Web.Controllers
 
             return View();
         }
+
+        public ActionResult UpdateEvent()
+        {
+    
+            Event matchmakingEvent = new Event();
+            matchmakingEvent.MatchmakingId = int.Parse(Request.Params["matchmakingId"]);
+            matchmakingEvent.InterviewLength = int.Parse(Request.Params["interviewLength"]);
+            matchmakingEvent.EventDate = Request.Params["date"];
+            matchmakingEvent.StartTime = Request.Params["date"]+" "+Request.Params["startHour"]+":"+ Request.Params["startMinute"] + ":00 " + Request.Params["startAMPM"];
+            matchmakingEvent.EndTime = Request.Params["date"] + " " + Request.Params["endHour"] + ":" + Request.Params["endMinute"] + ":00 " + Request.Params["endAMPM"];
+
+            if (Request.Params["lunchStartHour"] != "NA")
+            {
+                matchmakingEvent.LunchStart = Request.Params["date"] + " " + Request.Params["lunchStartHour"] + ":" + Request.Params["lunchStartMinute"] + ":00 " + Request.Params["lunchStartAMPM"];
+                matchmakingEvent.LunchEnd = Request.Params["date"] + " " + Request.Params["lunchEndHour"] + ":" + Request.Params["lunchEndMinute"] + ":00 " + Request.Params["lunchEndAMPM"];
+            }
+            else
+            {
+                matchmakingEvent.LunchStart = null;
+                matchmakingEvent.LunchEnd = null;
+            }
+
+            if (Request.Params["MBStartHour"] != "NA")
+            {
+                matchmakingEvent.FirstBreakStart = Request.Params["date"] + " " + Request.Params["MBStartHour"] + ":" + Request.Params["MBStartMinute"] + ":00 " + Request.Params["MBStartAMPM"];
+                matchmakingEvent.FirstBreakEnd = Request.Params["date"] + " " + Request.Params["MBEndHour"] + ":" + Request.Params["MBEndMinute"] + ":00 " + Request.Params["MBEndAMPM"];
+            }
+            else
+            {
+                matchmakingEvent.FirstBreakStart = null;
+                matchmakingEvent.FirstBreakEnd = null;
+            }
+
+            if (Request.Params["ABStartHour"] != "NA")
+            {
+                matchmakingEvent.SecondBreakStart = Request.Params["date"] + " " + Request.Params["ABStartHour"] + ":" + Request.Params["ABStartMinute"] + ":00 " + Request.Params["ABStartAMPM"];
+                matchmakingEvent.SecondBreakEnd = Request.Params["date"] + " " + Request.Params["ABEndHour"] + ":" + Request.Params["ABEndMinute"] + ":00 " + Request.Params["ABEndAMPM"];
+            }
+            else
+            {
+                matchmakingEvent.SecondBreakStart = null;
+                matchmakingEvent.SecondBreakEnd = null;
+            }
+
+
+            EventDAL edal = new EventDAL();
+
+            bool isSuccessful = edal.AddNewEvent(matchmakingEvent);
+
+            if (isSuccessful)
+            {
+                ViewBag.Message = "The arrangement was successfully added.";
+            }
+            else
+            {
+                ViewBag.Message = "The arrangement was not successfully added. Please try again.";
+            }
+
+            return View("StaffHome");
+
+        }
+
         public void CreateArrangementDropDownList()
         {
             EventDAL edal = new EventDAL();
@@ -283,7 +378,12 @@ namespace Capstone.Web.Controllers
 
         private List<SelectListItem> hours = new List<SelectListItem>
         {
-                new SelectListItem { Text = "NA", Value = "NA" },
+                new SelectListItem { Text = "NA", Value = "NA" }, 
+                new SelectListItem { Text = "7", Value = "7" },
+                new SelectListItem { Text = "8", Value = "8" },
+                new SelectListItem { Text = "9", Value = "9", Selected = true },
+                new SelectListItem { Text = "10", Value = "10" },
+                new SelectListItem { Text = "11", Value = "11" },
                 new SelectListItem { Text = "12", Value = "12" },
                 new SelectListItem { Text = "1", Value = "1" },
                 new SelectListItem { Text = "2", Value = "2" },
@@ -291,11 +391,6 @@ namespace Capstone.Web.Controllers
                 new SelectListItem { Text = "4", Value = "4" },
                 new SelectListItem { Text = "5", Value = "5" },
                 new SelectListItem { Text = "6", Value = "6" },
-                new SelectListItem { Text = "7", Value = "7" },
-                new SelectListItem { Text = "8", Value = "8" },
-                new SelectListItem { Text = "9", Value = "9", Selected = true },
-                new SelectListItem { Text = "10", Value = "10" },
-                new SelectListItem { Text = "11", Value = "11" },
         };
 
         private List<SelectListItem> minutes = new List<SelectListItem>
@@ -317,7 +412,6 @@ namespace Capstone.Web.Controllers
 
         private List<SelectListItem> ampm = new List<SelectListItem>
         {
-                new SelectListItem { Text = "NA", Value = "NA" },
                 new SelectListItem { Text = "AM", Value = "AM", Selected = true },
                 new SelectListItem { Text = "PM", Value = "PM" }
         };

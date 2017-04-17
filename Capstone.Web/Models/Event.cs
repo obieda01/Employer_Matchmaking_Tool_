@@ -7,17 +7,18 @@ namespace Capstone.Web.Models
 {
     public class Event
     {
-        public DateTime EventDate { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public DateTime LunchStart { get; set; }
-        public DateTime LunchEnd { get; set; }
-        public DateTime FirstBreakStart { get; set; }
-        public DateTime FirstBreakEnd { get; set; }
-        public DateTime SecondBreakStart { get; set; }
-        public DateTime SecondBreakEnd { get; set; }
-        public int InterviewLenght { get; set; }
-        public int AmountOfInterviews { get; set; }
+        public int MatchmakingId { get; set; }
+        public string EventDate { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+        public string LunchStart { get; set; }
+        public string LunchEnd { get; set; }
+        public string FirstBreakStart { get; set; }
+        public string FirstBreakEnd { get; set; }
+        public string SecondBreakStart { get; set; }
+        public string SecondBreakEnd { get; set; }
+        public int InterviewLength { get; set; }
+        public int NumberOfInterviewSlots { get; set; }
 
     }
 }

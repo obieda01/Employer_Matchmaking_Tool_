@@ -8,36 +8,42 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Data.SqlClient;
 using Capstone.Web.Models;
+using System.Configuration;
 
 namespace Capstone.Web.Tests.DAL
 {
     [TestClass]
     public class InterviewDALTests
     {
+        private TransactionScope tran;
+        private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
         // Set up the database before each test        
         [TestInitialize]
         public void Initialize()
         {
             // Initialize a new transaction scope. This automatically begins the transaction.
             tran = new TransactionScope();
-
+           
+            
             // Open a SqlConnection object using the active transaction
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand cmd;
 
                 conn.Open();
+                string masterScheduleSQL = @"Insert into Interview_Schedule (Student_Id, Employer_Id, Team_Id, Time_Slot_Rank, Matchmaking_Id) VALUES (1,2,1, 1, 2);
+Insert into Interview_Schedule (Student_Id, Employer_Id, Team_Id, Time_Slot_Rank, Matchmaking_Id) VALUES (1,3,1, 2, 2);
+Insert into Interview_Schedule (Student_Id, Employer_Id, Team_Id, Time_Slot_Rank, Matchmaking_Id) VALUES (2,1,1, 1, 2);
+Insert into Interview_Schedule (Student_Id, Employer_Id, Team_Id, Time_Slot_Rank, Matchmaking_Id) VALUES (2,2,1, 3, 2);
+Insert into Interview_Schedule (Student_Id, Employer_Id, Team_Id, Time_Slot_Rank, Matchmaking_Id) VALUES (3,1,1, 3, 2);
+Insert into Interview_Schedule (Student_Id, Employer_Id, Team_Id, Time_Slot_Rank, Matchmaking_Id) VALUES (3,3,1, 1, 2);";
+                //Insert a Dummy Record for Interview                
+                //cmd = new SqlCommand(masterScheduleSQL, conn);
+                //cmd.ExecuteNonQuery();
 
-                //Insert a Dummy Record for Country                
-                cmd = new SqlCommand("INSERT INTO Country VALUES ('ABC', 'ABC Country', 'Asia', 'Southern Asia', 1, 1111, 1, 1, 1, 1, 'ABC Country', 'Monarchy', 'Josh Tucholski', null, 'AB');", conn);
-                cmd.ExecuteNonQuery();
-
-                //Insert a Dummy Record for City that belongs to 'ABC Country'
-                //If we want to the new id of the record inserted we can use
-                // SELECT CAST(SCOPE_IDENTITY() as int) as a work-around
-                // This will get the newest identity value generated for the record most recently inserted
-                cmd = new SqlCommand("INSERT INTO City VALUES ('Test City', 'ABC', 'Test District', 1); SELECT CAST(SCOPE_IDENTITY() as int);", conn);
-                cityId = (int)cmd.ExecuteScalar();
+                
+                //cmd = new SqlCommand("INSERT INTO City VALUES ('Test City', 'ABC', 'Test District', 1); SELECT CAST(SCOPE_IDENTITY() as int);", conn);
+               // cityId = (int)cmd.ExecuteScalar();
             }
         }
 
@@ -49,24 +55,49 @@ namespace Capstone.Web.Tests.DAL
         }
 
 
-
-
-        /*
-        * In order to test Get Cities by Country Code, we should see if we can get cities in ABC Country.        
-        */
         [TestMethod()]
-        public void GetCitiesByCountryCodeTest()
+        public void GetMasterScheduleTest()
         {
 
             // Arrange 
-            CitySqlDAL cityDal = new CitySqlDAL(connectionString);
+            InterviewDAL iDal = new InterviewDAL();
 
             //Act
-            List<City> cities = cityDal.GetCitiesByCountryCode("ABC"); //<-- use our dummy country 
+            List<Interview> schedules = iDal.GetMasterSchedule(1); 
 
             //Assert
-            Assert.AreEqual(1, cities.Count);               // We should only have one city in ABC country
-            Assert.AreEqual(cityId, cities[0].CityId);      // We created the city ahead of time and know the id to check for
+            Assert.AreEqual(15, schedules.Count);              
+            /*Assert.AreEqual(cityId, cities[0].CityId); */    
+        }
+
+        [TestMethod()]
+        public void GetStudentScheduleTest()
+        {
+
+            // Arrange 
+            InterviewDAL iDal = new InterviewDAL();
+
+            //Act
+            List<Interview> schedules = iDal.GetStudentSchedule(1,1);
+
+            //Assert
+            Assert.AreEqual(3, schedules.Count);
+            /*Assert.AreEqual(cityId, cities[0].CityId); */
+        }
+
+        [TestMethod()]
+        public void GetEmployerScheduleTest()
+        {
+
+            // Arrange 
+            InterviewDAL iDal = new InterviewDAL();
+
+            //Act
+            List<Interview> schedules = iDal.GetEmployerSchedule(1, 1);
+
+            //Assert
+            Assert.AreEqual(5, schedules.Count);
+            /*Assert.AreEqual(cityId, cities[0].CityId); */
         }
     }
 }

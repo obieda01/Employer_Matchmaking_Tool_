@@ -11,10 +11,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
 {
     public class StudentController : MatchMakingController
     {
-        public Student loggedInStudent = new Student() {
-            StudentId=1,
-            MatchmakingId=1
-        };
+        public Student loggedInStudent;
 
         public StudentController(IUserDal userDal) :
             base(userDal)
@@ -22,18 +19,25 @@ namespace Capstone.Web.Controllers.UsersProfiles
            
         }
 
+
         // GET: Student
         public ActionResult StudentHome(string userName)
         {
-            //StudentDAL sdal = new StudentDAL();
-            //loggedInStudent = sdal.GetStudent(userName);
+            StudentDAL sdal = new StudentDAL();
+            loggedInStudent = sdal.GetStudent(userName);
+
             ViewBag.userName = userName;
             return View("StudentHome",loggedInStudent);
         }
 
-        public ActionResult RankEmployers()
+        public ActionResult RankEmployers(string userName)
         {
             EmployerDAL edal = new EmployerDAL();
+            StudentDAL sdal = new StudentDAL();
+            loggedInStudent = new Student();
+            loggedInStudent = sdal.GetStudent(userName);
+            ViewBag.userName = userName;
+
 
             List<Employer> employers = edal.GetAllEmployers(loggedInStudent.MatchmakingId);
 
@@ -53,18 +57,28 @@ namespace Capstone.Web.Controllers.UsersProfiles
             return View(employers);
         }
 
-        public ActionResult ViewMySchedule()
+        public ActionResult ViewMySchedule(string userName)
         {
             InterviewDAL dal = new InterviewDAL();
+            StudentDAL sdal = new StudentDAL();
+            loggedInStudent = new Student();
+            loggedInStudent = sdal.GetStudent(userName);
+            ViewBag.userName = userName;
+
 
             List<Interview> studentSchedule = dal.GetStudentSchedule(loggedInStudent.StudentId, loggedInStudent.MatchmakingId);
 
             return View(studentSchedule);
         }
 
-        public ActionResult UpdateStudentChoices()
+        public ActionResult UpdateStudentChoices(string userName)
         {
             StudentChoiceDAL scdal = new StudentChoiceDAL();
+            StudentDAL sdal = new StudentDAL();
+            loggedInStudent = new Student();
+            loggedInStudent = sdal.GetStudent(userName);
+            ViewBag.userName = userName;
+
             EventDAL eventDAL = new EventDAL();
             int numberOfStudentChoices = eventDAL.GetNumberOfStudentChoices(loggedInStudent.MatchmakingId);
 

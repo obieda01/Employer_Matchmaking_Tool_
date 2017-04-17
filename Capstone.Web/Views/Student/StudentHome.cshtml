@@ -75,7 +75,7 @@
 
                                         <h2>@ViewBag.Message</h2>
 
-                                        @Html.Action("ViewMySchedule", "Student",new {student = base.Model })
+                                        @Html.Action("ViewMySchedule", "Student",new {username = Model.UserName })
 
                                         @*<div class="col-sm-6">
                                                 <div class="form-group label-floating">
@@ -110,7 +110,7 @@
                                     <h4 class="info-text">What type of room would you want? </h4>
                                     <div class="row" style="width: 1200px">
                                         <div class="col-sm-12 ">
-                                            @Html.Action("RankEmployers", "Student", new { student = base.Model })
+                                            @Html.Action("RankEmployers", "Student", new { username = Model.UserName })
 
 
                                             @*<div class="col-sm-12">
@@ -200,7 +200,7 @@
     <div class="footer">
 
     </div>
-
+    
 </div>
 
 

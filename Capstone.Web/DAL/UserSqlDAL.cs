@@ -123,7 +123,7 @@ namespace Capstone.Web.DAL
                     reader.Close();
 
                     cmd = new SqlCommand(sql2, conn);
-                    u.UserId = (int) cmd.ExecuteScalar();
+                   // u.UserId = (int) cmd.ExecuteScalar();
 
                 }
             }

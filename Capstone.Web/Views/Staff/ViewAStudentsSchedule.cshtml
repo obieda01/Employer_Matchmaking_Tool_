@@ -20,8 +20,11 @@
 
 <h2>View Student Schedule</h2>
 
-<td>@Html.Label("Which student's schedule do you want to see:")</td>
-<td>@Html.DropDownList("student", (List<SelectListItem>)ViewBag.StudentNames)</td>
+<div>@Html.Label("Please pick a matchmaking event:")</div>
+<div>@Html.DropDownList("arrangement", (List<SelectListItem>)ViewBag.Arrangements)</div>
+
+<div>@Html.Label("Which student's schedule do you want to see:")</div>
+<div>@Html.DropDownList("student", (List<SelectListItem>)ViewBag.StudentNames)</div>
 
 
 

@@ -25,8 +25,8 @@ namespace Capstone.Web.Controllers.UsersProfiles
         // GET: Student
         public ActionResult StudentHome(string userName)
         {
-            StudentDAL sdal = new StudentDAL();
-            loggedInStudent = sdal.GetStudent(userName);
+            //StudentDAL sdal = new StudentDAL();
+            //loggedInStudent = sdal.GetStudent(userName);
             ViewBag.userName = userName;
             return View("StudentHome",loggedInStudent);
         }
@@ -47,6 +47,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
             ViewBag.EmployerNames = employerNames;
 
             EventDAL eventDAL = new EventDAL();
+
             ViewBag.NumberOfStudentChoices = eventDAL.GetNumberOfStudentChoices(loggedInStudent.MatchmakingId);
                  
             return View(employers);

@@ -26,6 +26,9 @@ namespace Capstone.Web.Controllers
         {
             //need to remove hard coding
             int matchmakingId = 1;
+
+            CreateArrangementDropDownList();
+
             EmployerDAL edal = new EmployerDAL();
 
             List<Employer> employers = edal.GetAllEmployers(matchmakingId);
@@ -57,10 +60,12 @@ namespace Capstone.Web.Controllers
         {
             //remove hardcoding
             int matchmakingId = 1;
+
+            CreateArrangementDropDownList();
+
             EmployerDAL eDAL = new EmployerDAL();
             List<EmployerTeam> employerList = eDAL.GetAllEmployersAndTeams(matchmakingId);
-
-
+            
             return View(employerList);
         }
 
@@ -68,8 +73,10 @@ namespace Capstone.Web.Controllers
         {
             //remove hardcoding
             int matchmakingId = 1;
+
             EmployerDAL eDAL = new EmployerDAL();
             List<EmployerTeam> employerList = eDAL.GetAllEmployersAndTeams(matchmakingId);
+
             foreach (EmployerTeam e in employerList)
             {
                 if (!String.IsNullOrEmpty(Request.Params[e.EmployerName + e.TeamId + "assignedRoom"]))
@@ -100,8 +107,12 @@ namespace Capstone.Web.Controllers
         {
             //need to remove hardcoding
             int matchmakingId = 1;
+
+            CreateArrangementDropDownList();
+
             InterviewDAL iDAL = new InterviewDAL();
             List<Interview> masterSchedule = iDAL.GetMasterSchedule(matchmakingId);
+
             return View(masterSchedule);
         }
 
@@ -109,6 +120,9 @@ namespace Capstone.Web.Controllers
         {
             //need to remove hardcoding
             int matchmaking = 1;
+
+            CreateArrangementDropDownList();
+
             StudentDAL sdal = new StudentDAL();
 
             List<Student> students = sdal.GetAllStudents();
@@ -131,19 +145,7 @@ namespace Capstone.Web.Controllers
 
         public ActionResult AddAStudentLogin()
         {
-            EventDAL edal = new EventDAL();
-
-            List<MatchmakingArrangement> allArrangements = edal.GetAllArrangements();
-
-            List<SelectListItem> arrangements = new List<SelectListItem>();
-
-            foreach (MatchmakingArrangement a in allArrangements)
-            {
-                string displayText = a.Location + " Cohort " + a.CohortNumber + " " + a.Season;
-                arrangements.Add(new SelectListItem { Text = displayText, Value = a.MatchmakingId.ToString() });
-            }
-
-            ViewBag.Cohorts = arrangements;
+            CreateArrangementDropDownList();
 
             return View();
         }
@@ -250,6 +252,23 @@ namespace Capstone.Web.Controllers
 
             return View("StaffHome");
 
+        }
+
+        public void CreateArrangementDropDownList()
+        {
+            EventDAL edal = new EventDAL();
+
+            List<MatchmakingArrangement> allArrangements = edal.GetAllArrangements();
+
+            List<SelectListItem> arrangements = new List<SelectListItem>();
+
+            foreach (MatchmakingArrangement a in allArrangements)
+            {
+                string displayText = a.Location + " Cohort " + a.CohortNumber + " " + a.Season;
+                arrangements.Add(new SelectListItem { Text = displayText, Value = a.MatchmakingId.ToString() });
+            }
+
+            ViewBag.Arrangements = arrangements;
         }
     }
 }

@@ -18,6 +18,9 @@
 <h2>UpdateRooms</h2>
 
 
+<div>@Html.Label("Please pick a matchmaking event:")</div>
+<div>@Html.DropDownList("arrangement", (List<SelectListItem>)ViewBag.Arrangements)</div>
+
 @using (Html.BeginForm("UpdateRoom", "Staff"))
 {
 

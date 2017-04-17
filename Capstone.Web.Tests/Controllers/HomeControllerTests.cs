@@ -13,16 +13,17 @@ namespace Capstone.Web.Controllers.Tests
     public class HomeControllerTests
     {
         [TestMethod()]
-        public void HomeController_IndexAction_ReturnIndexView()
+        public void HomeController_IndexAction_ReturnLoginView()
         {
             //Arrange
             HomeController controller = new HomeController();
 
             //Act
-            ViewResult result = controller.Index() as ViewResult;
+            RedirectToRouteResult result = controller.Index() as RedirectToRouteResult;
 
             //Assert
-            Assert.AreEqual("Index", result.ViewName);
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Login", result.RouteValues["action"]);
         }
     }
 }

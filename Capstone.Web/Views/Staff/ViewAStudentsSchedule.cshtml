@@ -31,10 +31,7 @@
                 Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
         -->
 
-
-
         <h2>View My Schedule</h2>
-
 
         <table id="fresh-table" class="table">
             <thead>
@@ -47,9 +44,6 @@
 
             <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
             </thead>
-
-
-
             <tbody>
                 @foreach (Interview i in Model)
                 {
@@ -61,8 +55,6 @@
                         <td> @i.StartTime</td>
                     </tr>
                 }
-
- 
             </tbody>
         </table>
     </div>

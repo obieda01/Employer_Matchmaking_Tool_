@@ -162,7 +162,7 @@ namespace Capstone.Web.Controllers
 
             // HERE Email Send
 
-            return View("UpdateStatus");
+            return View(""StaffHome"");
 
         }
 
@@ -174,8 +174,8 @@ namespace Capstone.Web.Controllers
 
             if ((!String.IsNullOrEmpty(Request.Params["staffName"])) && (!String.IsNullOrEmpty(Request.Params["userName"])))
             {
-                u.Username = Request.Params["staffName"];
-                u.User_Role = Request.Params["userName"];
+                u.Username = Request.Params["userName"];
+                u.StaffName = Request.Params["staffName"];
             }
 
             u.User_Role = ((Request.Params["isAdmin"]) == "Yes") ? "admin" : "staff";
@@ -188,7 +188,7 @@ namespace Capstone.Web.Controllers
 
             // HERE Email Send
 
-            return View("UpdateStatus");
+            return View(""StaffHome"");
 
         }
 

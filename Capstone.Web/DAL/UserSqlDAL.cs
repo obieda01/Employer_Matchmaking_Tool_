@@ -12,8 +12,9 @@ namespace Capstone.Web.DAL
     public class UserSqlDal : IUserDal
     {
         private readonly string databaseConnectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
-        private string SQL_InsertStaffIntoLogin = @"Insert into Login(User_Name, Password, User_Role) VALUES(@userName,'Password',@userRole)";
+        private string SQL_InsertStaffIntoLogin = @"Insert into Login(User_Name, Password, User_Role) VALUES(@userName,'GWtlZ2gG14GC6DiY937w1L9RZCM=', @userRole)";
         private string SQL_InsertStaffIntoInternalStaff = @"insert into Internal_Staff (User_Name, Name, Admin_Flag) values (@userName, @name, @adminFlag)";
+
         public bool ChangePassword(string username, string newPassword)
         {
             try
@@ -269,7 +270,7 @@ namespace Capstone.Web.DAL
             try
             {
                 int rowsUpdated = 0;
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(databaseConnectionString))
                 {
                     conn.Open();
 
@@ -280,10 +281,9 @@ namespace Capstone.Web.DAL
                     rowsUpdated += cmd.ExecuteNonQuery();
 
                     SqlCommand cmd2 = new SqlCommand(SQL_InsertStaffIntoInternalStaff, conn);
-                    cmd.Parameters.AddWithValue("@userName", newStaff.Username);
-                    //cmd.Parameters.AddWithValue("@name", newStaff.);
-                    //cmd2.Parameters.AddWithValue("@languageId", student.LanguageId);
-                    //cmd2.Parameters.AddWithValue("@matchmakingId", student.MatchmakingId);
+                    cmd2.Parameters.AddWithValue("@userName", newStaff.Username);
+                    cmd2.Parameters.AddWithValue("@name", newStaff.StaffName);
+                    cmd2.Parameters.AddWithValue("@adminFlag", ((newStaff.User_Role == "admin") ? "Y" : "N"));                   
                     rowsUpdated += cmd2.ExecuteNonQuery();
                 }
 

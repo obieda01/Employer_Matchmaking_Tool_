@@ -49,6 +49,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
@@ -89,6 +90,7 @@
     <Compile Include="Controllers\StaffControllerTests.cs" />
     <Compile Include="Controllers\StudentControllerTests.cs" />
     <Compile Include="Controllers\UsersControllerTests.cs" />
+    <Compile Include="DAL\InterviewDALTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

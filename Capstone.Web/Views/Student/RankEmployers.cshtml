@@ -10,19 +10,25 @@
 
 @using (Html.BeginForm("UpdateStudentChoices", "Student"))
 {
-<table>
+    string loggedInUserName = ViewBag.userName;
+    @Html.Hidden("userName", loggedInUserName);
 
-    @for (int i = 1; i <= ViewBag.NumberOfStudentChoices; i++)
-    {
-        <tr>
+    <table>
+        @for (int i = 1; i <= ViewBag.NumberOfStudentChoices; i++)
+        {
 
-            <td>@Html.Label("Please Rank your #"+i+" Employer")</td>
-            <td>@Html.DropDownList("Choice"+i, (List<SelectListItem>)ViewBag.EmployerNames)</td>
-        </tr>
-    }
 
-</table>
+            <tr>
+
+                <td>@Html.Label("Please Rank your #" + i + " Employer")</td>
+                <td>@Html.DropDownList("Choice" + i, (List<SelectListItem>)ViewBag.EmployerNames)</td>
+            </tr>
+        }
+
+    </table>
 <input value="Submit" type="submit" id="inputButton"/>
+
+
 <p>@Html.ActionLink("Go Back", "StudentHome", "Student")</p>
 <br />
 <br />

@@ -53,17 +53,18 @@
                                 <h3 class="wizard-title">
                                     Staff Home
                                 </h3>
-                                <h5>This information will let us know more about you.</h5>
+                                @*<h5>This information will let us know more about you.</h5>*@
                             </div>
                             <div class="wizard-navigation" style="width: 1400px">
                                 <ul>
                                     <li><a href="#details" data-toggle="tab">Add Student Login</a></li>
                                     <li><a href="#captain" data-toggle="tab">Add Employer</a></li>
-                                    <li><a href="#description" data-toggle="tab">Assign Room</a></li>
-                                    <li><a href="#description_01" data-toggle="tab">Update Status</a></li>
+                                    @*<li><a href="#description_01" data-toggle="tab">Update Status</a></li>*@
                                     <li><a href="#description_02" data-toggle="tab">View Student Schedule</a></li>
                                     <li><a href="#description_03" data-toggle="tab">View Employer Schedule</a></li>
                                     <li><a href="#description_04" data-toggle="tab">View Master Schedule</a></li>
+                                    <li><a href="#description" data-toggle="tab">Assign Room</a></li>
+
 
 
 
@@ -76,7 +77,7 @@
                                 <div class="tab-pane" id="details">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <h4 class="info-text"> Let's start with the basic details.</h4>
+                                            @*<h4 class="info-text"> Let's start with the basic details.</h4>*@
                                         </div>
 
                                         @Html.Action("AddAStudentLogin", "Staff")
@@ -111,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="captain">
-                                    <h4 class="info-text">What type of room would you want? </h4>
+                                    @*<h4 class="info-text">What type of room would you want? </h4>*@
                                     <div class="row" style="width: 1200px">
                                         <div class="col-sm-12 ">
                                             @Html.Action("AddEmployer", "Staff")
@@ -156,17 +157,17 @@
 
 
 
-                                        <h4 class="info-text"> Drop us a small description.</h4>
+                                        @*<h4 class="info-text"> Drop us a small description.</h4>*@
                                         <div class="col-sm-6 col-sm-offset-1">
                                             <div class="form-group">
-                                                <label>Room description</label>
+                                                @*<label>Room description</label>*@
                                                 <textarea class="form-control" placeholder="" rows="6"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label class="control-label">Example</label>
-                                                <p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>
+                                                @*<label class="control-label">Example</label>*@
+                                                @*<p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>*@
                                             </div>
                                         </div>
                                     </div>
@@ -174,18 +175,18 @@
 
                                 <div class="tab-pane" id="description_01">
                                     <div class="row">
-                                      @*  @Html.Action("UpdateStatus", "Staff")*@
-                                        <h4 class="info-text"> Drop us a small description.</h4>
+                                      @*  @Html.Action("UpdateStatus", "Staff") *@
+                                        @*<h4 class="info-text"> Drop us a small description.</h4>*@
                                         <div class="col-sm-6 col-sm-offset-1">
                                             <div class="form-group">
-                                                <label>Room description</label>
+                                                <label>@*Room description*@</label>
                                                 <textarea class="form-control" placeholder="" rows="6"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label class="control-label">Example</label>
-                                                <p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>
+                                                @*<label class="control-label">Example</label>*@
+                                           @*     <p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>*@
                                             </div>
                                         </div>
                                     </div>
@@ -201,17 +202,18 @@
                                 <div class="tab-pane" id="description_03">
                                     <div class="row">
                                         @Html.Action("ViewEmployerSchedule", "Staff")
-                                        <h4 class="info-text"> Drop us a small description.</h4>
+                                       @* <h4 class="info-text"> Drop us a small description.</h4>*@
                                         <div class="col-sm-6 col-sm-offset-1">
                                             <div class="form-group">
-                                                <label>Room description</label>
+                                        @*<h4 class="info-text"> Drop us a small description.</h4>*@
+                                                @*<label>Room description</label>*@
                                                 <textarea class="form-control" placeholder="" rows="6"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label class="control-label">Example</label>
-                                                <p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>
+                                                @*<label class="control-label">Example</label>*@
+                                                @*<p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>*@
                                             </div>
                                         </div>
                                     </div>
@@ -221,7 +223,7 @@
                                 <div class="tab-pane" id="description_04">
                                     <div class="row">
                                         @Html.Action("ViewMasterSchedule", "Staff")
-                                        <h4 class="info-text"> Drop us a small description.</h4>
+                                        @*<h4 class="info-text"> Drop us a small description.</h4>*@
 
                                     </div>
                                 </div>
@@ -230,7 +232,7 @@
 
 
                             </div>
-                            <div class="wizard-footer">
+                            @*<div class="wizard-footer">
                                 <div class="pull-right">
                                     <input type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='next' value='Next' />
                                     <input type='button' class='btn btn-finish btn-fill btn-danger btn-wd' name='finish' value='Finish' />
@@ -250,7 +252,7 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-                            </div>
+                            </div>*@
                         </form>
                     </div>
                 </div> <!-- wizard container -->

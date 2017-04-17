@@ -22,8 +22,8 @@ namespace Capstone.Web.Controllers.UsersProfiles
         public ActionResult StudentHome(string userName)
         {
             Student loggedInStudent = GetLoggedInStudent(userName);
-
-            return View("StudentHome",loggedInStudent);
+            Session["UserName"] = userName;
+            return View("StudentHome", loggedInStudent);
         }
 
         public ActionResult RankEmployers(string userName)
@@ -63,6 +63,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
         public ActionResult UpdateStudentChoices(string userName)
         {
+            string userName2 = Request.Params["userName"];
             Student loggedInStudent = GetLoggedInStudent(userName);
 
             StudentChoiceDAL scdal = new StudentChoiceDAL();

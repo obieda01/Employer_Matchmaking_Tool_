@@ -18,10 +18,13 @@
 </h2>
 
 
-<h2>View Student Schedule</h2>
+<h2>View Students Schedule</h2>
 
-<td>@Html.Label("Which student's schedule do you want to see:")</td>
-<td>@Html.DropDownList("student", (List<SelectListItem>)ViewBag.StudentNames)</td>
+<div>@Html.Label("Please pick a matchmaking event:")</div>
+<div>@Html.DropDownList("arrangement", (List<SelectListItem>)ViewBag.Arrangements)</div>
+
+<div>@Html.Label("Which student's schedule do you want to see:")</div>
+<div>@Html.DropDownList("student", (List<SelectListItem>)ViewBag.StudentNames)</div>
 
 
 
@@ -31,7 +34,7 @@
                 Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
         -->
 
-        <h2>View My Schedule</h2>
+        <h2>View Student Schedule</h2>
 
         <table id="fresh-table" class="table">
             <thead>
@@ -41,7 +44,7 @@
             <th data-field="salary" data-sortable="true">Team Id</th>
             <th data-field="Start_Time" data-sortable="true">Event Date</th>
             <th data-field="Start_Time" data-sortable="true">Start Time</th>
-
+            <th data-field="Assigned_Room" data-sortable="true">Assigned Room</th>
             <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
             </thead>
             <tbody>
@@ -53,6 +56,7 @@
                         <td> @i.TeamId</td>
                         <td> @i.EventDate</td>
                         <td> @i.StartTime</td>
+                        <td> @i.AssignedRoom</td>
                     </tr>
                 }
             </tbody>

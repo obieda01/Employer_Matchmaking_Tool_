@@ -8,6 +8,7 @@ using Capstone.Web.Models;
 using System.Configuration;
 using Capstone.Web.Models.Data;
 
+
 namespace Capstone.Web.Controllers
 {
     public class StaffController : HomeController
@@ -73,26 +74,14 @@ namespace Capstone.Web.Controllers
 
             foreach (EmployerTeam e in employerList)
             {
-                if (!String.IsNullOrEmpty(Request.Params[e.EmployerName + e.TeamId + "assignedRoom"]))
-                {
-                    e.AssignedRoom = Request.Params[e.EmployerName + e.TeamId + "assignedRoom"];
-                }
-                else
-                {
-                    e.AssignedRoom = "";
-                }
+
+              e.AssignedRoom = (!String.IsNullOrEmpty(Request.Params[e.EmployerName + e.TeamId + "assignedRoom"])) ? Request.Params[e.EmployerName + e.TeamId + "assignedRoom"] : "";
+
             }
 
             bool isSuccessful = eDAL.UpdateAssignedRoom(employerList);
 
-            if (isSuccessful)
-            {
-                ViewBag.Message = "The rooms were successfully updated.";
-            }
-            else
-            {
-                ViewBag.Message = "The room were not successfully updated. Please try again.";
-            }
+            ViewBag.Message = (isSuccessful) ? "The rooms was successfully added." : "The room was not successfully added. Please try again.";
 
             return View("StaffHome");
         }
@@ -168,14 +157,8 @@ namespace Capstone.Web.Controllers
 
             bool isSuccessful = sdal.AddNewStudent(s);
 
-            if (isSuccessful)
-            {
-                ViewBag.Message = "The student was successfully added.";
-            }
-            else
-            {
-                ViewBag.Message = "The student was not successfully added. Please try again.";  
-            }
+            ViewBag.Message = (isSuccessful) ? "The student was successfully added." : "The student was not successfully added. Please try again.";  
+
 
             // HERE Email Send
 
@@ -185,31 +168,23 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UpdateStaffLogin()
         {
-            //need to add capability to email the student the username and password
+            //need to add capability to email the staff the username and password
 
-            Student s = new Student();
+            User u = new User();
 
-            if ((!String.IsNullOrEmpty(Request.Params["staffName"])) && (!String.IsNullOrEmpty(Request.Params["userName"]))
-                    && (!String.IsNullOrEmpty(Request.Params["isAdmin"])) && (!String.IsNullOrEmpty(Request.Params["matchmakingId"])))
+            if ((!String.IsNullOrEmpty(Request.Params["staffName"])) && (!String.IsNullOrEmpty(Request.Params["userName"])))
             {
-                s.StudentName = Request.Params["studentName"];
-                s.UserName = Request.Params["userName"];
-                s.LanguageId = int.Parse(Request.Params["languageId"]);
-                s.MatchmakingId = int.Parse(Request.Params["matchmakingId"]);
+                u.Username = Request.Params["staffName"];
+                u.User_Role = Request.Params["userName"];
             }
 
-            StudentDAL sdal = new StudentDAL();
+            u.User_Role = ((Request.Params["isAdmin"]) == "Yes") ? "admin" : "staff";
+   
+            UserSqlDal udal = new UserSqlDal();
 
-            bool isSuccessful = sdal.AddNewStudent(s);
+            bool isSuccessful = udal.AddNewStaff(u);
 
-            if (isSuccessful)
-            {
-                ViewBag.Message = "The student was successfully added.";
-            }
-            else
-            {
-                ViewBag.Message = "The student was not successfully added. Please try again.";
-            }
+            ViewBag.Message = (isSuccessful) ? "The staff was successfully added." : "The staff was not successfully added. Please try again.";
 
             // HERE Email Send
 
@@ -238,14 +213,7 @@ namespace Capstone.Web.Controllers
 
             bool isSuccessful = edal.AddNewEmployer(e);
 
-            if (isSuccessful)
-            {
-                ViewBag.Message = "The employer was successfully added.";
-            }
-            else
-            {
-                ViewBag.Message = "The employer was not successfully added. Please try again.";
-            }
+            ViewBag.Message = (isSuccessful) ? "The employer was successfully added." : "The employer was not successfully added. Please try again.";
 
             return View("StaffHome");
         }
@@ -274,14 +242,7 @@ namespace Capstone.Web.Controllers
 
             bool isSuccessful = edal.AddNewArrangement(arrangement);
 
-            if (isSuccessful)
-            {
-                ViewBag.Message = "The arrangement was successfully added.";
-            }
-            else
-            {
-                ViewBag.Message = "The arrangement was not successfully added. Please try again.";
-            }
+            ViewBag.Message = (isSuccessful) ? "The arrangement was successfully added." : "The arrangement was not successfully added. Please try again.";
 
             return View("StaffHome");
 
@@ -308,52 +269,20 @@ namespace Capstone.Web.Controllers
             matchmakingEvent.StartTime = Request.Params["date"]+" "+Request.Params["startHour"]+":"+ Request.Params["startMinute"] + ":00 " + Request.Params["startAMPM"];
             matchmakingEvent.EndTime = Request.Params["date"] + " " + Request.Params["endHour"] + ":" + Request.Params["endMinute"] + ":00 " + Request.Params["endAMPM"];
 
-            if (Request.Params["lunchStartHour"] != "NA")
-            {
-                matchmakingEvent.LunchStart = Request.Params["date"] + " " + Request.Params["lunchStartHour"] + ":" + Request.Params["lunchStartMinute"] + ":00 " + Request.Params["lunchStartAMPM"];
-                matchmakingEvent.LunchEnd = Request.Params["date"] + " " + Request.Params["lunchEndHour"] + ":" + Request.Params["lunchEndMinute"] + ":00 " + Request.Params["lunchEndAMPM"];
-            }
-            else
-            {
-                matchmakingEvent.LunchStart = null;
-                matchmakingEvent.LunchEnd = null;
-            }
+            matchmakingEvent.LunchStart = (Request.Params["lunchStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["lunchStartHour"] + ":" + Request.Params["lunchStartMinute"] + ":00 " + Request.Params["lunchStartAMPM"];
+            matchmakingEvent.LunchEnd = (Request.Params["lunchStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["lunchEndHour"] + ":" + Request.Params["lunchEndMinute"] + ":00 " + Request.Params["lunchEndAMPM"];
+       
+            matchmakingEvent.FirstBreakStart = (Request.Params["MBStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["MBStartHour"] + ":" + Request.Params["MBStartMinute"] + ":00 " + Request.Params["MBStartAMPM"];
+            matchmakingEvent.FirstBreakEnd = (Request.Params["MBStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["MBEndHour"] + ":" + Request.Params["MBEndMinute"] + ":00 " + Request.Params["MBEndAMPM"];
 
-            if (Request.Params["MBStartHour"] != "NA")
-            {
-                matchmakingEvent.FirstBreakStart = Request.Params["date"] + " " + Request.Params["MBStartHour"] + ":" + Request.Params["MBStartMinute"] + ":00 " + Request.Params["MBStartAMPM"];
-                matchmakingEvent.FirstBreakEnd = Request.Params["date"] + " " + Request.Params["MBEndHour"] + ":" + Request.Params["MBEndMinute"] + ":00 " + Request.Params["MBEndAMPM"];
-            }
-            else
-            {
-                matchmakingEvent.FirstBreakStart = null;
-                matchmakingEvent.FirstBreakEnd = null;
-            }
-
-            if (Request.Params["ABStartHour"] != "NA")
-            {
-                matchmakingEvent.SecondBreakStart = Request.Params["date"] + " " + Request.Params["ABStartHour"] + ":" + Request.Params["ABStartMinute"] + ":00 " + Request.Params["ABStartAMPM"];
-                matchmakingEvent.SecondBreakEnd = Request.Params["date"] + " " + Request.Params["ABEndHour"] + ":" + Request.Params["ABEndMinute"] + ":00 " + Request.Params["ABEndAMPM"];
-            }
-            else
-            {
-                matchmakingEvent.SecondBreakStart = null;
-                matchmakingEvent.SecondBreakEnd = null;
-            }
-
+            matchmakingEvent.SecondBreakStart = (Request.Params["ABStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["ABStartHour"] + ":" + Request.Params["ABStartMinute"] + ":00 " + Request.Params["ABStartAMPM"];
+            matchmakingEvent.SecondBreakEnd = (Request.Params["ABStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["ABEndHour"] + ":" + Request.Params["ABEndMinute"] + ":00 " + Request.Params["ABEndAMPM"];
 
             EventDAL edal = new EventDAL();
 
             bool isSuccessful = edal.AddNewEvent(matchmakingEvent);
 
-            if (isSuccessful)
-            {
-                ViewBag.Message = "The arrangement was successfully added.";
-            }
-            else
-            {
-                ViewBag.Message = "The arrangement was not successfully added. Please try again.";
-            }
+            ViewBag.Message = (isSuccessful) ? "The event was successfully added." : "The event was not successfully added. Please try again.";
 
             return View("StaffHome");
 

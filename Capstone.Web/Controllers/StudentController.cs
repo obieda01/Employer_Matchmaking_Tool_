@@ -64,6 +64,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
         public ActionResult UpdateStudentChoices(string userName)
         {
             string userName2 = Request.Params["userName"];
+
             Student loggedInStudent = GetLoggedInStudent(userName);
 
             StudentChoiceDAL scdal = new StudentChoiceDAL();
@@ -88,14 +89,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
           
             bool isSuccessful = scdal.UpdateStudentChoice(studentChoices);
 
-            if (isSuccessful)
-            {
-                ViewBag.Message = "Your choices were submitted.";
-            }
-            else
-            {
-                ViewBag.Message = "Your choices were not submitted. Please try again.";
-            }
+            ViewBag.Message = (isSuccessful) ? "Your choices were successfully added." : "Your choices were was not successfully added. Please try again.";
 
             return View("StudentHome");
         }

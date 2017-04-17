@@ -254,6 +254,16 @@ namespace Capstone.Web.Controllers
 
         }
 
+        public ActionResult AddNewEvent()
+        {
+            CreateArrangementDropDownList();
+
+            ViewBag.Hours = hours;
+            ViewBag.Minutes = minutes;
+            ViewBag.AMPM = ampm;
+
+            return View();
+        }
         public void CreateArrangementDropDownList()
         {
             EventDAL edal = new EventDAL();
@@ -270,5 +280,46 @@ namespace Capstone.Web.Controllers
 
             ViewBag.Arrangements = arrangements;
         }
+
+        private List<SelectListItem> hours = new List<SelectListItem>
+        {
+                new SelectListItem { Text = "NA", Value = "NA" },
+                new SelectListItem { Text = "12", Value = "12" },
+                new SelectListItem { Text = "1", Value = "1" },
+                new SelectListItem { Text = "2", Value = "2" },
+                new SelectListItem { Text = "3", Value = "3" },
+                new SelectListItem { Text = "4", Value = "4" },
+                new SelectListItem { Text = "5", Value = "5" },
+                new SelectListItem { Text = "6", Value = "6" },
+                new SelectListItem { Text = "7", Value = "7" },
+                new SelectListItem { Text = "8", Value = "8" },
+                new SelectListItem { Text = "9", Value = "9", Selected = true },
+                new SelectListItem { Text = "10", Value = "10" },
+                new SelectListItem { Text = "11", Value = "11" },
+        };
+
+        private List<SelectListItem> minutes = new List<SelectListItem>
+        {
+                new SelectListItem { Text = "NA", Value = "NA" },
+                new SelectListItem { Text = "00", Value = "00" },
+                new SelectListItem { Text = "05", Value = "05" },
+                new SelectListItem { Text = "10", Value = "10" },
+                new SelectListItem { Text = "15", Value = "15" },
+                new SelectListItem { Text = "20", Value = "20" },
+                new SelectListItem { Text = "25", Value = "25" },
+                new SelectListItem { Text = "30", Value = "30", Selected = true },
+                new SelectListItem { Text = "35", Value = "35" },
+                new SelectListItem { Text = "40", Value = "40" },
+                new SelectListItem { Text = "45", Value = "45"},
+                new SelectListItem { Text = "50", Value = "50" },
+                new SelectListItem { Text = "55", Value = "55" },
+        };
+
+        private List<SelectListItem> ampm = new List<SelectListItem>
+        {
+                new SelectListItem { Text = "NA", Value = "NA" },
+                new SelectListItem { Text = "AM", Value = "AM", Selected = true },
+                new SelectListItem { Text = "PM", Value = "PM" }
+        };
     }
 }

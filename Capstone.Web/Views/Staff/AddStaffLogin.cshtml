@@ -4,10 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create A Student Login</h2>
+<h2>Create A Staff Login</h2>
 
 
 <form action="UpdateStaffLogin" method="post">
+    @{string loggedInUserName = ViewBag.userName; }
+    @Html.Hidden("userName", loggedInUserName);
 
     @*@using (Html.BeginForm("UpdateStaffLogin", "Staff"))
         {*@

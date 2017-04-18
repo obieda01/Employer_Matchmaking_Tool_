@@ -86,6 +86,7 @@ namespace Capstone.Web.Controllers
 
                     if (user.User_Role == "admin"|| (user.User_Role == "staff"))
                     {
+                        //ViewBag.UserRole = user.User_Role;
                         return RedirectToAction("StaffHome", "Staff", new {username = base.CurrentUser});
                     }
                     else if(user.User_Role=="student")

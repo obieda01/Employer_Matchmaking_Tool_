@@ -7,6 +7,8 @@
 <h2>Add Employer</h2>
 
 <form action="UpdateEmployer" method="post">
+    @{string loggedInUserName = ViewBag.userName; }
+    @Html.Hidden("userName", loggedInUserName);
     <table>
         <tr>
 

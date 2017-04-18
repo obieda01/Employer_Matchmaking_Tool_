@@ -7,7 +7,8 @@
 <h2>Create A Student Login</h2>
 
 <form action="UpdateStudentLogin" method="post">
-
+    @{string loggedInUserName = ViewBag.userName; }
+    @Html.Hidden("userName", loggedInUserName);
     <table>
         <tr>
             <td>@Html.Label("Add the student to which cohort's matchmaking event : ")</td>

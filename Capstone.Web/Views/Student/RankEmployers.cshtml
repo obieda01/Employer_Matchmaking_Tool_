@@ -26,10 +26,11 @@
         }
 
     </table>
-    <script> 
+    <script>
+
 
     </script>
-    @Html.Action("UpdateStudentChoices",new { })
+
 
 
     <input value="Submit" type="submit" id="inputButton" />
@@ -38,27 +39,27 @@
 
 
 
-        <p>@Html.ActionLink("Go Back", "StudentHome", "Student")</p>
-        <br />
-        <br />
-        <br />
+@*<p>@Html.ActionLink("Go Back", "StudentHome", "Student")</p>*@
+<br />
+<br />
+<br />
 
-    <table>
+<table>
 
+    <tr>
+        <th>Employer Name</th>
+        <th>Profile</th>
+
+    </tr>
+
+    @foreach (Employer e in Model)
+    {
         <tr>
-            <th>Employer Name</th>
-            <th>Profile</th>
-
+            <td> @e.EmployerName</td>
+            <td> @e.Summary</td>
         </tr>
-
-        @foreach (Employer e in Model)
-        {
-            <tr>
-                <td> @e.EmployerName</td>
-                <td> @e.Summary</td>
-            </tr>
-        }
-    </table>
+    }
+</table>
 
 
 

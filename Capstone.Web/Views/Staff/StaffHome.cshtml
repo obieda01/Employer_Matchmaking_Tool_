@@ -51,7 +51,8 @@
 
                             <div class="wizard-header">
                                 <h3 class="wizard-title">
-                                    Staff Home
+                                    
+                                    @ViewBag.UserRole Home
                                 </h3>
                                 @*<h5>This information will let us know more about you.</h5>*@
                             </div>
@@ -60,14 +61,18 @@
                                     <li><a href="#details" data-toggle="tab">Add Student Login</a></li>
                                     <li><a href="#captain" data-toggle="tab">Add Employer</a></li>
                                     @*<li><a href="#description_01" data-toggle="tab">Update Status</a></li>*@
-                                    <li><a href="#description_02" data-toggle="tab">View Student Schedule</a></li>
+                                    @if (ViewBag.UserRole == "admin")
+                                    {
+                                        <li><a href="#description_02" data-toggle="tab">Add Staff User</a></li>
+                                    }
+                                   
                                     <li><a href="#description_03" data-toggle="tab">View Employer Schedule</a></li>
                                     <li><a href="#description_04" data-toggle="tab">View Master Schedule</a></li>
                                     <li><a href="#description" data-toggle="tab">Assign Room</a></li>
                                     <li><a href="#description_05" data-toggle="tab">Create Arrangment</a></li>
                                     <li><a href="#description_06" data-toggle="tab">Add Event</a></li>
                                     <li><a href="#description_07" data-toggle="tab">Update Event</a></li>
-
+                                   
 
 
 
@@ -81,11 +86,23 @@
 
                                 <div class="tab-pane" id="description_02">
                                     <div class="row">
-                                        @Html.Action("ViewAStudentsSchedule", "Staff")
+                                        @Html.Action("AddStaffLogin", "Staff")
 
                                     </div>
                                 </div>
 
+                                <div class="tab-pane" id="description_05">
+                                    <div class="row">
+                                        @Html.Action("CreateNewArrangement", "Staff")
+
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="description_06">
+                                    <div class="row">
+                                        @Html.Action("AddNewEvent", "Staff")
+                                    </div>
+                                </div>
                              
                                 <div class="tab-pane" id="details">
                                     <div class="row">

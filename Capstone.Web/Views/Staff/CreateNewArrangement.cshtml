@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "CreateANewArrangement";
+    ViewBag.Title = "Create New Arrangement";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,6 +11,8 @@
 
     @*@using (Html.BeginForm("UpdateArrangement", "Staff"))
     {*@
+    @{string loggedInUserName = ViewBag.userName; }
+    @Html.Hidden("userName", loggedInUserName);
         <table>
             <tr>
                 <td>@Html.Label("Which Location are you scheduling for? ")</td>

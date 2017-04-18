@@ -93,7 +93,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
             ViewBag.Message = (isSuccessful) ? "Your choices were successfully added." : "Your choices were was not successfully added. Please try again.";
 
-            return View("StudentHome");
+            return View("StudentHome", loggedInStudent);
         }
 
         private Student GetLoggedInStudent(string userName)

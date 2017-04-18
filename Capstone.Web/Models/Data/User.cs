@@ -11,6 +11,7 @@ namespace Capstone.Web.Models.Data
         public string Password { get; set; }
         public string User_Role { get; set; }
         public int UserId { get; set; }
+        public string StaffName { get; set; }
         public string SendEmail()
         {
             return "";

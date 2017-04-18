@@ -14,12 +14,12 @@ namespace Capstone.Web.DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        private string SQL_GetNumberOfStudentChoices = "select Number_Of_Student_Choices from Matchmaking_Arrangement where Matchmaking_Id = @matchmakingId;";
+        private string SQL_GetNumberOfStudentChoices = @"select Number_Of_Student_Choices from Matchmaking_Arrangement where Matchmaking_Id = @matchmakingId;";
 
-        private string SQL_GetAllArrangements = "select Matchmaking_Id, Location, Season, Cohort_Number, Number_Of_Student_Choices from matchmaking_arrangement";
+        private string SQL_GetAllArrangements = @"select Matchmaking_Id, Location, Season, Cohort_Number, Number_Of_Student_Choices from matchmaking_arrangement";
 
-        private string SQL_AddNewArrangement = "insert into matchmaking_arrangement (Location, Season, Cohort_Number, Number_Of_Student_Choices) values (@location, @season, @cohortNumber, @numberOfStudentChoices)";
-
+        private string SQL_AddNewArrangement = @"insert into matchmaking_arrangement (Location, Season, Cohort_Number, Number_Of_Student_Choices,Schedule_Is_Generated) values (@location, @season, @cohortNumber, @numberOfStudentChoices,'N')";
+        private string SQL_AddNewEvent = @"Insert into Event (Matchmaking_Id, Start_Time, End_Time, Lunch_Start, Lunch_End, First_Break_Start, First_Break_End, Second_Break_Start, Second_Break_End, Interview_Length) VALUES (@matchmakingId,@startTime, @endTime,@lunchStart,@lunchEnd,@firstBreakStart,@firstBreakEnd,@secondBreakStart,@secondBreakEnd,@interviewLength);";
         public int GetNumberOfStudentChoices(int matchmakingId)
         {
             try
@@ -93,6 +93,40 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@cohortNumber", arrangement.CohortNumber);
                     cmd.Parameters.AddWithValue("@numberOfStudentChoices", arrangement.NumberOfStudentChoices);
 
+                    rowsUpdated += cmd.ExecuteNonQuery();
+                }
+
+                return (rowsUpdated == 1);
+            }
+            catch (SqlException ex)
+            {
+                //Log and throw the exception
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool AddNewEvent(Event matchmakingEvent)
+        {
+            try
+            {
+                int rowsUpdated = 0;
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(SQL_AddNewEvent, conn);
+                    cmd.Parameters.AddWithValue("@matchmakingId", matchmakingEvent.MatchmakingId);
+                    cmd.Parameters.AddWithValue("@startTime", matchmakingEvent.StartTime);
+                    cmd.Parameters.AddWithValue("@endTime", matchmakingEvent.EndTime);
+
+                    cmd.Parameters.AddWithValue("@lunchStart", matchmakingEvent.LunchStart ?? (object) DBNull.Value);
+                    cmd.Parameters.AddWithValue("@lunchEnd", matchmakingEvent.LunchEnd ?? (object) DBNull.Value);
+                    cmd.Parameters.AddWithValue("@firstBreakStart", matchmakingEvent.FirstBreakStart ?? (object) DBNull.Value);
+                    cmd.Parameters.AddWithValue("@firstBreakEnd", matchmakingEvent.FirstBreakEnd ?? (object) DBNull.Value);
+                    cmd.Parameters.AddWithValue("@secondBreakStart", matchmakingEvent.SecondBreakStart ?? (object) DBNull.Value);
+                    cmd.Parameters.AddWithValue("@secondBreakEnd", matchmakingEvent.SecondBreakEnd ?? (object) DBNull.Value);
+                    cmd.Parameters.AddWithValue("@interviewLength", matchmakingEvent.InterviewLength);
+            
                     rowsUpdated += cmd.ExecuteNonQuery();
                 }
 

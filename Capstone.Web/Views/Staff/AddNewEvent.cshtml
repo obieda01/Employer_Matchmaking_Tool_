@@ -3,8 +3,10 @@
     ViewBag.Title = "AddNewEvent";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Add New Event</h2>
 
+<h2>Add New Event</h2>
+@using (Html.BeginForm("UpdateEvent", "Staff"))
+{
 <div>
     @Html.Label("Pick a co-hort's a matchmaking event:")
     @Html.DropDownList("matchmakingId", (List<SelectListItem>)ViewBag.Arrangements)
@@ -18,9 +20,9 @@
 
 <div>
     @Html.Label("Date of the Event:")
-    @Html.TextBox("date", "", new { type = "time" })
+    @Html.TextBox("date", "", new { type = "date" })
 </div>
-<p>Date: <input type="text" id="datepicker"></p>
+
 
 <div>
     @Html.Label("Start Time:")
@@ -32,7 +34,7 @@
     @Html.DropDownList("endMinute", (List<SelectListItem>)ViewBag.Minutes)
     @Html.DropDownList("endAMPM", (List<SelectListItem>)ViewBag.AMPM)
 </div>
-
+<h5>Select N/A if there are no lunch or break periods.</h5>
 <div>
     @Html.Label("Lunch Start:")
     @Html.DropDownList("lunchStartHour", (List<SelectListItem>)ViewBag.Hours)
@@ -67,4 +69,7 @@
     @Html.DropDownList("ABEndMinute", (List<SelectListItem>)ViewBag.Minutes)
     @Html.DropDownList("ABEndAMPM", (List<SelectListItem>)ViewBag.AMPM)
 </div>
+
+<input value="Update" type="submit" id="inputButton" />
+}
 

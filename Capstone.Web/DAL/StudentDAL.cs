@@ -14,7 +14,7 @@ namespace Capstone.Web.DAL
 
         private string SQL_GetStudents = "Select Matchmaking_Id, Student_Id, Student_Name, l.Language_Id, l.Language, User_Name from Student join Language l on l.Language_Id = student.Language_Id ";
 
-        private string SQL_InsertStudentIntoLogin = "Insert into Login(User_Name, Password, User_Role) VALUES(@userName,'Password','student');";
+        private string SQL_InsertStudentIntoLogin = "Insert into Login(User_Name, Password, User_Role) VALUES(@userName,'GWtlZ2gG14GC6DiY937w1L9RZCM=','student');";
 
         private string SQL_InsertStudentIntoStudent = "Insert into student(Student_Name, Language_Id, User_Name, Matchmaking_Id) values(@studentName, @languageId, @username, @matchmakingId);";
 

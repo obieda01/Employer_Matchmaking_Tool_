@@ -5,7 +5,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-<form action="UpdatePickArrangement" method="post">
+<form action="AssignParticipantsToEvent" method="post">
     @{string loggedInUserName = ViewBag.userName; }
     @Html.Hidden("userName", loggedInUserName);
 

@@ -21,7 +21,7 @@ namespace Capstone.Web.DAL
         private string SQL_AddNewArrangement = @"insert into matchmaking_arrangement (Location, Season, Cohort_Number, Number_Of_Student_Choices,Schedule_Is_Generated) values (@location, @season, @cohortNumber, @numberOfStudentChoices,'N')";
 
         private string SQL_AddNewEvent = @"Insert into Event (Matchmaking_Id, Start_Time, End_Time, Lunch_Start, Lunch_End, First_Break_Start, First_Break_End, Second_Break_Start, Second_Break_End, Interview_Length) VALUES (@matchmakingId,@startTime, @endTime,@lunchStart,@lunchEnd,@firstBreakStart,@firstBreakEnd,@secondBreakStart,@secondBreakEnd,@interviewLength);";
-        private string SQL__AssignStudentsAndEmployersToEvent
+        private string SQL__GetAllEvents =
         public int GetNumberOfStudentChoices(int matchmakingId)
         {
             try
@@ -90,7 +90,7 @@ namespace Capstone.Web.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(SQL_AddNewArrangement, conn);
-                    cmd.Parameters.AddWithValue("@location",arrangement.Location);
+                    cmd.Parameters.AddWithValue("@location", arrangement.Location);
                     cmd.Parameters.AddWithValue("@season", arrangement.Season);
                     cmd.Parameters.AddWithValue("@cohortNumber", arrangement.CohortNumber);
                     cmd.Parameters.AddWithValue("@numberOfStudentChoices", arrangement.NumberOfStudentChoices);
@@ -121,14 +121,14 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@startTime", matchmakingEvent.StartTime);
                     cmd.Parameters.AddWithValue("@endTime", matchmakingEvent.EndTime);
 
-                    cmd.Parameters.AddWithValue("@lunchStart", matchmakingEvent.LunchStart ?? (object) DBNull.Value);
-                    cmd.Parameters.AddWithValue("@lunchEnd", matchmakingEvent.LunchEnd ?? (object) DBNull.Value);
-                    cmd.Parameters.AddWithValue("@firstBreakStart", matchmakingEvent.FirstBreakStart ?? (object) DBNull.Value);
-                    cmd.Parameters.AddWithValue("@firstBreakEnd", matchmakingEvent.FirstBreakEnd ?? (object) DBNull.Value);
-                    cmd.Parameters.AddWithValue("@secondBreakStart", matchmakingEvent.SecondBreakStart ?? (object) DBNull.Value);
-                    cmd.Parameters.AddWithValue("@secondBreakEnd", matchmakingEvent.SecondBreakEnd ?? (object) DBNull.Value);
+                    cmd.Parameters.AddWithValue("@lunchStart", matchmakingEvent.LunchStart ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@lunchEnd", matchmakingEvent.LunchEnd ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@firstBreakStart", matchmakingEvent.FirstBreakStart ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@firstBreakEnd", matchmakingEvent.FirstBreakEnd ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@secondBreakStart", matchmakingEvent.SecondBreakStart ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@secondBreakEnd", matchmakingEvent.SecondBreakEnd ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@interviewLength", matchmakingEvent.InterviewLength);
-            
+
                     rowsUpdated += cmd.ExecuteNonQuery();
                 }
 
@@ -140,7 +140,27 @@ namespace Capstone.Web.DAL
                 throw new NotImplementedException();
             }
         }
+        public List<Event> GetAllEvents(int matchmakingId)
+        {
+            List<Event> result = new List<Event>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
 
+                    SqlCommand cmd = new SqlCommand(SQL_GetNumberOfStudentChoices, conn);
+                    cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
+
+                    return result;
+                }
+            }
+            catch (SqlException ex)
+            {
+                //Log and throw the exception
+                throw new NotImplementedException();
+            }
+
+        }
     }
-
 }

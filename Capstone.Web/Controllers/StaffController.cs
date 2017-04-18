@@ -323,10 +323,13 @@ namespace Capstone.Web.Controllers
             CreateArrangementDropDownList();
             return View();
         }
-        public ActionResult UpdatePickArrangement()
+        public ActionResult AssignParticipantsToEvent()
         {
+            int matchmakingId = int.Parse(Request.Params["matchmakingId"]);
+            EventDAL edal = new EventDAL();
+            List<Event> result = edal.GetAllEvents(matchmakingId);
 
-            return View();
+            return View(result);
         }
 
         public void CreateArrangementDropDownList()

@@ -142,6 +142,9 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UpdateStudentLogin()
         {
+
+
+
             System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
 
             //need to add capability to email the student the username and password

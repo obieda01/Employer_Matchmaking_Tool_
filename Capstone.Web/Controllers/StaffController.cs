@@ -19,7 +19,7 @@ namespace Capstone.Web.Controllers
         {
             IUserDal idal = new UserSqlDal();
             loggedInUser = idal.GetUser(userName);
-            return View();
+            return View("StaffHome");
         }
 
         // GET: Staff
@@ -60,12 +60,14 @@ namespace Capstone.Web.Controllers
 
             EmployerDAL eDAL = new EmployerDAL();
             List<EmployerTeam> employerList = eDAL.GetAllEmployersAndTeams(matchmakingId);
-            
+
             return View(employerList);
         }
 
         public ActionResult UpdateRoom()
         {
+            System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
+
             //remove hardcoding
             int matchmakingId = 1;
 
@@ -75,7 +77,7 @@ namespace Capstone.Web.Controllers
             foreach (EmployerTeam e in employerList)
             {
 
-              e.AssignedRoom = (!String.IsNullOrEmpty(Request.Params[e.EmployerName + e.TeamId + "assignedRoom"])) ? Request.Params[e.EmployerName + e.TeamId + "assignedRoom"] : "";
+                e.AssignedRoom = (!String.IsNullOrEmpty(Request.Params[e.EmployerName + e.TeamId + "assignedRoom"])) ? Request.Params[e.EmployerName + e.TeamId + "assignedRoom"] : "";
 
             }
 
@@ -140,6 +142,8 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UpdateStudentLogin()
         {
+            System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
+
             //need to add capability to email the student the username and password
 
             Student s = new Student();
@@ -157,7 +161,7 @@ namespace Capstone.Web.Controllers
 
             bool isSuccessful = sdal.AddNewStudent(s);
 
-            ViewBag.Message = (isSuccessful) ? "The student was successfully added." : "The student was not successfully added. Please try again.";  
+            ViewBag.Message = (isSuccessful) ? "The student was successfully added." : "The student was not successfully added. Please try again.";
 
 
             // HERE Email Send
@@ -168,6 +172,8 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UpdateStaffLogin()
         {
+            System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
+
             //need to add capability to email the staff the username and password
 
             User u = new User();
@@ -179,7 +185,7 @@ namespace Capstone.Web.Controllers
             }
 
             u.User_Role = ((Request.Params["isAdmin"]) == "Yes") ? "admin" : "staff";
-   
+
             UserSqlDal udal = new UserSqlDal();
 
             bool isSuccessful = udal.AddNewStaff(u);
@@ -199,6 +205,17 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UpdateEmployer()
         {
+            System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
+            string name;
+            if ((Request.Params["employerName"] == null) || (Request.Params["employerSummary"] == null))
+            {
+                name = "";
+            }
+            else
+            {
+                name = Request.Params["employerName"] + " " + Request.Params["employerSummary"];
+            }
+
             Employer e = new Employer();
 
             if ((!String.IsNullOrEmpty(Request.Params["employerName"])) && (!String.IsNullOrEmpty(Request.Params["employerSummary"])))
@@ -226,6 +243,7 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UpdateArrangement()
         {
+            System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
 
             MatchmakingArrangement arrangement = new MatchmakingArrangement();
 
@@ -261,17 +279,18 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UpdateEvent()
         {
-    
+            System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
+
             Event matchmakingEvent = new Event();
             matchmakingEvent.MatchmakingId = int.Parse(Request.Params["matchmakingId"]);
             matchmakingEvent.InterviewLength = int.Parse(Request.Params["interviewLength"]);
             matchmakingEvent.EventDate = Request.Params["date"];
-            matchmakingEvent.StartTime = Request.Params["date"]+" "+Request.Params["startHour"]+":"+ Request.Params["startMinute"] + ":00 " + Request.Params["startAMPM"];
+            matchmakingEvent.StartTime = Request.Params["date"] + " " + Request.Params["startHour"] + ":" + Request.Params["startMinute"] + ":00 " + Request.Params["startAMPM"];
             matchmakingEvent.EndTime = Request.Params["date"] + " " + Request.Params["endHour"] + ":" + Request.Params["endMinute"] + ":00 " + Request.Params["endAMPM"];
 
             matchmakingEvent.LunchStart = (Request.Params["lunchStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["lunchStartHour"] + ":" + Request.Params["lunchStartMinute"] + ":00 " + Request.Params["lunchStartAMPM"];
             matchmakingEvent.LunchEnd = (Request.Params["lunchStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["lunchEndHour"] + ":" + Request.Params["lunchEndMinute"] + ":00 " + Request.Params["lunchEndAMPM"];
-       
+
             matchmakingEvent.FirstBreakStart = (Request.Params["MBStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["MBStartHour"] + ":" + Request.Params["MBStartMinute"] + ":00 " + Request.Params["MBStartAMPM"];
             matchmakingEvent.FirstBreakEnd = (Request.Params["MBStartHour"] == "NA") ? null : Request.Params["date"] + " " + Request.Params["MBEndHour"] + ":" + Request.Params["MBEndMinute"] + ":00 " + Request.Params["MBEndAMPM"];
 
@@ -307,7 +326,7 @@ namespace Capstone.Web.Controllers
 
         private List<SelectListItem> hours = new List<SelectListItem>
         {
-                new SelectListItem { Text = "NA", Value = "NA" }, 
+                new SelectListItem { Text = "NA", Value = "NA" },
                 new SelectListItem { Text = "7", Value = "7" },
                 new SelectListItem { Text = "8", Value = "8" },
                 new SelectListItem { Text = "9", Value = "9", Selected = true },

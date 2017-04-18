@@ -6,8 +6,11 @@
 
 <h2>Create A Student Login</h2>
 
-@using (Html.BeginForm("UpdateStaffLogin", "Staff"))
-{
+
+<form action="UpdateStaffLogin" method="post">
+
+    @*@using (Html.BeginForm("UpdateStaffLogin", "Staff"))
+        {*@
     <table>
         <tr>
             <td>@Html.Label("Staff Name: ")</td>
@@ -30,14 +33,14 @@
             <td>
                 @Html.DropDownList("isAdmin", new SelectList(new List<Object>{new { value = "Yes" , text = "Yes" },
                     new { value = "No" , text = "No"}}, "value", "text", 2))
-        </td>
-    </tr>
-    <tr>
-        <td>Initial Passwords are set to "Password"</td>
-    </tr>
-</table>
+            </td>
+        </tr>
+        <tr>
+            <td>Initial Passwords are set to "Password"</td>
+        </tr>
+    </table>
 
     <input value="Submit" type="submit" id="inputButton" />
-}
-
+    @*}*@
+</form>
 

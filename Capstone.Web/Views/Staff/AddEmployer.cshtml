@@ -6,8 +6,7 @@
 
 <h2>Add Employer</h2>
 
-@using (Html.BeginForm("UpdateEmployer", "Staff"))
-{
+<form action="UpdateEmployer" method="post">
     <table>
         <tr>
 
@@ -18,7 +17,9 @@
             <td>@Html.Label("Employer Summary: ")</td>
             <td>@Html.TextArea("employerSummary")</td>
         </tr>
-</table>
-
+    </table>
     <input value="Update" type="submit" id="inputButton" />
-}
+
+</form>
+
+

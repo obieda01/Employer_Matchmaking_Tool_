@@ -8,14 +8,14 @@
 
 <h2>Rank Employers</h2>
 
-@using (Html.BeginForm("UpdateStudentChoices", "Student"))
-{
-    string loggedInUserName = ViewBag.userName;
+<form action="UpdateStudentChoices" onsubmit="" method="get">
+
+    @{string loggedInUserName = ViewBag.userName; }
     @Html.Hidden("userName", loggedInUserName);
 
     <table>
         @for (int i = 1; i <= ViewBag.NumberOfStudentChoices; i++)
-        {
+            {
 
 
             <tr>
@@ -26,31 +26,39 @@
         }
 
     </table>
-<input value="Submit" type="submit" id="inputButton"/>
+    <script> 
+
+    </script>
+    @Html.Action("UpdateStudentChoices",new { })
 
 
-<p>@Html.ActionLink("Go Back", "StudentHome", "Student")</p>
-<br />
-<br />
-<br />
-}
+    <input value="Submit" type="submit" id="inputButton" />
+</form>
 
-<table>
-    
-    <tr>
-        <th>Employer Name</th>
-        <th>Summary</th>
 
-    </tr>
 
-    @foreach (Employer e in Model)
-    {
+
+        <p>@Html.ActionLink("Go Back", "StudentHome", "Student")</p>
+        <br />
+        <br />
+        <br />
+
+    <table>
+
         <tr>
-            <td> @e.EmployerName</td>
-            <td> @e.Summary</td>
+            <th>Employer Name</th>
+            <th>Profile</th>
+
         </tr>
-    }
-</table>
+
+        @foreach (Employer e in Model)
+        {
+            <tr>
+                <td> @e.EmployerName</td>
+                <td> @e.Summary</td>
+            </tr>
+        }
+    </table>
 
 
 

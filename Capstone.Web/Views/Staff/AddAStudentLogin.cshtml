@@ -6,8 +6,8 @@
 
 <h2>Create A Student Login</h2>
 
-@using (Html.BeginForm("UpdateStudentLogin", "Staff"))
-{
+<form action="UpdateStudentLogin" method="post">
+
     <table>
         <tr>
             <td>@Html.Label("Add the student to which cohort's matchmaking event : ")</td>
@@ -34,14 +34,13 @@
             <td>
                 @Html.DropDownList("languageId", new SelectList(new List<Object>{new { value = 1 , text = "Java" },
                     new { value = 2 , text = ".Net"}}, "value", "text", 2))
-        </td>
-    </tr>
-    <tr>
-        <td>Initial Passwords are set to "Password"</td>
-    </tr>
-</table>
+            </td>
+        </tr>
+        <tr>
+            <td>Initial Passwords are set to "Password"</td>
+        </tr>
+    </table>
 
     <input value="Submit" type="submit" id="inputButton" />
-}
 
-
+</form>

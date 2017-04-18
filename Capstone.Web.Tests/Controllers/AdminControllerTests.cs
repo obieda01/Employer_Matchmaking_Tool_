@@ -38,7 +38,7 @@ namespace Capstone.Web.Tests.Controllers
         }
 
         [TestMethod()]
-        public void AdminController_SendEmailHomeAction_ReturnAdminHomeView()
+        public void AdminController_SendEmailHomeActionvg_ReturnAdminHomeView()
         {
             //AdminController controller = new AdminController(userDal);
 

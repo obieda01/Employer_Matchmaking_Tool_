@@ -5,71 +5,75 @@
 }
 
 <h2>Add New Event</h2>
-@using (Html.BeginForm("UpdateEvent", "Staff"))
-{
-<div>
-    @Html.Label("Pick a co-hort's a matchmaking event:")
-    @Html.DropDownList("matchmakingId", (List<SelectListItem>)ViewBag.Arrangements)
-</div>
+
+<form action="UpdateEvent" method="post">
+
+    @*@using (Html.BeginForm("UpdateEvent", "Staff"))
+        {*@
+    <div>
+        @Html.Label("Pick a co-hort's a matchmaking event:")
+        @Html.DropDownList("matchmakingId", (List<SelectListItem>)ViewBag.Arrangements)
+    </div>
 
 
-<div>
-    @Html.Label("How long is each interview?  Please include the 5 minute break:")
-    @Html.DropDownList("interviewLength", (List<SelectListItem>)ViewBag.Minutes) minutes.
-</div>
+    <div>
+        @Html.Label("How long is each interview?  Please include the 5 minute break:")
+        @Html.DropDownList("interviewLength", (List<SelectListItem>)ViewBag.Minutes) minutes.
+    </div>
 
-<div>
-    @Html.Label("Date of the Event:")
-    @Html.TextBox("date", "", new { type = "date" })
-</div>
-
-
-<div>
-    @Html.Label("Start Time:")
-    @Html.DropDownList("startHour", (List<SelectListItem>)ViewBag.Hours)
-    @Html.DropDownList("startMinute", (List<SelectListItem>)ViewBag.Minutes)
-    @Html.DropDownList("startAMPM", (List<SelectListItem>)ViewBag.AMPM)
-    @Html.Label("End Time:")
-    @Html.DropDownList("endHour", (List<SelectListItem>)ViewBag.Hours)
-    @Html.DropDownList("endMinute", (List<SelectListItem>)ViewBag.Minutes)
-    @Html.DropDownList("endAMPM", (List<SelectListItem>)ViewBag.AMPM)
-</div>
-<h5>Select N/A if there are no lunch or break periods.</h5>
-<div>
-    @Html.Label("Lunch Start:")
-    @Html.DropDownList("lunchStartHour", (List<SelectListItem>)ViewBag.Hours)
-    @Html.DropDownList("lunchStartMinute", (List<SelectListItem>)ViewBag.Minutes)
-    @Html.DropDownList("lunchStartAMPM", (List<SelectListItem>)ViewBag.AMPM)
-    @Html.Label("Lunch End:")
-    @Html.DropDownList("lunchEndHour", (List<SelectListItem>)ViewBag.Hours)
-    @Html.DropDownList("lunchEndMinute", (List<SelectListItem>)ViewBag.Minutes)
-    @Html.DropDownList("lunchEndAMPM", (List<SelectListItem>)ViewBag.AMPM)
-</div>
-
-<div>
-    @Html.Label("Morning Break Start:")
-    @Html.DropDownList("MBStartHour", (List<SelectListItem>)ViewBag.Hours)
-    @Html.DropDownList("MBStartMinute", (List<SelectListItem>)ViewBag.Minutes)
-    @Html.DropDownList("MBStartAMPM", (List<SelectListItem>)ViewBag.AMPM)
-    @Html.Label("Morning Break End:")
-    @Html.DropDownList("MBEndHour", (List<SelectListItem>)ViewBag.Hours)
-    @Html.DropDownList("MBEndMinute", (List<SelectListItem>)ViewBag.Minutes)
-    @Html.DropDownList("MBEndAMPM", (List<SelectListItem>)ViewBag.AMPM)
-</div>
-
-<div>
-    @Html.Label("Afternoon Break Start:")
-    @Html.DropDownList("ABStartHour", (List<SelectListItem>)ViewBag.Hours)
-    @Html.DropDownList("ABStartMinute", (List<SelectListItem>)ViewBag.Minutes)
-    @Html.DropDownList("ABStartAMPM", (List<SelectListItem>)ViewBag.AMPM)
+    <div>
+        @Html.Label("Date of the Event:")
+        @Html.TextBox("date", "", new { type = "date" })
+    </div>
 
 
-    @Html.Label("Afternoon Break End:")
-    @Html.DropDownList("ABEndHour", (List<SelectListItem>)ViewBag.Hours)
-    @Html.DropDownList("ABEndMinute", (List<SelectListItem>)ViewBag.Minutes)
-    @Html.DropDownList("ABEndAMPM", (List<SelectListItem>)ViewBag.AMPM)
-</div>
+    <div>
+        @Html.Label("Start Time:")
+        @Html.DropDownList("startHour", (List<SelectListItem>)ViewBag.Hours)
+        @Html.DropDownList("startMinute", (List<SelectListItem>)ViewBag.Minutes)
+        @Html.DropDownList("startAMPM", (List<SelectListItem>)ViewBag.AMPM)
+        @Html.Label("End Time:")
+        @Html.DropDownList("endHour", (List<SelectListItem>)ViewBag.Hours)
+        @Html.DropDownList("endMinute", (List<SelectListItem>)ViewBag.Minutes)
+        @Html.DropDownList("endAMPM", (List<SelectListItem>)ViewBag.AMPM)
+    </div>
+    <h5>Select N/A if there are no lunch or break periods.</h5>
+    <div>
+        @Html.Label("Lunch Start:")
+        @Html.DropDownList("lunchStartHour", (List<SelectListItem>)ViewBag.Hours)
+        @Html.DropDownList("lunchStartMinute", (List<SelectListItem>)ViewBag.Minutes)
+        @Html.DropDownList("lunchStartAMPM", (List<SelectListItem>)ViewBag.AMPM)
+        @Html.Label("Lunch End:")
+        @Html.DropDownList("lunchEndHour", (List<SelectListItem>)ViewBag.Hours)
+        @Html.DropDownList("lunchEndMinute", (List<SelectListItem>)ViewBag.Minutes)
+        @Html.DropDownList("lunchEndAMPM", (List<SelectListItem>)ViewBag.AMPM)
+    </div>
 
-<input value="Update" type="submit" id="inputButton" />
-}
+    <div>
+        @Html.Label("Morning Break Start:")
+        @Html.DropDownList("MBStartHour", (List<SelectListItem>)ViewBag.Hours)
+        @Html.DropDownList("MBStartMinute", (List<SelectListItem>)ViewBag.Minutes)
+        @Html.DropDownList("MBStartAMPM", (List<SelectListItem>)ViewBag.AMPM)
+        @Html.Label("Morning Break End:")
+        @Html.DropDownList("MBEndHour", (List<SelectListItem>)ViewBag.Hours)
+        @Html.DropDownList("MBEndMinute", (List<SelectListItem>)ViewBag.Minutes)
+        @Html.DropDownList("MBEndAMPM", (List<SelectListItem>)ViewBag.AMPM)
+    </div>
 
+    <div>
+        @Html.Label("Afternoon Break Start:")
+        @Html.DropDownList("ABStartHour", (List<SelectListItem>)ViewBag.Hours)
+        @Html.DropDownList("ABStartMinute", (List<SelectListItem>)ViewBag.Minutes)
+        @Html.DropDownList("ABStartAMPM", (List<SelectListItem>)ViewBag.AMPM)
+
+
+        @Html.Label("Afternoon Break End:")
+        @Html.DropDownList("ABEndHour", (List<SelectListItem>)ViewBag.Hours)
+        @Html.DropDownList("ABEndMinute", (List<SelectListItem>)ViewBag.Minutes)
+        @Html.DropDownList("ABEndAMPM", (List<SelectListItem>)ViewBag.AMPM)
+    </div>
+
+    <input value="Update" type="submit" id="inputButton" />
+    @*}*@
+
+</form>

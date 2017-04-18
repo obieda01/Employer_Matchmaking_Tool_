@@ -17,7 +17,7 @@ namespace Capstone.Web.Controllers.UsersProfiles
            
         }
 
-
+        public int x = 0;
         // GET: Student
         public ActionResult StudentHome(string userName)
         {
@@ -63,6 +63,8 @@ namespace Capstone.Web.Controllers.UsersProfiles
 
         public ActionResult UpdateStudentChoices(string userName)
         {
+            System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
+
             string userName2 = Request.Params["userName"];
 
             Student loggedInStudent = GetLoggedInStudent(userName);

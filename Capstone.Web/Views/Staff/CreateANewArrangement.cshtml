@@ -7,13 +7,15 @@
 <h2>Create A New Arrangement</h2>
 
 
+<form action="UpdateArrangement" method="post">
 
-@using (Html.BeginForm("UpdateArrangement", "Staff"))
-{
-    <table>
-        <tr>
-            <td>@Html.Label("Which Location are you scheduling for? ")</td>
-            <td>@Html.DropDownList("location", new SelectList(new List<Object>{new { value = "Columbus" , text = "Columbus" },
+    @*@using (Html.BeginForm("UpdateArrangement", "Staff"))
+    {*@
+        <table>
+            <tr>
+                <td>@Html.Label("Which Location are you scheduling for? ")</td>
+                <td>
+                    @Html.DropDownList("location", new SelectList(new List<Object>{new { value = "Columbus" , text = "Columbus" },
                     new { value = "Cleveland" , text = "Cleveland"}}, "value", "text", 2))
             </td>
         </tr>
@@ -36,4 +38,5 @@
     </table>
 
     <input value="Update" type="submit" id="inputButton" />
-}
+    @*}*@
+    </form>

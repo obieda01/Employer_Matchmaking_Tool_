@@ -8,15 +8,16 @@
 }
 
 
-<h2>UpdateRooms</h2>
+<h2>Update Rooms</h2>
 
 
 <div>@Html.Label("Please pick a matchmaking event:")</div>
 <div>@Html.DropDownList("matchmakingId", (List<SelectListItem>)ViewBag.Arrangements)</div>
 
-@using (Html.BeginForm("UpdateRoom", "Staff"))
-{
+@*@using (Html.BeginForm("UpdateRoom", "Staff"))
+{*@
 
+<form action="UpdateRoom" method="post">
     <table>
         <tr>
             <td>@Html.Label("Employer Name")</td>
@@ -28,12 +29,13 @@
             <tr>
                 <td>@Html.Label(e.EmployerName)</td>
                 <td>@Html.Label(e.TeamId.ToString())</td>
-                <td>@Html.TextBox(e.EmployerName+e.TeamId+"assignedRoom", e.AssignedRoom)</td>
+                <td>@Html.TextBox(e.EmployerName + e.TeamId + "assignedRoom", e.AssignedRoom)</td>
             </tr>
         }
-      
+
     </table>
 
     <input value="Update" type="submit" id="inputButton" />
-}
+    @*}*@
+    </form>
 

@@ -216,6 +216,7 @@
     <Content Include="Views\Staff\AddNewEvent.cshtml" />
     <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Staff\AddStaffLogin.cshtml" />
+    <Content Include="Views\Staff\Staff.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

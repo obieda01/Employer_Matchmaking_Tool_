@@ -144,6 +144,17 @@ CREATE TABLE [dbo].[Matchmaking_Arrangement](
 	[Matchmaking_Id] ASC
 ));
 
+CREATE TABLE [dbo].[Participating_Students](
+[Matchmaking_Id] [int] NOT NULL,
+[Event_Id] [int] NOT NULL,
+[Student_Id] [int] NOT NULL,
+CONSTRAINT [PK_Participating_Students] PRIMARY KEY CLUSTERED
+(
+[Matchmaking_Id] ASC,
+[Event_Id] ASC,
+[Student_Id] ASC
+));
+
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Interview_Schedule_Employer]') AND parent_object_id = OBJECT_ID(N'[dbo].[Interview_Schedule]'))
 ALTER TABLE [dbo].[Interview_Schedule]  WITH CHECK ADD  CONSTRAINT [FK_Interview_Schedule_Employer] FOREIGN KEY([Employer_Id])
 REFERENCES [dbo].[Employer] ([Employer_Id])
@@ -328,5 +339,32 @@ GO
 
 IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[Schedule_Is_Generated_Yes_or_No]') AND parent_object_id = OBJECT_ID(N'[dbo].[Schedule_Is_Generated]'))
 ALTER TABLE [dbo].[Matchmaking_Arrangement] CHECK CONSTRAINT [Schedule_Is_Generated_Yes_or_No]
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Participating_Students_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Participating_Students]'))
+ALTER TABLE [dbo].[Participating_Students] WITH CHECK ADD CONSTRAINT [FK_Participating_Students_Matchmaking_Arrangement] FOREIGN KEY([Matchmaking_Id])
+REFERENCES [dbo].[Matchmaking_Arrangement] ([Matchmaking_Id])
+GO
+
+IF EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Participating_Students_Matchmaking_Arrangement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Participating_Students]'))
+ALTER TABLE [dbo].[Participating_Students] CHECK CONSTRAINT [FK_Participating_Students_Matchmaking_Arrangement]
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Participating_Students_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Participating_Students]'))
+ALTER TABLE [dbo].[Participating_Students] WITH CHECK ADD CONSTRAINT [FK_Participating_Students_Event] FOREIGN KEY([Event_Id])
+REFERENCES [dbo].[Event] ([Event_Id])
+GO
+
+IF EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Participating_Students_Event]') AND parent_object_id = OBJECT_ID(N'[dbo].[Participating_Students]'))
+ALTER TABLE [dbo].[Participating_Students] CHECK CONSTRAINT [FK_Participating_Students_Event]
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Participating_Students_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[Participating_Students]'))
+ALTER TABLE [dbo].[Participating_Students] WITH CHECK ADD CONSTRAINT [FK_Participating_Students_Student] FOREIGN KEY([Student_Id])
+REFERENCES [dbo].[Student] ([Student_Id])
+GO
+
+IF EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Participating_Students_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[Participating_Students]'))
+ALTER TABLE [dbo].[Participating_Students] CHECK CONSTRAINT [FK_Participating_Students_Student]
 GO
 Commit;

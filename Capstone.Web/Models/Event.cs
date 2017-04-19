@@ -19,10 +19,10 @@ namespace Capstone.Web.Models
         public string SecondBreakEnd { get; set; }
         public int InterviewLength { get; set; }
         public int NumberOfInterviewSlots { get; set; }
-        List <Student>AllStudents { get; set; }
-        List <Student>ParticipatingStudents { get; set; }
-        List<EmployerTeam>AllEmployers { get; set; }
-        List<EmployerTeam>ParticipatingEmployers { get; set; }
+        public List <Student>AllStudents { get; set; }
+        public List <Student>ParticipatingStudents { get; set; }
+        public List<EmployerTeam>AllEmployers { get; set; }
+        public List<EmployerTeam>ParticipatingEmployers { get; set; }
 
     }
 }

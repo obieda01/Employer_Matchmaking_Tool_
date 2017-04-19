@@ -20,6 +20,7 @@ namespace Capstone.Web.Controllers
             IUserDal idal = new UserSqlDal();
             loggedInUser = idal.GetUser(userName);
             ViewBag.UserRole = loggedInUser.User_Role;
+            ViewBag.username = loggedInUser.Username;
             return View("StaffHome");
         }
 

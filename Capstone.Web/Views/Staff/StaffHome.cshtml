@@ -1,7 +1,7 @@
 ﻿@model Capstone.Web.Models.Users.LoginViewModel
 @{
     ViewBag.Title = "StaffHome";
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
@@ -9,22 +9,19 @@
 <link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
 
 <div class="image-container set-full-height">
-    <!--   Creative Tim Branding   -->
     <link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
 
 
 
-    <a href="http://creative-tim.com" style="" target="_blank">
+    <a href="~/About/About" style="" target="_blank">
         <div class="logo-container_01">
             <div class="logo">
                 <img src="http://demos.creative-tim.com/material-bootstrap-wizard/assets/img/new_logo.png">
             </div>
-            <div class="brand">
                 @ViewBag.userName
-            </div>
         </div>
     </a>
-    <a href="http://creative-tim.com" style="" target="_blank">
+    <a href="#" style="" target="_blank">
         <div class="logo-container_02">
 
             <div class="brand">
@@ -32,31 +29,24 @@
             </div>
         </div>
     </a>
-
-    <!--  Made With Material Kit  -->
-    <a href="http://demos.creative-tim.com/material-kit/index.html?ref=material-bootstrap-wizard" class="made-with-mk" target="_blank">
+    <a href="~/About/About" class="made-with-mk" target="_blank">
         <div class="brand">ET</div>
         <div class="made-with">Made with <strong>Echo Team</strong></div>
     </a>
 
     <!--   Big container   -->
     <div class="container">
-        <div class="row" style="width: 1400px">
+        <div class="row" style="width: 1500px">
             <div class="col-sm-12">
                 <!-- Wizard container -->
                 <div class="wizard-container">
                     <div class="card wizard-card" data-color="green" id="wizard">
-                        <!--form action="" method=""-->
-                        <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
-
-<<<<<<< HEAD
                         <div class="wizard-header">
                             <h3 class="wizard-title">
                                 Staff Home
                             </h3>
-                            @*<h5>This information will let us know more about you.</h5>*@
                         </div>
-                        <div class="wizard-navigation" style="width: 1400px">
+                        <div class="wizard-navigation" style="width: 1450px">
                             <ul>
                                 <li><a href="#details" data-toggle="tab">Add Student Login</a></li>
                                 <li><a href="#captain" data-toggle="tab">Add Employer</a></li>
@@ -65,38 +55,11 @@
                                 <li><a href="#description_03" data-toggle="tab">View Employer Schedule</a></li>
                                 <li><a href="#description_04" data-toggle="tab">View Master Schedule</a></li>
                                 <li><a href="#description" data-toggle="tab">Assign Room</a></li>
-                                <li><a href="#description_8" data-toggle="tab">Add Staff</a></li>
+                                <li><a href="#description_08" data-toggle="tab">Add Staff</a></li>
 
                                 <li><a href="#description_05" data-toggle="tab">Create Arrangment</a></li>
                                 <li><a href="#description_06" data-toggle="tab">Add Event</a></li>
                                 <li><a href="#description_07" data-toggle="tab">Update Event</a></li>
-                                <li><a href="#description_07" data-toggle="tab">Update Event</a></li>
-=======
-                            <div class="wizard-header">
-                                <h3 class="wizard-title">
-                                    
-                                    @ViewBag.UserRole Home
-                                </h3>
-                                @*<h5>This information will let us know more about you.</h5>*@
-                            </div>
-                            <div class="wizard-navigation" style="width: 1400px">
-                                <ul>
-                                    <li><a href="#details" data-toggle="tab">Add Student Login</a></li>
-                                    <li><a href="#captain" data-toggle="tab">Add Employer</a></li>
-                                    @*<li><a href="#description_01" data-toggle="tab">Update Status</a></li>*@
-                                    @if (ViewBag.UserRole == "admin")
-                                    {
-                                        <li><a href="#description_02" data-toggle="tab">Add Staff User</a></li>
-                                    }
-                                   
-                                    @*<li><a href="#description_03" data-toggle="tab">View Employer Schedule</a></li>*@
-                                    <li><a href="#description_04" data-toggle="tab">View Master Schedule</a></li>
-                                    <li><a href="#description" data-toggle="tab">Assign Room</a></li>
-                                    <li><a href="#description_05" data-toggle="tab">Create Arrangment</a></li>
-                                    <li><a href="#description_06" data-toggle="tab">Add Event</a></li>
-                                    <li><a href="#description_07" data-toggle="tab">Update Event</a></li>
-                                   
->>>>>>> 2d25c225fec3e3a0b53a3f57d0f65d2c38545f54
 
 
 
@@ -107,49 +70,18 @@
                             <div class="moving-tab" style="transition:0.5s cubic-bezier(0.29, 1.42, 0.79, 1); width: 200px; transform: translate3d(62.2727px, 0px, 0px);">Add Employer</div>
                         </div>
 
-<<<<<<< HEAD
                         <div class="tab-content">
-                            
-=======
-                                <div class="tab-pane" id="description_02">
-                                    <div class="row">
-                                        @Html.Action("AddStaffLogin", "Staff")
->>>>>>> 2d25c225fec3e3a0b53a3f57d0f65d2c38545f54
-
                             <div class="tab-pane" id="description_02">
                                 <div class="row">
                                     @Html.Action("ViewAStudentsSchedule", "Staff")
 
-<<<<<<< HEAD
                                 </div>
                             </div>
-=======
-                                <div class="tab-pane" id="description_05">
-                                    <div class="row">
-                                        @Html.Action("CreateNewArrangement", "Staff")
-
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane" id="description_06">
-                                    <div class="row">
-                                        @Html.Action("AddNewEvent", "Staff")
-                                    </div>
-                                </div>
-                             
-                                <div class="tab-pane" id="details">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            @*<h4 class="info-text"> Let's start with the basic details.</h4>*@
-                                        </div>
->>>>>>> 2d25c225fec3e3a0b53a3f57d0f65d2c38545f54
-
-
                             <div class="tab-pane" id="details">
                                 <div class="row">
                                     <div class="col-sm-12">
+                                        @Html.Action("AddAStudentLogin", "Staff")
                                     </div>
-                                    @Html.Action("AddAStudentLogin", "Staff")
                                 </div>
                             </div>
                             <div class="tab-pane" id="captain">
@@ -225,18 +157,32 @@
 
                                 </div>
                             </div>
+                            <div class="tab-pane" id="description_05">
+                                <div class="row">
+                                    @Html.Action("CreateNewArrangement", "Staff")
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="description_06">
+                                <div class="row">
+                                    @Html.Action("AddNewEvent", "Staff")
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="description_07">
+                                <div class="row">
+                                    @Html.Action("AddNewEvent", "Staff")
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="footer">
-
     </div>
-
-
 </div>
 
 

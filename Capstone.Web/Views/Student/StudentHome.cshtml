@@ -14,15 +14,12 @@
 
     <!--   Creative Tim Branding   -->
     <link type="text/css" rel="stylesheet" href="~/Content/css/crus.css" />
-    <a href="https://techelevator.com" style="" target="_blank">
+    <a href="~/About/About" style="" target="_blank">
         <div class="logo-container_01">
             <div class="logo">
                 <img src="http://demos.creative-tim.com/material-bootstrap-wizard/assets/img/new_logo.png">
             </div>
-            <div class="brand">
-                Welcome <br /> @ViewBag.userName
-                @*Hello, Student!*@
-            </div>
+             @ViewBag.userName
         </div>
     </a>
 
@@ -30,18 +27,14 @@
         <div class="logo-container_02">
 
             <div class="brand">
-              Log Out
+                Log Out
             </div>
         </div>
     </a>
-
-
-    <!--  Made With Material Kit  -->
-    <a href="http://demos.creative-tim.com/material-kit/index.html?ref=material-bootstrap-wizard" class="made-with-mk" target="_blank">
+    <a href="~/About/About" class="made-with-mk" target="_blank">
         <div class="brand">ET</div>
         <div class="made-with">Made with <strong>Echo Team</strong></div>
     </a>
-
     <!--   Big container   -->
     <div class="container">
         <div class="row" style="width: 1200px">
@@ -50,106 +43,106 @@
                 <div class="wizard-container">
                     <div class="card wizard-card" data-color="green" id="wizard">
                         <!--form action="" method="" -->
-                            <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
+                        <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
 
-                            <div class="wizard-header">
-                                <h3 class="wizard-title">
-                                   Welcome @ViewBag.userName
-                                </h3>
-                            </div>
-                            <div class="wizard-navigation">
-                                <ul>
-                                    <li><a href="#details" data-toggle="tab">View My Schedule</a></li>
-                                    <li><a href="#captain" data-toggle="tab">Rank Employers</a></li>
-                                    @*<li><a href="#description" data-toggle="tab">Update My Choices</a></li>*@
-                                </ul>
-                            </div>
+                        <div class="wizard-header">
+                            <h3 class="wizard-title">
+                                Welcome @ViewBag.userName
+                            </h3>
+                        </div>
+                        <div class="wizard-navigation">
+                            <ul>
+                                <li><a href="#details" data-toggle="tab">View My Schedule</a></li>
+                                <li><a href="#captain" data-toggle="tab">Rank Employers</a></li>
+                                @*<li><a href="#description" data-toggle="tab">Update My Choices</a></li>*@
+                            </ul>
+                        </div>
 
-                            <div class="tab-content">
-                                <div class="tab-pane" id="details">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                        </div>
-
-
-
-                                        <h4>@ViewBag.Message</h4>
-
-                                        @Html.Action("ViewMySchedule", "Student", new { username = Model.UserName })
-
-
-                                            
+                        <div class="tab-content">
+                            <div class="tab-pane" id="details">
+                                <div class="row">
+                                    <div class="col-sm-12">
                                     </div>
+
+
+
+                                    <h4>@ViewBag.Message</h4>
+
+                                    @Html.Action("ViewMySchedule", "Student", new { username = Model.UserName })
+
+
+
                                 </div>
-                                <div class="tab-pane" id="captain">
-                                    @*<h4 class="info-text">What type of room would you want? </h4>*@
-                                    <div class="row" style="width: 1200px">
-                                        <div class="col-sm-12 ">
-                                            @Html.Action("RankEmployers", "Student", new { username = Model.UserName })
+                            </div>
+                            <div class="tab-pane" id="captain">
+                                @*<h4 class="info-text">What type of room would you want? </h4>*@
+                                <div class="row" style="width: 1200px">
+                                    <div class="col-sm-12 ">
+                                        @Html.Action("RankEmployers", "Student", new { username = Model.UserName })
 
 
-                                            @*<div class="col-sm-12">
+                                        @*<div class="col-sm-12">
 
 
-                                                    <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="This is good if you travel alone.">
-                                                        <input type="radio" name="job" value="Design">
-                                                        <div class="icon">
-                                                            <i class="material-icons">weekend</i>
-                                                        </div>
-                                                        <h6>Single</h6>
+                                                <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="This is good if you travel alone.">
+                                                    <input type="radio" name="job" value="Design">
+                                                    <div class="icon">
+                                                        <i class="material-icons">weekend</i>
                                                     </div>
+                                                    <h6>Single</h6>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Select this room if you're traveling with your family.">
-                                                        <input type="radio" name="job" value="Code">
-                                                        <div class="icon">
-                                                            <i class="material-icons">home</i>
-                                                        </div>
-                                                        <h6>Family</h6>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Select this room if you're traveling with your family.">
+                                                    <input type="radio" name="job" value="Code">
+                                                    <div class="icon">
+                                                        <i class="material-icons">home</i>
                                                     </div>
+                                                    <h6>Family</h6>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Select this option if you are coming with your team.">
-                                                        <input type="radio" name="job" value="Code">
-                                                        <div class="icon">
-                                                            <i class="material-icons">business</i>
-                                                        </div>
-                                                        <h6>Business</h6>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Select this option if you are coming with your team.">
+                                                    <input type="radio" name="job" value="Code">
+                                                    <div class="icon">
+                                                        <i class="material-icons">business</i>
                                                     </div>
-                                                </div>*@
-                                        </div>
+                                                    <h6>Business</h6>
+                                                </div>
+                                            </div>*@
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="description">
-                                    <div class="row">
-                                        @*     @Html.Action("UpdateStudentChoices", "Student",new { })*@
+                            </div>
+                            <div class="tab-pane" id="description">
+                                <div class="row">
+                                    @*     @Html.Action("UpdateStudentChoices", "Student",new { })*@
 
-                                        return RedirectToAction("StudentHome", "Student", new { username = base.CurrentUser });
+                                    return RedirectToAction("StudentHome", "Student", new { username = base.CurrentUser });
 
 
 
-                                        <h4 class="info-text"> Drop us a small description.</h4>
-                                        <div class="col-sm-6 col-sm-offset-1">
-                                            <div class="form-group">
-                                                <label>Room description</label>
-                                                <textarea class="form-control" placeholder="" rows="6"></textarea>
-                                            </div>
+                                    <h4 class="info-text"> Drop us a small description.</h4>
+                                    <div class="col-sm-6 col-sm-offset-1">
+                                        <div class="form-group">
+                                            <label>Room description</label>
+                                            <textarea class="form-control" placeholder="" rows="6"></textarea>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label class="control-label">Example</label>
-                                                <p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>
-                                            </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Example</label>
+                                            <p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="wizard-footer">
-                                <div class="pull-right">
-                                    <input type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='next' value='Next' />
-                                    <input type='button' class='btn btn-finish btn-fill btn-danger btn-wd' name='finish' value='Finish' />
-                                </div>
-                                @*<div class="pull-left">
+                        </div>
+                        <div class="wizard-footer">
+                            <div class="pull-right">
+                                <input type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='next' value='Next' />
+                                <input type='button' class='btn btn-finish btn-fill btn-danger btn-wd' name='finish' value='Finish' />
+                            </div>
+                            @*<div class="pull-left">
                                     <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
 
                                     <div class="footer-checkbox">
@@ -163,8 +156,8 @@
                                         </div>
                                     </div>
                                 </div>*@
-                                <div class="clearfix"></div>
-                            </div>
+                            <div class="clearfix"></div>
+                        </div>
                         <!--/!--form-->
                     </div>
                 </div> <!-- wizard container -->

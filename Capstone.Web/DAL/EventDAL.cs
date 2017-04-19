@@ -21,7 +21,6 @@ namespace Capstone.Web.DAL
         private string SQL_AddNewArrangement = @"insert into matchmaking_arrangement (Location, Season, Cohort_Number, Number_Of_Student_Choices,Schedule_Is_Generated) values (@location, @season, @cohortNumber, @numberOfStudentChoices,'N')";
 
         private string SQL_AddNewEvent = @"Insert into Event (Matchmaking_Id, Start_Time, End_Time, Lunch_Start, Lunch_End, First_Break_Start, First_Break_End, Second_Break_Start, Second_Break_End, Interview_Length) VALUES (@matchmakingId,@startTime, @endTime,@lunchStart,@lunchEnd,@firstBreakStart,@firstBreakEnd,@secondBreakStart,@secondBreakEnd,@interviewLength);";
-        private string SQL__GetAllEvents =
         public int GetNumberOfStudentChoices(int matchmakingId)
         {
             try

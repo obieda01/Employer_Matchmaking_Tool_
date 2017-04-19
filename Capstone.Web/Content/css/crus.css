@@ -421,7 +421,7 @@ h2.title {
 }
 
 .text-success {
-    color: #4caf50;
+    color: #50a3a2;
 }
 
 .text-info {
@@ -514,39 +514,41 @@ h2.title {
         font-size: 12px;
         text-transform: uppercase;
         -webkit-font-smoothing: subpixel-antialiased;
-        background-color: #4caf50;
+        background: #50a3a2;
+        background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+        background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
         top: -4px;
         left: 0px;
         border-radius: 4px;
         color: #FFFFFF;
         cursor: pointer;
         font-weight: 500;
-        box-shadow: 0 16px 26px -10px rgba(76, 175, 80, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(76, 175, 80, 0.2);
+        box-shadow: 0 16px 26px -10px rgba(74, 139, 107, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(76, 175, 80, 0.2);
     }
 
     .wizard-card[data-color="green"] .picture:hover {
-        border-color: #4caf50;
+        border-color: #53e3a6;
     }
 
     .wizard-card[data-color="green"] .choice:hover .icon, .wizard-card[data-color="green"] .choice.active .icon {
-        border-color: #4caf50;
-        color: #4caf50;
+        border-color: #53e3a6;
+        color: #53e3a6;
     }
 
     .wizard-card[data-color="green"] .form-group .form-control {
-        background-image: linear-gradient(#4caf50, #4caf50), linear-gradient(#D2D2D2, #D2D2D2);
+        background-image: linear-gradient(#53e3a6, #53e3a6), linear-gradient(#D2D2D2, #D2D2D2);
     }
 
     .wizard-card[data-color="green"] .checkbox input[type=checkbox]:checked + .checkbox-material .check {
-        background-color: #4caf50;
+        background-color: #53e3a6;
     }
 
     .wizard-card[data-color="green"] .radio input[type=radio]:checked ~ .check {
-        background-color: #4caf50;
+        background-color: #53e3a6;
     }
 
     .wizard-card[data-color="green"] .radio input[type=radio]:checked ~ .circle {
-        border-color: #4caf50;
+        border-color: #53e3a6;
     }
 
     .wizard-card[data-color="blue"] .moving-tab {
@@ -965,7 +967,7 @@ output {
         }
 
         .label.label-success {
-            background-color: #4caf50;
+            background-color: #50a3a2;
         }
 
         .label.label-info {
@@ -1069,7 +1071,7 @@ output {
     }
 
     .form-group.is-focused.form-success .form-control {
-        background-image: linear-gradient(#4caf50, #4caf50), linear-gradient(#D2D2D2, #D2D2D2);
+        background-image: linear-gradient(#50a3a2, #50a3a2), linear-gradient(#D2D2D2, #D2D2D2);
     }
 
     .form-group.is-focused.form-warning .form-control {
@@ -1128,12 +1130,12 @@ output {
     }
 
     .form-group.has-success.is-focused .form-control {
-        background-image: linear-gradient(#4caf50, #4caf50), linear-gradient(#D2D2D2, #D2D2D2);
+        background-image: linear-gradient(#50a3a2, #50a3a2), linear-gradient(#D2D2D2, #D2D2D2);
     }
 
     .form-group.has-success label.control-label,
     .form-group.has-success .help-block {
-        color: #4caf50;
+        color: #50a3a2;
     }
 
     .form-group.has-info .form-control {
@@ -1482,7 +1484,7 @@ select.form-control {
 }
 
 .has-success .form-control-feedback {
-    color: #4caf50;
+    color: #50a3a2;
     opacity: 1;
 }
 
@@ -1598,7 +1600,7 @@ select.form-control {
             }
 
                 .btn.btn-success, .btn.btn-success:hover, .btn.btn-success:focus, .btn.btn-success:active, .btn.btn-success.active, .btn.btn-success:active:focus, .btn.btn-success:active:hover, .btn.btn-success.active:focus, .btn.btn-success.active:hover, .open > .btn.btn-success.dropdown-toggle, .open > .btn.btn-success.dropdown-toggle:focus, .open > .btn.btn-success.dropdown-toggle:hover {
-                    background-color: #4caf50;
+                    background-color: #50a3a2;
                     color: #FFFFFF;
                 }
 
@@ -1612,13 +1614,13 @@ select.form-control {
 
                     .btn.btn-success.btn-simple {
                         background-color: transparent;
-                        color: #4caf50;
+                        color: #50a3a2;
                         box-shadow: none;
                     }
 
                         .btn.btn-success.btn-simple:hover, .btn.btn-success.btn-simple:focus, .btn.btn-success.btn-simple:active {
                             background-color: transparent;
-                            color: #4caf50;
+                            color: #50a3a2;
                         }
 
             .btn.btn-warning {
@@ -2262,8 +2264,8 @@ fieldset[disabled] .checkbox, fieldset[disabled] .checkbox input[type=checkbox],
     z-index: 3;
 
 
-     width: 180px;
-    height: 90px;
+     width: 150px;
+    height: 80px;
     display: block;
     position: fixed;
     z-index: 555;
@@ -2303,14 +2305,12 @@ fieldset[disabled] .checkbox, fieldset[disabled] .checkbox input[type=checkbox],
 
 
 .logo-container_02 {
-    width: 180px;
-    height: 90px;
     right: 50px;
     position: absolute;
     top: 20px;
     z-index: 3;
-    width: 180px;
-    height: 90px;
+    width: 90px;
+    height: 50px;
     display: block;
     position: fixed;
     z-index: 555;

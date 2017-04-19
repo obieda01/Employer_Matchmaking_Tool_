@@ -149,7 +149,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(SQL__GetAllEvents, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_GetAllEvents, conn);
                     cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
                     SqlDataReader reader = cmd.ExecuteReader();
 

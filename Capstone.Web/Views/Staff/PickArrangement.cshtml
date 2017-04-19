@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Pick An Arrangement";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form action="AssignParticipantsToEvent" method="post">
+    @{string loggedInUserName = ViewBag.userName; }
+    @Html.Hidden("userName", loggedInUserName);
+
+    @*@using (Html.BeginForm("UpdateEvent", "Staff"))
+        {*@
+    <div>
+        @Html.Label("Pick a co-hort's a matchmaking event:")
+        @Html.DropDownList("matchmakingId", (List<SelectListItem>)ViewBag.Arrangements)
+    </div>
+
+</form>

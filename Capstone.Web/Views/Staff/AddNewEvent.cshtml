@@ -7,6 +7,8 @@
 <h2>Add New Event</h2>
 
 <form action="UpdateEvent" method="post">
+    @{string loggedInUserName = ViewBag.userName; }
+    @Html.Hidden("userName", loggedInUserName);
 
     @*@using (Html.BeginForm("UpdateEvent", "Staff"))
         {*@

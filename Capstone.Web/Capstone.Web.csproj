@@ -212,11 +212,13 @@
     <Content Include="Views\Student\ViewMySchedule.cshtml" />
     <Content Include="Views\Staff\AddEmployer.cshtml" />
     <Content Include="Views\Staff\AssignRoom.cshtml" />
-    <Content Include="Views\Staff\CreateANewArrangement.cshtml" />
+    <Content Include="Views\Staff\CreateNewArrangement.cshtml" />
     <Content Include="Views\Staff\AddNewEvent.cshtml" />
     <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Staff\AddStaffLogin.cshtml" />
     <Content Include="Views\Staff\Staff.cshtml" />
+    <Content Include="Views\Staff\PickArrangement.cshtml" />
+    <Content Include="Views\Staff\AssignParticipantsToEvent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

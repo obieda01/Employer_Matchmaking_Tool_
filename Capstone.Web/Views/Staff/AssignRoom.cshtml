@@ -18,6 +18,12 @@
 {*@
 
 <form action="UpdateRoom" method="post">
+    @{string loggedInUserName = ViewBag.userName; }
+    @*@ViewBag.userName;
+    @ViewBag.UserRole;*@
+    <input id="userName" name="userName" type="hidden" value="@ViewBag.userName" />;
+
+    @Html.Hidden("userName", loggedInUserName);
     <table>
         <tr>
             <td>@Html.Label("Employer Name")</td>

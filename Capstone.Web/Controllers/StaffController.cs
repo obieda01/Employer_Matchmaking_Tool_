@@ -19,6 +19,7 @@ namespace Capstone.Web.Controllers
         {
             IUserDal idal = new UserSqlDal();
             loggedInUser = idal.GetUser(userName);
+            ViewBag.UserRole = loggedInUser.User_Role;
             return View("StaffHome");
         }
 
@@ -85,6 +86,10 @@ namespace Capstone.Web.Controllers
 
             ViewBag.Message = (isSuccessful) ? "The rooms was successfully added." : "The room was not successfully added. Please try again.";
 
+            IUserDal idal = new UserSqlDal();
+            loggedInUser = idal.GetUser((Request.Params["userName"]));
+            ViewBag.UserRole = loggedInUser.User_Role;
+
             return View("StaffHome");
         }
 
@@ -142,9 +147,6 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UpdateStudentLogin()
         {
-
-
-
             System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
 
             //need to add capability to email the student the username and password
@@ -168,6 +170,9 @@ namespace Capstone.Web.Controllers
 
 
             // HERE Email Send
+            IUserDal idal = new UserSqlDal();
+            loggedInUser = idal.GetUser((Request.Params["userName"]));
+            ViewBag.UserRole = loggedInUser.User_Role;
 
             return View("StaffHome");
 
@@ -196,7 +201,9 @@ namespace Capstone.Web.Controllers
             ViewBag.Message = (isSuccessful) ? "The staff was successfully added." : "The staff was not successfully added. Please try again.";
 
             // HERE Email Send
-
+            IUserDal idal = new UserSqlDal();
+            loggedInUser = idal.GetUser((Request.Params["userName"]));
+            ViewBag.UserRole = loggedInUser.User_Role;
             return View("StaffHome");
 
         }
@@ -209,21 +216,11 @@ namespace Capstone.Web.Controllers
         public ActionResult UpdateEmployer()
         {
             System.Collections.Specialized.NameValueCollection parameters = Url.RequestContext.HttpContext.Request.Params;
-            string name;
-            if ((Request.Params["employerName"] == null) || (Request.Params["employerSummary"] == null))
-            {
-                name = "";
-            }
-            else
-            {
-                name = Request.Params["employerName"] + " " + Request.Params["employerSummary"];
-            }
 
             Employer e = new Employer();
 
             if ((!String.IsNullOrEmpty(Request.Params["employerName"])) && (!String.IsNullOrEmpty(Request.Params["employerSummary"])))
             {
-
                 e.EmployerName = Request.Params["employerName"];
                 e.Summary = Request.Params["employerSummary"];
                 e.NumberOfTeams = 1; //initially set this value to 1. Staff have the option to update it when they create an event
@@ -235,10 +232,14 @@ namespace Capstone.Web.Controllers
 
             ViewBag.Message = (isSuccessful) ? "The employer was successfully added." : "The employer was not successfully added. Please try again.";
 
+            IUserDal idal = new UserSqlDal();
+            loggedInUser = idal.GetUser((Request.Params["userName"]));
+            ViewBag.UserRole = loggedInUser.User_Role;
+
             return View("StaffHome");
         }
 
-        public ActionResult CreateANewArrangement()
+        public ActionResult CreateNewArrangement()
         {
             MatchmakingArrangement arrangement = new MatchmakingArrangement();
             return View(arrangement);
@@ -264,6 +265,10 @@ namespace Capstone.Web.Controllers
             bool isSuccessful = edal.AddNewArrangement(arrangement);
 
             ViewBag.Message = (isSuccessful) ? "The arrangement was successfully added." : "The arrangement was not successfully added. Please try again.";
+
+            IUserDal idal = new UserSqlDal();
+            loggedInUser = idal.GetUser((Request.Params["userName"]));
+            ViewBag.UserRole = loggedInUser.User_Role;
 
             return View("StaffHome");
 
@@ -306,8 +311,25 @@ namespace Capstone.Web.Controllers
 
             ViewBag.Message = (isSuccessful) ? "The event was successfully added." : "The event was not successfully added. Please try again.";
 
+            IUserDal idal = new UserSqlDal();
+            loggedInUser = idal.GetUser((Request.Params["userName"]));
+            ViewBag.UserRole = loggedInUser.User_Role;
+
             return View("StaffHome");
 
+        }
+        public ActionResult PickArrangement()
+        {
+            CreateArrangementDropDownList();
+            return View();
+        }
+        public ActionResult AssignParticipantsToEvent()
+        {
+            int matchmakingId = int.Parse(Request.Params["matchmakingId"]);
+            EventDAL edal = new EventDAL();
+            List<Event> result = edal.GetAllEvents(matchmakingId);
+
+            return View(result);
         }
 
         public void CreateArrangementDropDownList()

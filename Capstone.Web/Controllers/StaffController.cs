@@ -137,7 +137,7 @@ namespace Capstone.Web.Controllers
 
         public ActionResult AddStaffLogin()
         {
-            return View();
+            return View("AddStaffLogin");
         }
 
         public ActionResult UpdateStudentLogin()

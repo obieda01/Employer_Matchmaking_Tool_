@@ -507,24 +507,7 @@ h2.title {
         border-color: #9c27b0;
     }
 
-    .wizard-card[data-color="green"] .moving-tab {
-        position: absolute;
-        text-align: center;
-        padding: 12px;
-        font-size: 12px;
-        text-transform: uppercase;
-        -webkit-font-smoothing: subpixel-antialiased;
-        background: #50a3a2;
-        background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-        background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
-        top: -4px;
-        left: 0px;
-        border-radius: 4px;
-        color: #FFFFFF;
-        cursor: pointer;
-        font-weight: 500;
-        box-shadow: 0 16px 26px -10px rgba(74, 139, 107, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(76, 175, 80, 0.2);
-    }
+   
 
     .wizard-card[data-color="green"] .picture:hover {
         border-color: #53e3a6;
@@ -551,22 +534,7 @@ h2.title {
         border-color: #53e3a6;
     }
 
-    .wizard-card[data-color="blue"] .moving-tab {
-        position: absolute;
-        text-align: center;
-        padding: 12px;
-        font-size: 12px;
-        text-transform: uppercase;
-        -webkit-font-smoothing: subpixel-antialiased;
-        background-color: #00bcd4;
-        top: -4px;
-        left: 0px;
-        border-radius: 4px;
-        color: #FFFFFF;
-        cursor: pointer;
-        font-weight: 500;
-        box-shadow: 0 16px 26px -10px rgba(0, 188, 212, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 188, 212, 0.2);
-    }
+    
 
     .wizard-card[data-color="blue"] .picture:hover {
         border-color: #00bcd4;
@@ -1799,7 +1767,9 @@ select.form-control {
         .nav-pills > li.active > a:focus,
         .nav-pills > li > a:hover,
         .nav-pills > li > a:focus {
-            background-color: inherit;
+            background: #50a3a2;
+            background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+            background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
         }
 
     .nav-pills > li i {

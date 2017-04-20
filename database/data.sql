@@ -6,6 +6,7 @@
 BEGIN transaction;
 
 Delete from Employer_Team;
+Delete from Participating_Students;
 Delete from Interview_Schedule;
 Delete from Student_Choices;
 Delete from Time_Slot_Rank;
@@ -17,10 +18,11 @@ Delete from Login;
 Delete from Event;
 Delete from Language;
 Delete from Matchmaking_Arrangement;
-Delete from Participating_Students;
+
 
 SET IDENTITY_INSERT dbo.Matchmaking_Arrangement ON;
 Insert into Matchmaking_Arrangement (Matchmaking_Id, Location, Season, Cohort_Number, Number_Of_Student_Choices, Schedule_Is_Generated) VALUES (1,'Columbus','Winter', 1,2,'Y');
+Insert into Matchmaking_Arrangement (Matchmaking_Id, Location, Season, Cohort_Number, Number_Of_Student_Choices, Schedule_Is_Generated) VALUES (2,'Columbus','Spring', 2,2,'N');
 SET IDENTITY_INSERT dbo.Matchmaking_Arrangement OFF;
 
 Insert into Login (User_Name, Password, User_Role) VALUES ('Jacob','GWtlZ2gG14GC6DiY937w1L9RZCM=','staff');
@@ -35,9 +37,9 @@ SET IDENTITY_INSERT dbo.Employer ON;
 Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (1,'Chase', 1,'This is Chase employer profile. They are a bank and do banking things.');
 Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (2,'FastSwitch', 1,'This is FastSwitch employer profile. They are fast and they like to switch often.');
 Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (3,'IGS', 1,'This is IGS employer profile. The believe in fun energy projects.');
---Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (4,'TeamDynamix', 1,'A zestful company of innovative spirits empowering higher ed through software solutions.');
---Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (5,'Nationwide', 1,'An insurance company. They are on your side.');
---Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (6,'CoverMyMeds', 1,'An company that makes sure medicine is bought, paid for, and consumed by the masses.');
+Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (4,'TeamDynamix', 1,'A zestful company of innovative spirits empowering higher ed through software solutions.');
+Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (5,'Nationwide', 1,'An insurance company. They are on your side.');
+Insert into Employer (Employer_Id, Employer_Name, Number_Of_Teams, Summary) VALUES (6,'CoverMyMeds', 1,'An company that makes sure medicine is bought, paid for, and consumed by the masses.');
 SET IDENTITY_INSERT dbo.Employer OFF;
 
 SET IDENTITY_INSERT dbo.Event ON;
@@ -60,6 +62,10 @@ SET IDENTITY_INSERT dbo.Student OFF;
 Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,1,1, 1, 0,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room A');
 Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,2,1, 1, 1,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room B');
 Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,3,1, 1, 2,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room C');
+Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,4,1, 1, 0,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','');
+Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,5,1, 1, 1,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','');
+Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,6,1, 1, 2,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','');
+
 
 Insert into Student_Choices (Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id) VALUES (1,2,1, 1);
 Insert into Student_Choices (Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id) VALUES (1,3,2, 1);

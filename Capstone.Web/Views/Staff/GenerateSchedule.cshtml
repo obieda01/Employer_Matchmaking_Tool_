@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Generate Schedule";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form action="" method="post">
+    <div>
+        @Html.Label("Pick a co-hort's a matchmaking event:")
+        @Html.DropDownList("matchmakingId", (List<SelectListItem>)ViewBag.Arrangements)
+    </div>
+    <h2>This will generate the master schedule.  Please verify that there will be no more changes to this Cohort's Matchmaking Arrangements</h2>
+    <div class="col-sm-10">
+        <div class="pull-left">
+            <input value="Submit" type="submit" class='btn btn-fill btn-success btn-wd btn' id="inputButton" />
+        </div>
+    </div>
+</form>

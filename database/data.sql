@@ -62,9 +62,9 @@ SET IDENTITY_INSERT dbo.Student OFF;
 Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,1,1, 1, 0,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room A');
 Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,2,1, 1, 1,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room B');
 Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,3,1, 1, 2,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','Test Room C');
-Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,4,1, 1, 0,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','');
-Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,5,1, 1, 1,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','');
-Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (1,6,1, 1, 2,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','');
+Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (2,4,1, 1, 0,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','');
+Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (2,5,1, 1, 1,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','');
+Insert into Employer_Team (Matchmaking_Id, Employer_Id, Team_Id, Event_Id, Language_Id, Start_Time, End_Time, Assigned_Room) VALUES (2,6,1, 1, 2,'4/15/2017 1:00:00 PM','4/15/2017 5:00:00 PM','');
 
 
 Insert into Student_Choices (Student_Id, Employer_Id, Employer_Rank, Matchmaking_Id) VALUES (1,2,1, 1);

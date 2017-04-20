@@ -328,7 +328,7 @@ namespace Capstone.Web.Controllers
 
         public ActionResult AssignParticipantsToEvent()
         {
-            int matchmakingId = int.Parse(Request.Params["matchmakingId"]);
+            int matchmakingId = 1; //int.Parse(Request.Params["matchmakingId"]);
             EventDAL edal = new EventDAL();
             StudentDAL studentDal = new StudentDAL();
             EmployerDAL employerDal = new EmployerDAL();
@@ -339,7 +339,7 @@ namespace Capstone.Web.Controllers
             {
                 e.AllStudents = studentDal.GetAllStudents(e.MatchmakingId);
                 e.ParticipatingStudents = studentDal.GetParticipatingStudents(e.EventId);
-                e.AllEmployers = employerDal.GetAllEmployersAndTeams(e.MatchmakingId);
+                e.AllEmployers = employerDal.GetAllEmployersAndTeams();
                 e.ParticipatingEmployers = employerDal.GetParticipatingEmployersAndTeams(e.MatchmakingId, e.EventId);
             }
 

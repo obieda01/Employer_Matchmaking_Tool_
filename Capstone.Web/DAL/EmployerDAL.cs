@@ -13,11 +13,13 @@ namespace Capstone.Web.DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["FinalCapstone"].ConnectionString;
 
-        private string SQL_GetAllEmployers = "Select e.Employer_Id, e.Employer_Name, e.Number_Of_Teams, e.Summary From Employer e join Employer_Team et on et.Employer_Id = e.Employer_Id  where et.Matchmaking_Id = @matchmakingId;";
+        private string SQL_GetAllEmployersByMatchmakingId = "Select e.Employer_Id, e.Employer_Name, e.Number_Of_Teams, e.Summary From Employer e join Employer_Team et on et.Employer_Id = e.Employer_Id where et.Matchmaking_Id = @matchmakingId;";
 
         private string SQL_AddNewEmployer = "Insert into employer (Employer_Name, Summary, Number_Of_Teams) VALUES (@employerName, @summary, @numberOfTeams);";
 
-        private string SQL_GetAllEmployersAndTeams = "Select t.event_Id, t.Matchmaking_Id, e.Employer_Id, e.Employer_Name, t.Assigned_Room, t.Team_Id, l.Language, t.Start_Time, t.End_Time from Employer_Team t join Employer e ON e.Employer_Id = t.Employer_Id join Language l ON t.Language_Id = l.Language_Id where t.Matchmaking_Id = @matchmakingId;";
+        private string SQL_GetAllEmployersAndTeamsByMatchmakingId = "Select t.event_Id, t.Matchmaking_Id, e.Employer_Id, e.Employer_Name, t.Assigned_Room, t.Team_Id, l.Language, t.Start_Time, t.End_Time from Employer_Team t join Employer e ON e.Employer_Id = t.Employer_Id join Language l ON t.Language_Id = l.Language_Id where t.Matchmaking_Id = @matchmakingId;";
+
+        private string SQL_GetAllEmployerTeams = "Select t.event_Id, t.Matchmaking_Id, e.Employer_Id, e.Employer_Name, t.Assigned_Room, t.Team_Id, l.Language, t.Start_Time, t.End_Time from Employer_Team t join Employer e ON e.Employer_Id = t.Employer_Id join Language l ON t.Language_Id = l.Language_Id;";
 
         private string SQL_GetParticipatingEmployersAndTeams = "Select t.event_Id, t.Matchmaking_Id, e.Employer_Id, e.Employer_Name, t.Assigned_Room, t.Team_Id, l.Language, t.Start_Time, t.End_Time from Employer_Team t join Employer e ON e.Employer_Id = t.Employer_Id join Language l ON t.Language_Id = l.Language_Id where t.Matchmaking_Id = @matchmakingId  and t.Event_Id = @eventId;";
 
@@ -33,7 +35,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(SQL_GetAllEmployers, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_GetAllEmployersByMatchmakingId, conn);
                     cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -68,8 +70,48 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(SQL_GetAllEmployersAndTeams, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_GetAllEmployersAndTeamsByMatchmakingId, conn);
                     cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        EmployerTeam e = new EmployerTeam();
+                        e.MatchmakingId = Convert.ToInt32(reader["Matchmaking_Id"]);
+                        e.EventId = Convert.ToInt32(reader["Event_Id"]);
+                        e.EmployerId = Convert.ToInt32(reader["Employer_Id"]);
+                        e.EmployerName = Convert.ToString(reader["Employer_Name"]);
+                        e.TeamId = Convert.ToInt32(reader["Team_Id"]);
+                        e.StartTime = Convert.ToDateTime(reader["Start_Time"]).ToShortTimeString();
+                        e.EndTime = Convert.ToDateTime(reader["End_Time"]).ToShortTimeString();
+                        e.AssignedRoom = Convert.ToString(reader["Assigned_Room"]);
+                        e.EventDate = Convert.ToDateTime(reader["Start_Time"]).ToShortDateString();
+                        e.Language = Convert.ToString(reader["Language"]);
+                        results.Add(e);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                //Log and throw the exception
+                throw new NotImplementedException();
+            }
+
+            return results;
+        }
+
+        public List<EmployerTeam> GetAllEmployersAndTeams()
+        {
+            List<EmployerTeam> results = new List<EmployerTeam>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(SQL_GetAllEmployerTeams, conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -109,7 +151,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(SQL_GetAllEmployersAndTeams, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_GetParticipatingEmployersAndTeams, conn);
                     cmd.Parameters.AddWithValue("@matchmakingId", matchmakingId);
                     cmd.Parameters.AddWithValue("@eventId", eventId);
 

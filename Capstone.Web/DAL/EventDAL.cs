@@ -21,7 +21,9 @@ namespace Capstone.Web.DAL
         private string SQL_AddNewArrangement = @"insert into matchmaking_arrangement (Location, Season, Cohort_Number, Number_Of_Student_Choices,Schedule_Is_Generated) values (@location, @season, @cohortNumber, @numberOfStudentChoices,'N')";
 
         private string SQL_AddNewEvent = @"Insert into Event (Matchmaking_Id, Start_Time, End_Time, Lunch_Start, Lunch_End, First_Break_Start, First_Break_End, Second_Break_Start, Second_Break_End, Interview_Length) VALUES (@matchmakingId,@startTime, @endTime,@lunchStart,@lunchEnd,@firstBreakStart,@firstBreakEnd,@secondBreakStart,@secondBreakEnd,@interviewLength);";
+
         private string SQL_GetAllEvents = @"Select Event_Id, Matchmaking_Id, Start_Time, End_Time, Lunch_Start, Lunch_End, First_Break_Start, First_Break_End, Second_Break_Start, Second_Break_End, Interview_Length from Event where matchmaking_Id = @matchmakingId;";
+
         public int GetNumberOfStudentChoices(int matchmakingId)
         {
             try
@@ -156,18 +158,18 @@ namespace Capstone.Web.DAL
                     while (reader.Read())
                     {
                         Event e = new Event();
+                        e.MatchmakingId = Convert.ToInt32(reader["Event_Id"]);
                         e.MatchmakingId = Convert.ToInt32(reader["Matchmaking_Id"]);
                         e.EventDate = Convert.ToDateTime(reader["Start_Time"]).ToShortDateString();
                         e.StartTime = Convert.ToDateTime(reader["Start_Time"]).ToShortTimeString();
                         e.EndTime = Convert.ToDateTime(reader["End_Time"]).ToShortTimeString();
-                        e.LunchStart = Convert.ToDateTime(reader["Lunch_Start"]).ToShortTimeString();
-                        e.LunchStart = Convert.ToDateTime(reader["Lunch_End"]).ToShortTimeString();
-                        e.FirstBreakStart = Convert.ToDateTime(reader["First_Break_Start"]).ToShortTimeString();
-                        e.FirstBreakEnd = Convert.ToDateTime(reader["First_Break_End"]).ToShortTimeString();
-                        e.SecondBreakStart = Convert.ToDateTime(reader["Second_Break_Start"]).ToShortTimeString();
-                        e.SecondBreakEnd = Convert.ToDateTime(reader["Second_Break_End"]).ToShortTimeString();
-                        e.InterviewLength = Convert.ToInt32(reader["Interview_Length"]);
-
+                        e.LunchStart = (reader["Lunch_Start"] != DBNull.Value) ? Convert.ToDateTime(reader["Lunch_Start"]).ToShortTimeString() : null;
+                        e.LunchEnd = (reader["Lunch_End"] != DBNull.Value) ? Convert.ToDateTime(reader["Lunch_End"]).ToShortTimeString() : null;
+                        e.FirstBreakStart = (reader["First_Break_Start"] != DBNull.Value) ? Convert.ToDateTime(reader["First_Break_Start"]).ToShortTimeString() : null;
+                        e.FirstBreakEnd = (reader["First_Break_End"] != DBNull.Value) ? Convert.ToDateTime(reader["First_Break_End"]).ToShortTimeString(): null;
+                        e.SecondBreakStart = (reader["Second_Break_Start"] != DBNull.Value) ? Convert.ToDateTime(reader["Second_Break_Start"]).ToShortTimeString(): null;
+                        e.SecondBreakEnd = (reader["Second_Break_End"] != DBNull.Value)? Convert.ToDateTime(reader["Second_Break_End"]).ToShortTimeString(): null;
+             
                         result.Add(e);
                     }
 

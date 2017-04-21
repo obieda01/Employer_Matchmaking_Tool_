@@ -17,7 +17,6 @@ namespace Capstone.Web.Controllers.UsersProfiles
            
         }
 
-        public int x = 0;
         // GET: Student
         public ActionResult StudentHome(string userName)
         {

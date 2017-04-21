@@ -219,6 +219,7 @@
     <Content Include="Views\Staff\Staff.cshtml" />
     <Content Include="Views\Staff\PickArrangement.cshtml" />
     <Content Include="Views\Staff\AssignParticipantsToEvent.cshtml" />
+    <Content Include="Views\Staff\GenerateSchedule.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -20,9 +20,8 @@ namespace Capstone.Web.Controllers
             StudentChoiceDAL scDAL = new StudentChoiceDAL();
             InterviewDAL iDAL = new InterviewDAL();
             EventDAL eDAL = new EventDAL();
+
             int numberOfStudentChoices = eDAL.GetNumberOfStudentChoices(matchmakingId);
-
-
 
             for (int i = 1; i < numberOfStudentChoices; i++)
             {

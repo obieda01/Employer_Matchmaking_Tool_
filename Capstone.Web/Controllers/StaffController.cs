@@ -319,18 +319,37 @@ namespace Capstone.Web.Controllers
             return View("StaffHome");
 
         }
+
         public ActionResult PickArrangement()
         {
             CreateArrangementDropDownList();
             return View();
         }
+
         public ActionResult AssignParticipantsToEvent()
         {
-            int matchmakingId = int.Parse(Request.Params["matchmakingId"]);
+            int matchmakingId = 1; //int.Parse(Request.Params["matchmakingId"]);
             EventDAL edal = new EventDAL();
+            StudentDAL studentDal = new StudentDAL();
+            EmployerDAL employerDal = new EmployerDAL();
+
             List<Event> result = edal.GetAllEvents(matchmakingId);
 
+            foreach (Event e in result)
+            {
+                e.AllStudents = studentDal.GetAllStudents(e.MatchmakingId);
+                e.ParticipatingStudents = studentDal.GetParticipatingStudents(e.EventId);
+                e.AllEmployers = employerDal.GetAllEmployersAndTeams();
+                e.ParticipatingEmployers = employerDal.GetParticipatingEmployersAndTeams(e.MatchmakingId, e.EventId);
+            }
+
             return View(result);
+        }
+
+        public ActionResult GenerateSchedule()
+        {
+            CreateArrangementDropDownList();
+            return View();
         }
 
         public void CreateArrangementDropDownList()

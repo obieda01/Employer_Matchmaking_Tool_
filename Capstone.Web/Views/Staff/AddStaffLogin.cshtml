@@ -10,6 +10,29 @@
     @{string loggedInUserName = ViewBag.userName; }
     @Html.Hidden("userName", loggedInUserName);
 
+    <div>
+        <div class="col-sm-5 col-sm-offset-1">
+            <div class="form-group label-floating">
+                <label class="control-label">Staff Name</label>
+                <input type="text" name="staffName" class="form-control" id="">
+            </div>
+        </div>
+        <div class="col-sm-5 col-sm-offset-1">
+            <div class="form-group label-floating">
+                <label class="control-label">Staff's User Name</label>
+                <input type="text" name="userName" class="form-control" id="">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <div class="pull-left">
+            <input value="Update" type="submit" class='btn btn-fill btn-success btn-wd btn' id="inputButton" />
+        </div>
+    </div>
+
+    <input id="userName" name="userName" type="hidden" value="@ViewBag.userName" />;
+
+
     @*@using (Html.BeginForm("UpdateStaffLogin", "Staff"))
         {*@
     <table>
